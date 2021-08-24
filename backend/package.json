@@ -1,0 +1,35 @@
+{
+  "name": "internbackend",
+  "version": "1.0.0",
+  "description": "Internside Backend",
+  "main": "server.js",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "author": "Kevin Nordnes",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "prisma": "^2.20.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.20.1",
+    "apollo-server-express": "^2.22.2",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-resolvers": "^0.4.2",
+    "graphql-tools": "^7.0.4",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "nodemailer": "^6.5.0",
+    "nodemailer-smtp-transport": "^2.7.4"
+  }
+}
