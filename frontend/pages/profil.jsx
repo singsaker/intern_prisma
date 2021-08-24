@@ -13,6 +13,7 @@ import Head from "next/head";
 import ProfilCard from "../Components/ProfilCard";
 import Innstillinger from "../components/profil/Innstillinger";
 import Layout from "../components/Layout";
+import { Breadcrumbs, Typography, Link, Box } from "@material-ui/core";
 
 const MinSide = () => {
   const beboer_id = useSelector((state) => state.auth.beboer_id);
@@ -23,14 +24,24 @@ const MinSide = () => {
         <title>Profil | Internsida</title>
       </Head>
 
-      <Grid container spacing={2}>
-        <Grid item md={5}>
-          <ProfilCard beboer_id={beboer_id} />
-        </Grid>
-        <Grid item md={7}>
-          <Innstillinger />
-        </Grid>
-      </Grid>
+      <Typography variant="h4" gutterBottom>Beboer</Typography>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/">
+          Hjem
+        </Link>
+        <Link
+          underline="hover"
+          color="inherit"
+          href="/profil"
+        >
+          Beboer
+        </Link>
+        <Typography color="text.primary">Innstillinger</Typography>
+      </Breadcrumbs>
+
+      <Box sx={{mt: 5}}>
+        <Innstillinger />
+      </Box>
     </Layout>
   );
 };

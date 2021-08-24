@@ -60,7 +60,7 @@ const Profil = (props) => {
     }
   }, [props.beboer_id]);
 
-  if (loading)
+  if (!beboer)
     return (
       <Grid container justify="center">
         <CircularProgress />
@@ -68,13 +68,16 @@ const Profil = (props) => {
     );
 
   let vervTekst = "";
-  for (let i = 0; i < beboer.verv.length; i++) {
-    if (i === 0) {
-      vervTekst += beboer.verv[i].navn;
-    } else {
-      vervTekst += ", " + beboer.verv[i].navn;
+
+  if (beboer) {
+    for (let i = 0; i < beboer?.verv.length; i++) {
+      if (i === 0) {
+        vervTekst += beboer.verv[i].navn;
+      } else {
+        vervTekst += ", " + beboer.verv[i].navn;
+      }
     }
-  }
+  
 
   return (
     <Card style={{ maxWidth: "200" }} variant="outlined">
@@ -275,6 +278,7 @@ const Profil = (props) => {
       </Snackbar>
     </Card>
   );
+  };
 };
 
 export default Profil;

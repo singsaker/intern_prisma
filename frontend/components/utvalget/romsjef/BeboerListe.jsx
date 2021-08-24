@@ -36,7 +36,6 @@ const BeboerListeAnsiennitet = (props) => {
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
   const [sorter, setSorter] = useState("navn");
   const [asc, setAsc] = useState(true);
-  const classes = useStyles();
 
   const { loading } = useQuery(GET_BEBOERE, {
     onCompleted(data) {

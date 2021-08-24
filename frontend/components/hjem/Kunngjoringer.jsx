@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
 
 // Material-UI
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
@@ -24,22 +23,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AnnouncementIcon from "@material-ui/icons/Announcement";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: "inline",
-  },
-}));
-
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
 const Kunngjoringer = (props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const kunngjoringer = useSelector((state) =>
@@ -115,7 +103,7 @@ const Kunngjoringer = (props) => {
                   primary={
                     <Typography
                       variant="body1"
-                      className={classes.inline}
+                    
                       color="textPrimary"
                     >
                       {kunngjoring.tittel}
@@ -126,7 +114,7 @@ const Kunngjoringer = (props) => {
                       <Typography
                         component="span"
                         variant="body2"
-                        className={classes.inline}
+                        
                         color="textSecondary"
                       >
                         {kunngjoring.beboer.fornavn +
@@ -164,7 +152,7 @@ const Kunngjoringer = (props) => {
           paddingBottom: "0",
         }}
       >
-        <List component="nav" className={classes.root}>
+        <List component="nav">
           {kunngjoringTable}
         </List>
       </CardContent>

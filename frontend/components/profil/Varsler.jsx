@@ -26,19 +26,9 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
-import { makeStyles } from "@material-ui/core/styles";
 
 import MuiAlert from "@material-ui/lab/Alert";
 import FormControl from "@material-ui/core/FormControl";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  formControl: {
-    margin: theme.spacing(3),
-  },
-}));
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -54,7 +44,6 @@ const Varsler = () => {
   const [utleie, setUtleie] = useState(false);
   const [barvakt, setBarvakt] = useState(false);
   const [vellykket, setVellykket] = useState(false);
-  const classes = useStyles();
 
   useEffect(() => {
     if (prefs) {
@@ -120,7 +109,7 @@ const Varsler = () => {
     >
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <FormControl className={classes.formControl}>
+          <FormControl>
             <FormLabel component="legend">Få en varsel på epost...</FormLabel>
             <FormGroup>
               <FormControlLabel

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import 'simplebar/src/simplebar.css';
+
 // Components
 import Kunngjoringer from "../components/hjem/Kunngjoringer";
 import KunngjoringCard from "../components/hjem/KunngjoringCard";

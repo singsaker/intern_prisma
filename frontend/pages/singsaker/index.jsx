@@ -14,7 +14,6 @@ import Head from "next/head";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -23,15 +22,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
-
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
+import { Card } from "@material-ui/core";
 
 const Singsaker = () => {
-  const classes = useStyles();
   const [beboerModal, setBeboerModal] = useState(false);
   const [aapmendListeModal, setAapmendListeModal] = useState(false);
   const [beboerId, setBeboerId] = useState(null);
@@ -118,20 +111,17 @@ const Singsaker = () => {
         <VervCard toggleVervModal={toggleVervModal} verv_id={vervId} />
       </Dialog>
 
-      <Paper className={classes.root}>
-        <Tabs
+      <Tabs
           value={tab}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
-          centered
         >
           <Tab label="Beboerliste" value="beboere" />
           <Tab label="Verv" value="verv" />
           <Tab label="Statistikk" value="statistikk" />
         </Tabs>
-      </Paper>
-      <Paper>
+      <Card sx={{mt: 5}}>
         <div role="tabpanel" hidden={tab !== "beboere"}>
           <BeboerListe toggleBeboer={(id) => toggleBeboerModal(id)} />
         </div>
@@ -145,7 +135,7 @@ const Singsaker = () => {
         <div role="tabpanel" hidden={tab !== "statistikk"}>
           <Statistikk />
         </div>
-      </Paper>
+      </Card>
     </Layout>
   );
 };

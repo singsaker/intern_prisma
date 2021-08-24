@@ -18,22 +18,12 @@ import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  formControl: {
-    margin: theme.spacing(3),
-  },
-}));
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -50,7 +40,6 @@ const Kryss = () => {
   const [pinkodeVinkjeller, setPinkodeVinkjeller] = useState("");
   const [pinResep, setPinResep] = useState(null);
   const [pinVin, setPinVin] = useState(null);
-  const classes = useStyles();
   const [vellykket, setVellykket] = useState(false);
 
   useEffect(() => {
@@ -128,7 +117,7 @@ const Kryss = () => {
     >
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <FormControl component="fieldset" className={classes.formControl}>
+          <FormControl component="fieldset">
             <FormLabel component="legend">Krysseliste</FormLabel>
             <FormGroup>
               <FormControlLabel

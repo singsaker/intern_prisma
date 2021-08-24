@@ -13,7 +13,6 @@ import _ from "lodash";
 import { useQuery } from "@apollo/react-hooks";
 
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -23,21 +22,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: "650px",
-  },
-});
-
 const VervListe = (props) => {
   const dispatch = useDispatch();
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
   const verv = useSelector((state) => Object.values(state.verv.verv));
   const [errorMelding, setErrorMelding] = useState("");
-  const classes = useStyles();
 
   const { loading, error } = useQuery(GET_VERV, {
     onCompleted(data) {
@@ -90,8 +79,8 @@ const VervListe = (props) => {
   if (loading) return <Spinner />;
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    <Paper xs={{width: "100%"}}>
+      <TableContainer xs={{maxHeight: "650px"}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

@@ -25,29 +25,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  datepicker: {
-    margin: theme.spacing(1),
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import DatePicker from '@material-ui/lab/DatePicker';
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,7 +41,6 @@ const Alert = (props) => {
 
 const ProfilRedigerInfo = (props) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const studier = useSelector((state) => Object.values(state.skole.studier));
   const skoler = useSelector((state) => Object.values(state.skole.skoler));
   const beboer = useSelector((state) => state.beboer.beboere[props.beboer_id]);
@@ -195,7 +180,7 @@ const ProfilRedigerInfo = (props) => {
           fullWidth
         />
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container className={classes.datepicker} justify="flex-start">
             <KeyboardDatePicker
               margin="normal"
@@ -209,9 +194,18 @@ const ProfilRedigerInfo = (props) => {
               }}
             />
           </Grid>
-        </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider> */}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Fødselsdag"
+            id="fodselsdag_input"
+            value={fodselsdato}
+            onChange={handleDateChange}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
         <Grid>
-          <FormControl className={classes.formControl}>
+          <FormControl>
             <InputLabel id="skole_label">Skole</InputLabel>
             <Select
               labelId="skole_label"
@@ -240,7 +234,7 @@ const ProfilRedigerInfo = (props) => {
               )}
             </Select>
           </FormControl>
-          <FormControl className={classes.formControl}>
+          <FormControl>
             <InputLabel id="studie_label">Studie</InputLabel>
             <Select
               labelId="studie_label"
@@ -269,7 +263,7 @@ const ProfilRedigerInfo = (props) => {
               )}
             </Select>
           </FormControl>
-          <FormControl className={classes.formControl}>
+          <FormControl>
             <InputLabel id="klasse_label">Klassetrinn</InputLabel>
             <Select
               labelId="klasse_label"
