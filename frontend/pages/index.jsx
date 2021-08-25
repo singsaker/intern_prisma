@@ -14,6 +14,7 @@ import Grid from "@material-ui/core/Grid";
 
 // Next
 import Head from "next/head";
+import { Box, Paper, Typography } from "@material-ui/core";
 
 const Hjem = () => {
   const [kunngjoringModal, setKunngjoringModal] = useState(false);
@@ -62,8 +63,8 @@ const Hjem = () => {
         />
       </Dialog>
 
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={8}>
           <Kunngjoringer
             toggleKunngjoringModal={(id) => toggleKunngjoringModal(id)}
           />
