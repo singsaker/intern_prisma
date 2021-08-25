@@ -3,22 +3,9 @@ import Aarsmodell from "./AarsmodellStatistikk";
 import AarsmodellBarStatistikk from "./AarsmodellBarStatistikk";
 
 // Material UI
-// import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     backgroundColor: theme.palette.background.paper,
-//     display: "flex",
-//     height: 224,
-//   },
-//   tabs: {
-//     borderRight: `1px solid ${theme.palette.divider}`,
-//   },
-// }));
 
 const Statistikk = () => {
   const [value, setValue] = useState(0);

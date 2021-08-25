@@ -12,7 +12,6 @@ import _ from "lodash";
 import { useQuery } from "@apollo/react-hooks";
 
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -22,19 +21,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Typography } from "@material-ui/core";
 
-const useStyles = makeStyles({
-    root: {
-        width: "100%",
-    },
-    container: {
-        maxHeight: "650px",
-    },
-});
-
 const DrikkeListe = (props) => {
     const dispatch = useDispatch();
     const [errorMelding, setErrorMelding] = useState("");
-    const classes = useStyles();
 
     useQuery(GET_DRIKKER, {
         onCompleted(data) {
@@ -45,8 +34,8 @@ const DrikkeListe = (props) => {
     const drikker = useSelector(state => Object.values(state.drikke.drikke));
 
     return (
-        <Paper variant="outlined" className={classes.root}>
-            <TableContainer className={classes.container}>
+        <Paper variant="outlined">
+            <TableContainer>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>

@@ -2,16 +2,13 @@ import React, { useState } from "react";
 
 // Material-UI
 import TextField from "@material-ui/core/TextField";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import DatePicker from '@material-ui/lab/DatePicker';
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
@@ -25,15 +22,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { flyttBeboer } from "../../../../src/actions/beboer";
 import { FLYTT_BEBOER } from "../../../../src/query/beboer";
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -41,7 +29,6 @@ const Alert = (props) => {
 
 const ProfilRomflytt = (props) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   const beboerRom = useSelector((state) => {
     if (props.perm) {
@@ -116,7 +103,7 @@ const ProfilRomflytt = (props) => {
             value={beboerRom.navn}
             style={{ margin: 8 }}
           />
-          <FormControl className={classes.formControl}>
+          <FormControl>
             <InputLabel id="rom_label">Nytt rom</InputLabel>
             <Select
               labelId="rom_label"
@@ -135,41 +122,28 @@ const ProfilRomflytt = (props) => {
           </FormControl>
         </div>
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid item>
-            <KeyboardDatePicker
-              margin="normal"
-              label="Utflytt fra nåværende rom"
-              format="dd/MM/yyyy"
-              value={utflytt}
-              onChange={handleUtflyttChange}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </Grid>
-        </MuiPickersUtilsProvider>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid item>
-            <KeyboardDatePicker
-              margin="normal"
-              label="Innflytt til nytt rom"
-              format="dd/MM/yyyy"
-              value={innflytt}
-              onChange={handleInnflyttChange}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </Grid>
-        </MuiPickersUtilsProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Utflytt fra nåværende rom"
+            value={utflytt}
+            onChange={handleUtflyttChange}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Innflytt til nytt rom"
+            value={innflytt}
+            onChange={handleInnflyttChange}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
 
         <Grid container justify="flex-end">
           <Button
             variant="contained"
             color="primary"
             size="large"
-            className={classes.button}
             startIcon={<ArrowForwardIcon />}
             type="submit"
           >

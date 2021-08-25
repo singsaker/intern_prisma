@@ -27,19 +27,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import { makeStyles } from "@material-ui/core/styles";
 import MuiAlert from "@material-ui/lab/Alert";
-
-const useStyles = makeStyles(() => ({
-  buttonProgress: {
-    color: "green",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    marginTop: -12,
-    marginLeft: -12,
-  },
-}));
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -49,7 +37,6 @@ const Login = () => {
   const [cookies, setCookies] = useCookies();
   const dispatch = useDispatch();
   const router = useRouter();
-  const classes = useStyles();
   const [epost, setEpost] = useState("");
   const [passord, setPassord] = useState("");
   const [autentiseringsfeil, setAutentiseringsfeil] = useState(false);
@@ -199,7 +186,6 @@ const Login = () => {
                   {loading && (
                     <CircularProgress
                       size={24}
-                      className={classes.buttonProgress}
                     />
                   )}
                 </Button>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-// import { makeStyles } from '@material-ui/core/styles';
 
 // Beboer Query
 import { useLazyQuery } from '@apollo/react-hooks';

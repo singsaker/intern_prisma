@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 // Material-UI
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -25,15 +24,8 @@ const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 450,
-  },
-});
-
 const Romhistorikk = (props) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const romhistorikk = useSelector((state) => {
     if (props.gammelBeboer) {
       return state.beboer.gamleBeboere[props.beboer_id].romhistorikk;
@@ -58,7 +50,7 @@ const Romhistorikk = (props) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} size="small">
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Rom</TableCell>

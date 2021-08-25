@@ -7,7 +7,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -38,22 +37,11 @@ import {
   sendHjemFraPerm,
 } from "../../../../src/actions/beboer";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
-
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
 const ProfilAdmin = (props) => {
-  const classes = useStyles();
   const [depositum, setDepositum] = useState(false);
   const [rolle, setRolle] = useState("default");
   const [rom, setRom] = useState("default");
@@ -189,7 +177,7 @@ const ProfilAdmin = (props) => {
         >
           <Grid container direction="column" spacing={2}>
             <Grid item xs={6}>
-              <FormControl className={classes.formControl}>
+              <FormControl>
                 <TextField
                   id="kundenr"
                   label="Kundenummer"
@@ -198,7 +186,7 @@ const ProfilAdmin = (props) => {
                   onChange={(e) => setKundenr(e.target.value)}
                 />
               </FormControl>
-              <FormControl component="fieldset" className={classes.formControl}>
+              <FormControl component="fieldset">
                 <FormGroup>
                   <FormControlLabel
                     control={
@@ -214,7 +202,7 @@ const ProfilAdmin = (props) => {
               </FormControl>
 
               {!rollerQuery.loading && roller.length > 0 && (
-                <FormControl className={classes.formControl}>
+                <FormControl>
                   <InputLabel id="rolle_label">Rolle</InputLabel>
                   <Select
                     labelId="rolle_label"
@@ -233,7 +221,7 @@ const ProfilAdmin = (props) => {
               )}
 
               {!romQuery.loading && alleRom.length > 0 && (
-                <FormControl className={classes.formControl}>
+                <FormControl>
                   <InputLabel id="rom_label">Rom</InputLabel>
                   <Select
                     labelId="rom_label"
@@ -258,7 +246,6 @@ const ProfilAdmin = (props) => {
                   variant="text"
                   size="large"
                   color="secondary"
-                  className={classes.button}
                   onClick={() => setSlettBeboerToggle(!slettBeboerToggle)}
                   startIcon={<DeleteIcon />}
                 >
@@ -270,7 +257,6 @@ const ProfilAdmin = (props) => {
                   size="large"
                   variant="contained"
                   color="secondary"
-                  className={classes.button}
                   startIcon={<FlightIcon />}
                   onClick={() => oppdaterPermStatusMutation()}
                 >
@@ -282,7 +268,6 @@ const ProfilAdmin = (props) => {
                   variant="contained"
                   color="primary"
                   size="large"
-                  className={classes.button}
                   startIcon={<SaveIcon />}
                   type="submit"
                 >

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -15,22 +14,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 import _ from "lodash";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-  },
-  paper: {
-    height: 430,
-    overflow: "auto",
-    backgroundColor: "#011F26",
-  },
-  button: {
-    margin: theme.spacing(0.5, 0),
-  },
-}));
-
 const NyListeRom = (props) => {
-  const classes = useStyles();
 
   const RomObjekt = (rom) => {
     let v = props.valgt.indexOf(rom.id) !== -1;
@@ -68,7 +52,7 @@ const NyListeRom = (props) => {
         <Typography variant="h6">
           Alle rom - {props.venstre && props.venstre.length} stk
         </Typography>
-        <Paper className={classes.paper}>
+        <Paper>
           <List dense component="div" role="list">
             {props.venstre &&
               props.venstre.length > 0 &&
@@ -85,7 +69,6 @@ const NyListeRom = (props) => {
           <Button
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={props.handleFlyttRomHoyre}
             aria-label="move selected right"
           >
@@ -94,7 +77,6 @@ const NyListeRom = (props) => {
           <Button
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={props.handleFlyttRomVenstre}
             aria-label="move selected left"
           >
@@ -107,8 +89,8 @@ const NyListeRom = (props) => {
           Valgte rom - {props.hoyre && props.hoyre.length} stk
         </Typography>
 
-        <Paper className={classes.paper}>
-          <Paper className={classes.paper}>
+        <Paper>
+          <Paper>
             <List dense component="div" role="list">
               {props.hoyre &&
                 props.hoyre.length > 0 &&

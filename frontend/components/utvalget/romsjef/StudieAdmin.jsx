@@ -22,7 +22,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
@@ -35,22 +34,12 @@ import TextField from "@material-ui/core/TextField";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
-
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
 const StudieAdmin = (props) => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const studier = useSelector((state) => state.skole.studier);
   const [studieNavn, setStudieNavn] = useState({});
   const [vellykket, setVellykket] = useState(false);
@@ -136,7 +125,7 @@ const StudieAdmin = (props) => {
   };
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container>
       <Grid container justify="flex-end" item xs={12}>
         <CloseIcon
           onClick={() => props.toggleStudieAdmin()}
@@ -144,7 +133,7 @@ const StudieAdmin = (props) => {
         />
       </Grid>
       <Grid item md={8} xs={12}>
-        <TableContainer className={classes.container}>
+        <TableContainer>
           <Table size="small" stickyHeader>
             <TableHead>
               <TableRow>

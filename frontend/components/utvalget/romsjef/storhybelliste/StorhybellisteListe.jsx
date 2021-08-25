@@ -10,7 +10,6 @@ import _ from "lodash";
 import { useLazyQuery } from "@apollo/react-hooks";
 
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -25,12 +24,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles({
-  container: {
-    maxHeight: "650px",
-  },
-});
-
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
@@ -40,7 +33,6 @@ const StorhybellisteListe = (props) => {
   const storhybellister = useSelector((state) =>
     Object.values(state.rom.storhybellister)
   );
-  const classes = useStyles();
   const auth = useSelector((state) => state.auth);
   const [melding, setMelding] = useState("");
   const [vellykket, setVellykket] = useState(false);
@@ -79,7 +71,7 @@ const StorhybellisteListe = (props) => {
 
   return (
     <Paper variant="outlined">
-      <TableContainer className={classes.container}>
+      <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

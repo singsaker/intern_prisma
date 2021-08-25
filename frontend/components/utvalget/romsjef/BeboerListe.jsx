@@ -10,7 +10,6 @@ import _ from "lodash";
 import { useQuery } from "@apollo/react-hooks";
 
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -21,15 +20,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: "650px",
-  },
-});
 
 const BeboerListeAnsiennitet = (props) => {
   const dispatch = useDispatch();
@@ -93,8 +83,8 @@ const BeboerListeAnsiennitet = (props) => {
   };
 
   return (
-    <Paper variant="outlined" className={classes.root}>
-      <TableContainer className={classes.container}>
+    <Paper variant="outlined">
+      <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

@@ -7,20 +7,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 const Kontrollpanel = (props) => {
-  const classes = useStyles();
   const currentYear = new Date().getFullYear();
 
   const lagAarValg = () => {
@@ -34,7 +22,7 @@ const Kontrollpanel = (props) => {
   return (
     <Card>
       <CardContent>
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant="outlined">
           <InputLabel id="aar-label">År</InputLabel>
           <Select
             labelId="aar-label"
@@ -55,7 +43,7 @@ const Kontrollpanel = (props) => {
               })}
           </Select>
         </FormControl>
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant="outlined">
           <InputLabel id="semester-label">Semester</InputLabel>
           <Select
             labelId="semester-label"

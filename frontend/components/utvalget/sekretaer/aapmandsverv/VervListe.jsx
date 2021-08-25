@@ -11,7 +11,6 @@ import _ from "lodash";
 import { useQuery } from "@apollo/react-hooks";
 
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -30,15 +29,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: "650px",
-  },
-});
-
 const VervListe = (props) => {
   const dispatch = useDispatch();
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
@@ -46,7 +36,6 @@ const VervListe = (props) => {
   const [melding, setMelding] = useState("");
   const [feilmelding, setFeilmelding] = useState(false);
   const [vellykket, setVellykket] = useState(false);
-  const classes = useStyles();
 
   useQuery(GET_VERV, {
     onCompleted(data) {
@@ -110,8 +99,8 @@ const VervListe = (props) => {
 
   if (beboere.length > 0 && verv.length > 0) {
     return (
-      <Paper variant="outlined" className={classes.root}>
-        <TableContainer className={classes.container}>
+      <Paper variant="outlined">
+        <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

@@ -23,7 +23,6 @@ import { styled } from '@material-ui/core/styles';
 // Material-UI Icons
 import MenuIcon from '@material-ui/icons/Menu';
 
-// import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // Snackbar
@@ -37,33 +36,6 @@ const RootStyle = styled('div')({
   minHeight: '100%',
   overflow: 'hidden'
 });
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: "100vw",
-//     height: "100vh",
-//   },
-//   header: {
-//     height: "50px"
-//   },
-//   drawerButton: {
-//     height: "inherit"
-//   },
-//   drawer: {
-//     border: 0,
-//     width: drawerWidth
-//   },
-//   drawerPaper: {
-//     border: 0
-//   },
-//   backdrop: {
-//     zIndex: theme.zIndex.drawer + 1,
-//     color: '#fff',
-//   },
-//   sidebar: {
-//     width: drawerWidth
-//   }
-// }));
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

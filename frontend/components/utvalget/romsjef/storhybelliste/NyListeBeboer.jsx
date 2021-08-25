@@ -1,6 +1,4 @@
 import React from "react";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,22 +11,7 @@ import Typography from "@material-ui/core/Typography";
 
 import _ from "lodash";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-  },
-  paper: {
-    height: 430,
-    overflow: "auto",
-    backgroundColor: "#011F26",
-  },
-  button: {
-    margin: theme.spacing(0.5, 0),
-  },
-}));
-
 const NyListeBeboer = (props) => {
-  const classes = useStyles();
 
   const compare = (a, b) => {
     const objA =
@@ -85,7 +68,7 @@ const NyListeBeboer = (props) => {
         <Typography variant="h6">
           Alle beboere - {props.venstre && props.venstre.length} stk
         </Typography>
-        <Paper className={classes.paper}>
+        <Paper>
           <List dense component="div" role="list">
             {props.venstre &&
               props.venstre.length > 0 &&
@@ -98,7 +81,6 @@ const NyListeBeboer = (props) => {
           <Button
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={props.handleFlyttBeboerHoyre}
             aria-label="move selected right"
           >
@@ -107,7 +89,6 @@ const NyListeBeboer = (props) => {
           <Button
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={props.handleFlyttBeboerVenstre}
             aria-label="move selected left"
           >
@@ -120,8 +101,8 @@ const NyListeBeboer = (props) => {
           Valgte beboere - {props.hoyre && props.hoyre.length} stk
         </Typography>
 
-        <Paper className={classes.paper}>
-          <Paper className={classes.paper}>
+        <Paper>
+          <Paper>
             <List dense component="div" role="list">
               {props.hoyre &&
                 props.hoyre.length > 0 &&

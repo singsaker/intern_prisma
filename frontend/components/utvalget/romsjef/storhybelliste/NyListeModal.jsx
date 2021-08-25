@@ -5,7 +5,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -24,17 +23,7 @@ import NyListeSammendrag from "./NyListeSammendrag";
 
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  button: {
-    marginRight: theme.spacing(1),
-  },
-}));
-
 const NyListeModal = (props) => {
-  const classes = useStyles();
   const [aktivStep, setAktivStep] = useState(0);
   const rom = useSelector((state) => Object.values(state.rom.rom));
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
@@ -233,7 +222,7 @@ const NyListeModal = (props) => {
             />
           </Grid>
         </Grid>
-        <div className={classes.root}>
+        <div>
           <Stepper activeStep={aktivStep}>
             <Step>
               <StepLabel>Info</StepLabel>

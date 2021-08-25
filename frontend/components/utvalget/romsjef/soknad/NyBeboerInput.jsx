@@ -17,12 +17,6 @@ import validerEpost from "../../../../helpers/validerEpost";
 
 // Material-UI
 import TextField from "@material-ui/core/TextField";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -41,26 +35,15 @@ import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import DatePicker from '@material-ui/lab/DatePicker';
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  datepicker: {
-    margin: theme.spacing(1),
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
-
 const NyBeboerInput = () => {
-  const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
   const params = router.query;
@@ -289,28 +272,18 @@ const NyBeboerInput = () => {
           </Grid>
           <Grid item container>
             <Grid item>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid
-                  container
-                  className={classes.datepicker}
-                  justify="flex-start"
-                >
-                  <KeyboardDatePicker
-                    id="fodselsdag_input"
-                    label="Fødselsdag"
-                    format="dd/MM/yyyy"
-                    value={fodselsdato}
-                    onChange={handleDateChange}
-                    inputVariant="outlined"
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                  />
-                </Grid>
-              </MuiPickersUtilsProvider>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Fødselsdag"
+                  id="fodselsdag_input"
+                  value={fodselsdato}
+                  onChange={handleDateChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
             </Grid>
             <Grid item>
-              <FormControl variant="outlined" className={classes.formControl}>
+              <FormControl variant="outlined">
                 <InputLabel id="kjønn-label">Kjønn</InputLabel>
 
                 <Select
@@ -375,7 +348,7 @@ const NyBeboerInput = () => {
             </Grid>
           </Grid>
           <Grid item container>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined">
               <InputLabel id="skole-label">Skole</InputLabel>
               <Select
                 value={skole}
@@ -398,7 +371,7 @@ const NyBeboerInput = () => {
                   ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined">
               <InputLabel id="studie-label">Studie</InputLabel>
 
               <Select
@@ -421,7 +394,7 @@ const NyBeboerInput = () => {
                   ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined">
               <InputLabel id="klasse-label">Klasse</InputLabel>
 
               <Select
@@ -457,7 +430,6 @@ const NyBeboerInput = () => {
             <FormControl
               required
               variant="outlined"
-              className={classes.formControl}
             >
               <InputLabel id="rolle-label">Rolle</InputLabel>
               <Select
@@ -483,7 +455,6 @@ const NyBeboerInput = () => {
             <FormControl
               required
               variant="outlined"
-              className={classes.formControl}
             >
               <InputLabel id="rom-label">Rom</InputLabel>
               <Select
