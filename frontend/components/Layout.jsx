@@ -91,7 +91,7 @@ const Layout = ({ children }) => {
       <RootStyle>
         <Navbar onOpenSidebar={() => setOpen(true)} />
         <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}  />
-        <Box sx={{ px: 5, pt: 15, flexGrow: 1 }}>
+        <Box sx={{ px: 5, py: 15, flexGrow: 1 }}>
           {children}
         </Box>
       
