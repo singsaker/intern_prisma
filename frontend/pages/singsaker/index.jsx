@@ -11,7 +11,6 @@ import Statistikk from "../../components/singsaker/Statistikk";
 // Next
 import Head from "next/head";
 
-import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Avatar from "@material-ui/core/Avatar";
@@ -22,7 +21,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
-import { Card } from "@material-ui/core";
+import { Box, Breadcrumbs, Card, Link, Typography } from "@material-ui/core";
 
 const Singsaker = () => {
   const [beboerModal, setBeboerModal] = useState(false);
@@ -65,63 +64,52 @@ const Singsaker = () => {
         <title>Singsaker | Internsida</title>
       </Head>
 
+      <Box sx={{ mb: 5 }}>
+        <Typography variant="h4" gutterBottom>
+          Singsaker
+        </Typography>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/">
+            Hjem
+          </Link>
+          <Typography color="text.primary">Singsaker</Typography>
+        </Breadcrumbs>
+      </Box>
+
       {/* Beboermodal: */}
       <Dialog onClose={toggleBeboerModal} open={beboerModal}>
-        <ProfilCard
-          toggleBeboerModal={toggleBeboerModal}
-          beboer_id={beboerId}
-        />
+        <ProfilCard toggleBeboerModal={toggleBeboerModal} beboer_id={beboerId} />
       </Dialog>
 
       {/* Modal med liste over aktuelle aapmend: */}
-      <Dialog
-        onClose={togggleAapmendListeModal}
-        aria-labelledby="simple-dialog-title"
-        open={aapmendListeModal}
-      >
+      <Dialog onClose={togggleAapmendListeModal} aria-labelledby="simple-dialog-title" open={aapmendListeModal}>
         <DialogTitle id="simple-dialog-title">Aapmend</DialogTitle>
         <List>
           {beboerListe !== null &&
             beboerListe.map((beboer) => (
-              <ListItem
-                button
-                onClick={() => toggleBeboerModal(beboer.id)}
-                key={beboer.id}
-              >
+              <ListItem button onClick={() => toggleBeboerModal(beboer.id)} key={beboer.id}>
                 <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
+                  <Avatar>
                     <PersonIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary={`${beboer.fornavn} ${beboer.etternavn}`}
-                />
+                <ListItemText primary={`${beboer.fornavn} ${beboer.etternavn}`} />
               </ListItem>
             ))}
         </List>
       </Dialog>
 
       {/* Vervmodal: */}
-      <Dialog
-        fullWidth
-        maxWidth="sm"
-        open={vervModal}
-        onClose={toggleVervModal}
-      >
+      <Dialog fullWidth maxWidth="sm" open={vervModal} onClose={toggleVervModal}>
         <VervCard toggleVervModal={toggleVervModal} verv_id={vervId} />
       </Dialog>
 
-      <Tabs
-          value={tab}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-        >
-          <Tab label="Beboerliste" value="beboere" />
-          <Tab label="Verv" value="verv" />
-          <Tab label="Statistikk" value="statistikk" />
-        </Tabs>
-      <Card sx={{mt: 5}}>
+      <Tabs value={tab} onChange={handleChange} indicatorColor="primary" textColor="primary">
+        <Tab label="Beboerliste" value="beboere" />
+        <Tab label="Verv" value="verv" />
+        <Tab label="Statistikk" value="statistikk" />
+      </Tabs>
+      <Card sx={{ mt: 5 }}>
         <div role="tabpanel" hidden={tab !== "beboere"}>
           <BeboerListe toggleBeboer={(id) => toggleBeboerModal(id)} />
         </div>

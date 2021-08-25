@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import 'simplebar/src/simplebar.css';
+import "simplebar/src/simplebar.css";
 
 // Components
 import Kunngjoringer from "../components/hjem/Kunngjoringer";
@@ -14,7 +14,6 @@ import Grid from "@material-ui/core/Grid";
 
 // Next
 import Head from "next/head";
-import { Box, Paper, Typography } from "@material-ui/core";
 
 const Hjem = () => {
   const [kunngjoringModal, setKunngjoringModal] = useState(false);
@@ -43,31 +42,18 @@ const Hjem = () => {
       </Head>
 
       {/* Kunngjøringsmodal: */}
-      <Dialog
-        fullWidth
-        maxWidth="md"
-        open={kunngjoringModal}
-        onClose={toggleKunngjoringModal}
-      >
-        <KunngjoringCard
-          toggleKunngjoringModal={toggleKunngjoringModal}
-          kunngjoringId={kunngjoringId}
-        />
+      <Dialog fullWidth maxWidth="md" open={kunngjoringModal} onClose={toggleKunngjoringModal}>
+        <KunngjoringCard toggleKunngjoringModal={toggleKunngjoringModal} kunngjoringId={kunngjoringId} />
       </Dialog>
 
       {/* Beboermodal: */}
       <Dialog open={beboerModal} onClose={toggleBeboerModal}>
-        <ProfilCard
-          beboer_id={bdagbarnId}
-          toggleBeboerModal={toggleBeboerModal}
-        />
+        <ProfilCard beboer_id={bdagbarnId} toggleBeboerModal={toggleBeboerModal} />
       </Dialog>
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={8}>
-          <Kunngjoringer
-            toggleKunngjoringModal={(id) => toggleKunngjoringModal(id)}
-          />
+          <Kunngjoringer toggleKunngjoringModal={(id) => toggleKunngjoringModal(id)} />
         </Grid>
         <Grid item xs={12} md={4}>
           <Bursdag toggleBeboerModal={(id) => toggleBeboerModal(id)} />

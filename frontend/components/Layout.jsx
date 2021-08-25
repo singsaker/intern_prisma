@@ -14,16 +14,9 @@ import { useCookies } from "react-cookie";
 import Sidebar from "./Sidebar";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Drawer from '@material-ui/core/Drawer';
-import Button from "@material-ui/core/Button";
-import { styled } from '@material-ui/core/styles';
+import { styled } from "@material-ui/core/styles";
 
-// Material-UI Icons
-import MenuIcon from '@material-ui/icons/Menu';
-
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // Snackbar
 import Snackbar from "@material-ui/core/Snackbar";
@@ -31,10 +24,10 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Navbar from "./NavBar";
 import { Box } from "@material-ui/core";
 
-const RootStyle = styled('div')({
-  display: 'flex',
-  minHeight: '100%',
-  overflow: 'hidden'
+const RootStyle = styled("div")({
+  display: "flex",
+  minHeight: "100%",
+  overflow: "hidden",
 });
 
 const Alert = (props) => {
@@ -90,17 +83,10 @@ const Layout = ({ children }) => {
     <>
       <RootStyle>
         <Navbar onOpenSidebar={() => setOpen(true)} />
-        <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}  />
-        <Box sx={{ px: 5, py: 15, flexGrow: 1 }}>
-          {children}
-        </Box>
-      
-      </RootStyle >
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
+        <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
+        <Box sx={{ px: 5, py: 15, flexGrow: 1 }}>{children}</Box>
+      </RootStyle>
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
         <Alert onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
