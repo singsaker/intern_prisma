@@ -10,22 +10,13 @@ module.exports = async (context, beboer) => {
       });
     }
 
-    const beboerRom = JSON.parse(beboer.romhistorikk);
-    let innflyttet = "";
-
-    if (beboerRom.length > 0) {
-      innflyttet = beboerRom[0].innflyttet;
-    }
-
     const fodselsdato = JSON.stringify(
       beboer.fodselsdato.toISOString().split("T")[0]
     ).replace(/"/g, "");
 
     return {
       ...beboer,
-      romhistorikk: beboerRom,
       fodselsdato,
-      innflyttet,
       verv,
     };
   } catch (err) {

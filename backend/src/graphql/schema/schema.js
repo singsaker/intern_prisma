@@ -203,7 +203,8 @@ const schemaSchema = gql`
   }
 
   type Romhistorikk {
-    romId: Int!
+    id: Int!
+    rom: Rom!
     innflyttet: String!
     utflyttet: String
   }
@@ -433,6 +434,9 @@ const schemaSchema = gql`
       vakttype: Int
       slippDato: String
     ): Int
+
+    migrerRomhistorikk: String
+    migrerRomNy: String
   }
 `;
 

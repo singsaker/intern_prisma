@@ -24,6 +24,15 @@ const beboerQuery = {
               verv: true,
             },
           },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -41,10 +50,7 @@ const beboerQuery = {
               contains: "Utvalget",
             },
           },
-          romhistorikk: {
-            contains: '"utflyttet":null',
-          },
-          perm: 0,
+          perm: false,
         },
         include: {
           rolle: true,
@@ -59,6 +65,15 @@ const beboerQuery = {
           beboer_verv: {
             include: {
               verv: true,
+            },
+          },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
             },
           },
         },
@@ -101,6 +116,15 @@ const beboerQuery = {
               verv: true,
             },
           },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -135,6 +159,15 @@ const beboerQuery = {
           beboer_verv: {
             include: {
               verv: true,
+            },
+          },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
             },
           },
         },
@@ -216,6 +249,15 @@ const beboerMutation = {
           beboer_verv: {
             include: {
               verv: true,
+            },
+          },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
             },
           },
         },
@@ -326,6 +368,15 @@ const beboerMutation = {
               verv: true,
             },
           },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -391,33 +442,30 @@ const beboerMutation = {
         },
       });
 
-      const deleteStorhybelRekkefølge = await context.prisma.storhybel_rekkefolge.deleteMany(
-        {
+      const deleteStorhybelRekkefølge =
+        await context.prisma.storhybel_rekkefolge.deleteMany({
           where: {
             storhybel_velger: {
               beboer_id: args.id,
             },
           },
-        }
-      );
+        });
 
-      const deleteStorhybelFordeling = await context.prisma.storhybel_fordeling.deleteMany(
-        {
+      const deleteStorhybelFordeling =
+        await context.prisma.storhybel_fordeling.deleteMany({
           where: {
             storhybel_velger: {
               beboer_id: args.id,
             },
           },
-        }
-      );
+        });
 
-      const deleteStorhybelVelger = await context.prisma.storhybel_velger.deleteMany(
-        {
+      const deleteStorhybelVelger =
+        await context.prisma.storhybel_velger.deleteMany({
           where: {
             beboer_id: args.id,
           },
-        }
-      );
+        });
 
       const deleteBeboer = await context.prisma.beboer.delete({
         where: {
@@ -462,6 +510,15 @@ const beboerMutation = {
             beboer_verv: {
               include: {
                 verv: true,
+              },
+            },
+            romhistorikk: {
+              include: {
+                rom: {
+                  include: {
+                    romtype: true,
+                  },
+                },
               },
             },
           },
@@ -515,6 +572,15 @@ const beboerMutation = {
               verv: true,
             },
           },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -545,6 +611,15 @@ const beboerMutation = {
           beboer_verv: {
             include: {
               verv: true,
+            },
+          },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
             },
           },
         },
@@ -605,6 +680,15 @@ const beboerMutation = {
               verv: true,
             },
           },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -645,6 +729,75 @@ const beboerMutation = {
           barvakt: args.prefs.barvakt,
         },
       });
+    } catch (err) {
+      throw err;
+    }
+  },
+  migrerRomhistorikk: async (parent, args, context) => {
+    try {
+      const beboerRomhistorikk = await context.prisma.beboer_temp2.findMany({
+        select: {
+          id: true,
+          romhistorikk: true,
+        },
+      });
+
+      let nyRomhistorikk = [];
+
+      let romhistorikk = beboerRomhistorikk.map((beboer) => {
+        const historikk = JSON.parse(beboer.romhistorikk);
+        const nyHistorikk = historikk.map((x) => {
+          nyRomhistorikk.push({
+            rom_id: Number(x.romId),
+            beboer_id: Number(beboer.id),
+            innflyttet: new Date(x.innflyttet).toISOString(),
+            utflyttet:
+              x.utflyttet !== null ? new Date(x.utflyttet).toISOString() : null,
+          });
+
+          return null;
+        });
+        return { ...nyHistorikk };
+      });
+
+      const count = await context.prisma.romhistorikk.createMany({
+        data: nyRomhistorikk,
+        skipDuplicates: true,
+      });
+
+      console.log(count);
+
+      return null;
+    } catch (err) {
+      throw err;
+    }
+  },
+  migrerRomNy: async (parent, args, context) => {
+    try {
+      const beboer = await context.prisma.beboer.findMany({
+        select: {
+          id: true,
+          romhistorikk: true,
+        },
+      });
+
+      for (let i = 0; i < beboer.length; i++) {
+        const romHist = beboer[i].romhistorikk;
+        if (
+          romHist.length > 0 &&
+          romHist[romHist.length - 1].utflyttet === null
+        ) {
+          await context.prisma.beboer.update({
+            where: {
+              id: beboer[i].id,
+            },
+            data: {
+              rom_id: romHist[romHist.length - 1].rom_id,
+            },
+          });
+        }
+      }
+      return null;
     } catch (err) {
       throw err;
     }
