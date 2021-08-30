@@ -8,9 +8,7 @@ const CustomCard = (props) => {
       <Card.Header>
         <h2>{props.header}</h2>
       </Card.Header>
-      <Card.Body style={{ backgroundColor: "#212026" }}>
-        {props.children}
-      </Card.Body>
+      <Card.Body style={{ backgroundColor: "#212026" }}>{props.children}</Card.Body>
       {props.footer && <Card.Footer>{props.footer}</Card.Footer>}
     </Card>
   );

@@ -121,11 +121,7 @@ const Login = () => {
           >
             <Grid container justify="center">
               <Grid item xs={10} style={{ margin: 8 }}>
-                <FormControl
-                  required
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                >
+                <FormControl required variant="outlined" style={{ width: "100%" }}>
                   <InputLabel htmlFor="component-outlined">Epost</InputLabel>
                   <OutlinedInput
                     id="component-outlined"
@@ -166,39 +162,21 @@ const Login = () => {
             </Grid>
             <Grid container justify="center" spacing={2}>
               <Grid item>
-                <Button
-                  onClick={() => router.push("/glemtpassord")}
-                  size="large"
-                  variant="contained"
-                  color="secondary"
-                >
+                <Button onClick={() => router.push("/glemtpassord")} size="large" variant="contained" color="secondary">
                   Glemt passord
                 </Button>
               </Grid>
               <Grid item>
-                <Button
-                  type="submit"
-                  size="large"
-                  variant="contained"
-                  color="primary"
-                >
+                <Button type="submit" size="large" variant="contained" color="primary">
                   Logg inn
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                    />
-                  )}
+                  {loading && <CircularProgress size={24} />}
                 </Button>
               </Grid>
             </Grid>
           </form>
         </Paper>
       </Grid>
-      <Snackbar
-        open={autentiseringsfeil}
-        autoHideDuration={6000}
-        onClose={() => setAutentiseringsfeil(false)}
-      >
+      <Snackbar open={autentiseringsfeil} autoHideDuration={6000} onClose={() => setAutentiseringsfeil(false)}>
         <Alert onClose={() => setAutentiseringsfeil(false)} severity="error">
           Autentiseringsfeil!
         </Alert>

@@ -22,9 +22,7 @@ import Card from "../CustomCard";
 
 const Registrer = () => {
   const dispatch = useDispatch();
-  const kategorier = useSelector((state) =>
-    Object.values(state.regi.arbeidskategorier)
-  );
+  const kategorier = useSelector((state) => Object.values(state.regi.arbeidskategorier));
   const [tilhorighet, setTilhorighet] = useState("genarb");
   const [kategori, setKategori] = useState("loading");
   const [utfort, setUtfort] = useState(new Date());
@@ -59,11 +57,7 @@ const Registrer = () => {
             Tilhørighet
           </Form.Label>
           <Col sm="9">
-            <Form.Control
-              as="select"
-              onChange={(event) => setTilhorighet(event.target.value)}
-              value={tilhorighet}
-            >
+            <Form.Control as="select" onChange={(event) => setTilhorighet(event.target.value)} value={tilhorighet}>
               <option value="genarb">Generelt arbeid</option>
               <option value="genfei">Generell feil</option>
               <option value="spefei">Spesifikk feil</option>
@@ -76,11 +70,7 @@ const Registrer = () => {
             Kategori
           </Form.Label>
           <Col sm="9">
-            <Form.Control
-              as="select"
-              onChange={(event) => setKategori(event.target.value)}
-              value={kategori}
-            >
+            <Form.Control as="select" onChange={(event) => setKategori(event.target.value)} value={kategori}>
               {kategorier.length !== null &&
                 kategorier.map((kategori) => {
                   return (
@@ -97,12 +87,7 @@ const Registrer = () => {
             Dato utført
           </Form.Label>
           <Col sm="9">
-            <DatePicker
-              dateFormat="dd.MM.yyyy"
-              selected={utfort}
-              isClearable
-              onChange={(date) => setUtfort(date)}
-            />
+            <DatePicker dateFormat="dd.MM.yyyy" selected={utfort} isClearable onChange={(date) => setUtfort(date)} />
           </Col>
         </Form.Group>
         <Form.Group className="py-1" as={Row}>

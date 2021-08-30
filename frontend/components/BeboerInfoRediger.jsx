@@ -11,22 +11,22 @@ import { GET_STUDIER, GET_SKOLE } from "../src/query/studie";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
 // Material-UI
-import TextField from "@material-ui/core/TextField";
-import DateFnsUtils from "@date-io/date-fns";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import DatePicker from '@material-ui/lab/DatePicker';
-import { Stack } from "@material-ui/core";
+import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import DatePicker from "@material-ui/lab/DatePicker";
+import {
+  Stack,
+  TextField,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Grid,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -129,9 +129,7 @@ const BeboerInfoRediger = (props) => {
       etternavn,
     },
     onCompleted(data) {
-      props.gammelBeboer
-        ? dispatch(oppdaterGammelBeboer(data))
-        : dispatch(oppdaterBeboer(data));
+      props.gammelBeboer ? dispatch(oppdaterGammelBeboer(data)) : dispatch(oppdaterBeboer(data));
 
       setMelding("Beboer ble oppdatert!");
       setVellykket(true);
@@ -155,6 +153,11 @@ const BeboerInfoRediger = (props) => {
 
   return (
     <>
+      {vellykket && (
+        <Alert onClose={() => setVellykket(false)} severity="success">
+          {melding}
+        </Alert>
+      )}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -239,7 +242,7 @@ const BeboerInfoRediger = (props) => {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
-          
+
           <Grid container xs={12}>
             <FormControl>
               <InputLabel id="skole_label">Skole</InputLabel>
@@ -317,29 +320,13 @@ const BeboerInfoRediger = (props) => {
             </FormControl>
           </Grid>
           <Grid container justify="flex-end">
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              startIcon={<SaveIcon />}
-              type="submit"
-            >
+            <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
               Lagre
             </Button>
           </Grid>
         </Stack>
-        </form>
-        {/* <Snackbar
-
-          open={vellykket}
-          autoHideDuration={6000}
-          onClose={() => setVellykket(false)}
-        >
-          <Alert onClose={() => setVellykket(false)} severity="success">
-            {melding}
-          </Alert>
-        </Snackbar> */}
-   </>
+      </form>
+    </>
   );
 };
 

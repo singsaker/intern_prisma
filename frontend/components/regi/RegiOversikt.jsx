@@ -50,9 +50,7 @@ const RegiOversikt = (props) => {
             Godkjent
           </Col>
           <Col xs={4}>
-            {sekunderTilTid(regiStatus.godkjent).hours +
-              ":" +
-              sekunderTilTid(regiStatus.godkjent).minutes}
+            {sekunderTilTid(regiStatus.godkjent).hours + ":" + sekunderTilTid(regiStatus.godkjent).minutes}
           </Col>
         </Row>
         <Row>
@@ -60,9 +58,7 @@ const RegiOversikt = (props) => {
             Til behandling
           </Col>
           <Col xs={4}>
-            {sekunderTilTid(regiStatus.behandling).hours +
-              ":" +
-              sekunderTilTid(regiStatus.behandling).minutes}
+            {sekunderTilTid(regiStatus.behandling).hours + ":" + sekunderTilTid(regiStatus.behandling).minutes}
           </Col>
         </Row>
         <Row>
@@ -70,9 +66,7 @@ const RegiOversikt = (props) => {
             Underkjent
           </Col>
           <Col xs={4}>
-            {sekunderTilTid(regiStatus.underkjent).hours +
-              ":" +
-              sekunderTilTid(regiStatus.underkjent).minutes}
+            {sekunderTilTid(regiStatus.underkjent).hours + ":" + sekunderTilTid(regiStatus.underkjent).minutes}
           </Col>
         </Row>
 
@@ -81,9 +75,7 @@ const RegiOversikt = (props) => {
             Timer igjen
           </Col>
           <Col xs={4}>
-            {sekunderTilTid(regiStatus.gjenvaerende).hours +
-              ":" +
-              sekunderTilTid(regiStatus.gjenvaerende).minutes}
+            {sekunderTilTid(regiStatus.gjenvaerende).hours + ":" + sekunderTilTid(regiStatus.gjenvaerende).minutes}
           </Col>
         </Row>
 
@@ -91,11 +83,7 @@ const RegiOversikt = (props) => {
           <Col style={{ textAlign: "right", fontWeight: "bold" }} xs={8}>
             Totalt pliktige timer
           </Col>
-          <Col xs={4}>
-            {sekunderTilTid(regiStatus.totalt).hours +
-              ":" +
-              sekunderTilTid(regiStatus.totalt).minutes}
-          </Col>
+          <Col xs={4}>{sekunderTilTid(regiStatus.totalt).hours + ":" + sekunderTilTid(regiStatus.totalt).minutes}</Col>
         </Row>
       </Container>
     </Card>
