@@ -32,7 +32,10 @@ const BEBOER = `
       }
     }
     romhistorikk {
-      romId
+      rom {
+        id
+        navn
+      }
       innflyttet
       utflyttet
     }
@@ -195,13 +198,7 @@ export const UPDATE_PREFS = gql`
   ) {
     oppdaterPrefs(
       id: $id
-      prefs: {
-        pinboo: $pinboo
-        pinkode: $pinkode
-        resepp: $resepp
-        vinkjeller: $vinkjeller
-        vinpin: $vinpin
-      }
+      prefs: { pinboo: $pinboo, pinkode: $pinkode, resepp: $resepp, vinkjeller: $vinkjeller, vinpin: $vinpin }
     ) {
       beboerId
       pinboo
@@ -262,13 +259,7 @@ export const UPDATE_BEBOER_EPOST_PREFS = gql`
   ) {
     oppdaterEpostPrefs(
       id: $id
-      prefs: {
-        tildelt: $tildelt
-        snartVakt: $snartVakt
-        bytte: $bytte
-        utleie: $utleie
-        barvakt: $barvakt
-      }
+      prefs: { tildelt: $tildelt, snartVakt: $snartVakt, bytte: $bytte, utleie: $utleie, barvakt: $barvakt }
     ) {
       beboerId
       tildelt

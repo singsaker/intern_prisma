@@ -125,13 +125,11 @@ const authMutation = {
       const beboer = await context.prisma.beboer.findMany({
         where: {
           epost: args.epost,
-          romhistorikk: {
-            contains: '"utflyttet":null',
-          },
         },
         include: {
           // Inkluderer bruker for passord og verv for å sjekke tilgang:
           bruker: true,
+          romhistorikk: true,
           beboer_verv: {
             include: {
               verv: true,
@@ -139,6 +137,13 @@ const authMutation = {
           },
         },
       });
+
+      if (
+        beboer[0].romhistorikk[beboer[0].romhistorikk.length - 1].utflyttet !==
+        null
+      ) {
+        return null;
+      }
 
       if (!beboer) return null;
 

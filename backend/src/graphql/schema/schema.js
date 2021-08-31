@@ -112,7 +112,7 @@ const schemaSchema = gql`
   }
 
   type Bruker {
-    dato: String!
+    dato: String
     glemt_token: String!
     id: Int!
     beboer: Beboer
