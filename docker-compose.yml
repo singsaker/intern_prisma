@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  backend:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/:/code
+      - /code/node_modules
+      - /code/.next
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
