@@ -49,14 +49,8 @@ const VervListe = (props) => {
   };
 
   const compare = (a, b) => {
-    const objA =
-      _.get(a, sorter) !== null || _.get(a, sorter).length !== 0
-        ? _.get(a, sorter).toUpperCase()
-        : null;
-    const objB =
-      _.get(b, sorter) !== null || _.get(b, sorter).length !== 0
-        ? _.get(b, sorter).toUpperCase()
-        : null;
+    const objA = _.get(a, sorter) !== null || _.get(a, sorter).length !== 0 ? _.get(a, sorter).toUpperCase() : null;
+    const objB = _.get(b, sorter) !== null || _.get(b, sorter).length !== 0 ? _.get(b, sorter).toUpperCase() : null;
 
     let comparison = 0;
     if (asc) {
@@ -79,8 +73,8 @@ const VervListe = (props) => {
   if (loading) return <Spinner />;
 
   return (
-    <Paper xs={{width: "100%"}}>
-      <TableContainer xs={{maxHeight: "650px"}}>
+    <Paper xs={{ width: "100%" }}>
+      <TableContainer xs={{ maxHeight: "650px" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

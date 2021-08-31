@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Aarsmodell from "./AarsmodellStatistikk";
-import AarsmodellBarStatistikk from "./AarsmodellBarStatistikk";
 
 // Material UI
 import Paper from "@material-ui/core/Paper";
@@ -14,13 +12,8 @@ const Statistikk = () => {
     setValue(newValue);
   };
   return (
-    <Paper >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-      >
+    <Paper>
+      <Tabs orientation="vertical" variant="scrollable" value={value} onChange={handleChange}>
         <Tab label="Årsmodell (pie)" value={0} />
         <Tab label="Årsmodell (bar)" value={1} />
       </Tabs>

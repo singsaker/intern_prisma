@@ -18,9 +18,7 @@ import Romhistorikk from "./ProfilRomhistorikk";
 import { useSelector } from "react-redux";
 
 const ProfilRediger = (props) => {
-  const beboer = useSelector(
-    (state) => state.beboer.gamleBeboere[props.beboer_id]
-  );
+  const beboer = useSelector((state) => state.beboer.gamleBeboere[props.beboer_id]);
   const [tab, setTab] = useState("info");
 
   const handleChange = (event, newValue) => {
@@ -39,10 +37,7 @@ const ProfilRediger = (props) => {
               </Typography>
             </Grid>
             <Grid item>
-              <CloseIcon
-                onClick={() => props.toggleBeboer()}
-                style={{ cursor: "pointer", margin: "8px" }}
-              />
+              <CloseIcon onClick={() => props.toggleBeboer()} style={{ cursor: "pointer", margin: "8px" }} />
             </Grid>
           </Grid>
           <Paper style={{ backgroundColor: "#011F26" }}>
@@ -59,18 +54,10 @@ const ProfilRediger = (props) => {
             </Tabs>
           </Paper>
           <Grid container>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "info"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "info"}>
               <Info beboer_id={props.beboer_id} gammelBeboer={true} />
             </Grid>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "romhistorikk"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "romhistorikk"}>
               <Romhistorikk beboer_id={props.beboer_id} gammelBeboer={true} />
             </Grid>
           </Grid>

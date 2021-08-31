@@ -46,40 +46,19 @@ const Romsjef = () => {
       </Head>
 
       {/* Beboermodal: */}
-      <Dialog
-        maxWidth="sm"
-        fullWidth
-        onClose={toggleBeboerModal}
-        open={beboerModal}
-      >
-        <ProfilRediger
-          toggleBeboer={() => toggleBeboerModal(null)}
-          beboer_id={beboerId}
-        />
+      <Dialog maxWidth="sm" fullWidth onClose={toggleBeboerModal} open={beboerModal}>
+        <ProfilRediger toggleBeboer={() => toggleBeboerModal(null)} beboer_id={beboerId} />
       </Dialog>
 
       {/* Studieadminmodal */}
-      <Dialog
-        fullWidth
-        maxWidth="sm"
-        onClose={toggleStudieAdminModal}
-        open={studieAdminModal}
-      >
+      <Dialog fullWidth maxWidth="sm" onClose={toggleStudieAdminModal} open={studieAdminModal}>
         <StudieAdmin toggleStudieAdmin={toggleStudieAdminModal} />
       </Dialog>
 
       {/* Ny beboer-modal */}
-      <Dialog
-        fullWidth
-        maxWidth="sm"
-        onClose={toggleNyBeboer}
-        open={nyBeboerModal}
-      >
+      <Dialog fullWidth maxWidth="sm" onClose={toggleNyBeboer} open={nyBeboerModal}>
         <Grid container justify="flex-end" item xs={12}>
-          <CloseIcon
-            onClick={() => toggleNyBeboer()}
-            style={{ cursor: "pointer", margin: "8px" }}
-          />
+          <CloseIcon onClick={() => toggleNyBeboer()} style={{ cursor: "pointer", margin: "8px" }} />
         </Grid>
         <NyBeboerInput toggleNyBeboer={toggleNyBeboer} />
       </Dialog>
@@ -97,10 +76,7 @@ const Romsjef = () => {
               <RolleOversikt />
             </Grid>
             <Grid item>
-              <Kontrollpanel
-                toggleNyBeboer={toggleNyBeboer}
-                toggleStudieAdmin={toggleStudieAdminModal}
-              />
+              <Kontrollpanel toggleNyBeboer={toggleNyBeboer} toggleStudieAdmin={toggleStudieAdminModal} />
             </Grid>
           </Grid>
         </Grid>

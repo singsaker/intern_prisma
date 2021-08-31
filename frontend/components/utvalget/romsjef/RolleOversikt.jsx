@@ -9,7 +9,6 @@ import RolleOversiktPie from "./RolleOversiktPie";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import CardHeader from "@material-ui/core/CardHeader";
 import Typography from "@material-ui/core/Typography";
 
 const RolleOversikt = () => {

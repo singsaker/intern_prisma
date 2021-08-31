@@ -7,7 +7,7 @@ import Kontrollpanel from "../../../components/utvalget/romsjef/ansiennitet/Kont
 
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/core/Alert";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";

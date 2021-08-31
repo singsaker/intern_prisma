@@ -23,11 +23,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import Alert from "@material-ui/core/Alert";
 
 const Kryss = () => {
   const dispatch = useDispatch();
@@ -105,8 +101,7 @@ const Kryss = () => {
     },
   });
 
-  if (submitPrefsState.loading || hentPrefsState.loading || !prefs)
-    return <Spinner />;
+  if (submitPrefsState.loading || hentPrefsState.loading || !prefs) return <Spinner />;
 
   return (
     <form
@@ -121,39 +116,21 @@ const Kryss = () => {
             <FormLabel component="legend">Krysseliste</FormLabel>
             <FormGroup>
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={resep}
-                    onChange={() => setResep(!resep)}
-                    name="resep"
-                  />
-                }
+                control={<Checkbox checked={resep} onChange={() => setResep(!resep)} name="resep" />}
                 label="Jeg ønsker å stå på krysselista i resepsjonen"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={pinkode}
-                    onChange={() => setPinkode(!pinkode)}
-                    name="pinkode"
-                  />
-                }
+                control={<Checkbox checked={pinkode} onChange={() => setPinkode(!pinkode)} name="pinkode" />}
                 label="Pinkode på krysselista"
               />
               <FormControlLabel
                 control={
-                  <Checkbox
-                    checked={vinkjeller}
-                    onChange={() => setVinkjeller(!vinkjeller)}
-                    name="binkjeller"
-                  />
+                  <Checkbox checked={vinkjeller} onChange={() => setVinkjeller(!vinkjeller)} name="binkjeller" />
                 }
                 label="Jeg ønsker å stå på krysselista i vinkjelleren"
               />
             </FormGroup>
-            <FormHelperText>
-              Kryssing i vinkjeller krever pinkode
-            </FormHelperText>
+            <FormHelperText>Kryssing i vinkjeller krever pinkode</FormHelperText>
           </FormControl>
         </Grid>
         <Grid container item direction="row" spacing={2}>
@@ -181,23 +158,13 @@ const Kryss = () => {
           </Grid>
         </Grid>
         <Grid item container direction="row" justify="flex-end">
-          <Button
-            variant="contained"
-            type="submit"
-            size="large"
-            color="primary"
-            startIcon={<SaveIcon />}
-          >
+          <Button variant="contained" type="submit" size="large" color="primary" startIcon={<SaveIcon />}>
             Lagre
           </Button>
         </Grid>
       </Grid>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
-        <Alert onClose={() => setVellykket(false)} severity="success">
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           Endringene ble lagret!
         </Alert>
       </Snackbar>

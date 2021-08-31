@@ -14,24 +14,22 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import {
+  Alert,
+  Grid,
+  Paper,
+  Typography,
+  InputLabel,
+  FormControl,
+  OutlinedInput,
+  Button,
+  IconButton,
+  CircularProgress,
+  Snackbar,
+  InputAdornment,
+} from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const Login = () => {
   const [cookies, setCookies] = useCookies();
@@ -41,6 +39,7 @@ const Login = () => {
   const [passord, setPassord] = useState("");
   const [autentiseringsfeil, setAutentiseringsfeil] = useState(false);
   const [innlogget, setInnlogget] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [validated, setValidated] = useState(false);
   const [showPswd, setShowPswd] = useState(false);
 
@@ -155,7 +154,6 @@ const Login = () => {
                         </IconButton>
                       </InputAdornment>
                     }
-                    labelWidth={70}
                   />
                 </FormControl>
               </Grid>
@@ -177,7 +175,7 @@ const Login = () => {
         </Paper>
       </Grid>
       <Snackbar open={autentiseringsfeil} autoHideDuration={6000} onClose={() => setAutentiseringsfeil(false)}>
-        <Alert onClose={() => setAutentiseringsfeil(false)} severity="error">
+        <Alert elevation={6} variant="filled" onClose={() => setAutentiseringsfeil(false)} severity="error">
           Autentiseringsfeil!
         </Alert>
       </Snackbar>

@@ -18,7 +18,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from "../CustomSpinner";
 
 // Misc
-import _, { isInteger, isString } from "lodash";
+import { isInteger, isString } from "lodash";
 import styles from "../../styles/Table.module.css";
 import { useLazyQuery } from "@apollo/react-hooks";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
@@ -137,10 +137,7 @@ const MinRegi = (props) => {
                   const sesong = s.ses == "vaar" ? "vaar." : "host.";
 
                   return (
-                    <option
-                      key={sesong + String(s.aar)}
-                      value={sesong + String(s.aar)}
-                    >
+                    <option key={sesong + String(s.aar)} value={sesong + String(s.aar)}>
                       {s.ses == "vaar" ? "Vår " : "Høst "}
                       {s.aar}
                     </option>
@@ -151,10 +148,7 @@ const MinRegi = (props) => {
           </Form.Group>
         </Form>
       </Card.Header>
-      <div
-        className={styles.container}
-        style={{ maxHeight: "600px", height: "auto" }}
-      >
+      <div className={styles.container} style={{ maxHeight: "600px", height: "auto" }}>
         <Table className={styles.table} responsive size="sm">
           <thead>
             <tr>
@@ -186,21 +180,13 @@ const MinRegi = (props) => {
               const arbSem = utfort.getMonth() < 6 ? "vaar" : "host";
 
               // Filtrerer ut arbeid som ikke er gjort under valgt semester:
-              if (
-                Number(semester.split(".")[1]) !== utfort.getFullYear() ||
-                arbSem !== semester.split(".")[0]
-              )
-                return;
+              if (Number(semester.split(".")[1]) !== utfort.getFullYear() || arbSem !== semester.split(".")[0]) return;
 
               const { hours, minutes } = sekunderTilTid(arb.sekunder_brukt);
               return (
                 <tr key={arb.id}>
-                  <td scope="row" className="col-3">
-                    {utfort.toUTCString()}
-                  </td>
-                  <td className="col-1">
-                    {new Date(arb.tid_registrert).toUTCString()}
-                  </td>
+                  <td className="col-3">{utfort.toUTCString()}</td>
+                  <td className="col-1">{new Date(arb.tid_registrert).toUTCString()}</td>
 
                   <td className="col-2">{hours + ":" + minutes}</td>
                   <td className="col-3" style={{ overflow: "hidden" }}>

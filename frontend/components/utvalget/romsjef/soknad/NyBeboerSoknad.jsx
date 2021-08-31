@@ -43,11 +43,7 @@ const NyBeboerSoknad = () => {
             <Grid container direction="column" item xs={12}>
               <Grid item container direction="row" spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Innsendt
                   </Typography>
                 </Grid>
@@ -59,11 +55,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Epost
                   </Typography>
                 </Grid>
@@ -75,11 +67,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Født
                   </Typography>
                 </Grid>
@@ -91,11 +79,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Studie
                   </Typography>
                 </Grid>
@@ -107,11 +91,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Skole
                   </Typography>
                 </Grid>
@@ -123,11 +103,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Fagbrev
                   </Typography>
                 </Grid>
@@ -139,11 +115,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kompetanse
                   </Typography>
                 </Grid>
@@ -159,11 +131,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjenner
                   </Typography>
                 </Grid>
@@ -175,11 +143,7 @@ const NyBeboerSoknad = () => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjennskap
                   </Typography>
                 </Grid>
@@ -192,11 +156,7 @@ const NyBeboerSoknad = () => {
             </Grid>
             {/* Søknad */}
             <Grid container item xs={12}>
-              <Paper
-                variant="elevation"
-                elevation={8}
-                style={{ maxHeight: "500px" }}
-              >
+              <Paper variant="elevation" elevation={8} style={{ maxHeight: "500px" }}>
                 <Typography variant="body1" style={{ maxHeight: "inherit" }}>
                   <div
                     dangerouslySetInnerHTML={{

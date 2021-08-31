@@ -20,7 +20,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 
 const Login = () => {
   const router = useRouter();
@@ -60,11 +60,7 @@ const Login = () => {
           >
             <Grid container justify="center" xs={12}>
               <Grid item xs={10} style={{ margin: 8 }}>
-                <FormControl
-                  required
-                  variant="outlined"
-                  style={{ width: "100%" }}
-                >
+                <FormControl required variant="outlined" style={{ width: "100%" }}>
                   <InputLabel htmlFor="component-outlined">Epost</InputLabel>
                   <OutlinedInput
                     id="component-outlined"
@@ -89,30 +85,16 @@ const Login = () => {
                 </Button>
               </Grid>
               <Grid item>
-                <Button
-                  type="submit"
-                  size="large"
-                  variant="contained"
-                  color="primary"
-                >
+                <Button type="submit" size="large" variant="contained" color="primary">
                   Send epost
-                  {loading && (
-                    <CircularProgress
-                      size={24}
-                      className={classes.buttonProgress}
-                    />
-                  )}
+                  {loading && <CircularProgress size={24} />}
                 </Button>
               </Grid>
             </Grid>
           </form>
         </Paper>
       </Grid>
-      <Snackbar
-        open={sendt}
-        autoHideDuration={6000}
-        onClose={() => setSendt(false)}
-      >
+      <Snackbar open={sendt} autoHideDuration={6000} onClose={() => setSendt(false)}>
         <Alert onClose={() => setSendt(false)} severity="success">
           Dersom eposten tilhører nettsiden vil en epost være sendt!
         </Alert>

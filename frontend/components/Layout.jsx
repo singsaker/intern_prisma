@@ -11,28 +11,18 @@ import { loggInn, loggUt } from "../src/actions/auth";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { useCookies } from "react-cookie";
 
+// Components
 import Sidebar from "./Sidebar";
+import Navbar from "./NavBar";
 
 // Material-UI
-import { styled } from "@material-ui/core/styles";
-
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-
-// Snackbar
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import Navbar from "./NavBar";
-import { Box } from "@material-ui/core";
+import { Box, Alert, Snackbar, styled, useMediaQuery } from "@material-ui/core";
 
 const RootStyle = styled("div")({
   display: "flex",
   minHeight: "100%",
   overflow: "hidden",
 });
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const Layout = ({ children }) => {
   const matches = useMediaQuery(`(min-width: 1200px`);
@@ -81,16 +71,16 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
+          {melding}
+        </Alert>
+      </Snackbar>
       <RootStyle>
         <Navbar onOpenSidebar={() => setOpen(true)} />
         <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
         <Box sx={{ px: 5, py: 15, flexGrow: 1 }}>{children}</Box>
       </RootStyle>
-      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
-          {melding}
-        </Alert>
-      </Snackbar>
     </>
   );
 };

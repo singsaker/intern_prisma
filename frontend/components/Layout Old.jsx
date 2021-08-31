@@ -33,7 +33,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // Snackbar
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/core/Alert";
 
 const drawerWidth = 250;
 

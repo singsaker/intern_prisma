@@ -15,9 +15,7 @@ import styles from "../../styles/Table.module.css";
 import formaterDatoOgKlokke from "../../helpers/formaterDatoOgKlokke";
 
 const Kryssehistorikk = () => {
-  const krysseliste = useSelector((state) =>
-    Object.values(state.kryss.krysseliste)
-  );
+  const krysseliste = useSelector((state) => Object.values(state.kryss.krysseliste));
   const [kryss, setKryss] = useState([]);
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
 // Apollo
@@ -10,14 +11,6 @@ import { RESETT_GLEMT_PASSORD } from "../../src/query/auth";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
-
-// Bootstrap
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import FormGroup from "react-bootstrap/FormGroup";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 // Misc
 import styles from "../../styles/Login.module.css";
@@ -38,8 +31,7 @@ const Login = () => {
 
   const handleResett = () => {
     if (passord1 === passord2) {
-      if (passord1.length < 8) {
-      } else {
+      if (!(passord1.length < 8)) {
         resettPassord();
       }
     }
@@ -47,7 +39,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <Head>
+      {/* <Head>
         <title>Resett passord | Internsida</title>
       </Head>
 
@@ -94,7 +86,7 @@ const Login = () => {
             </Form>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </div>
   );
 };

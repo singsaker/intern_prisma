@@ -19,20 +19,14 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AnnouncementIcon from "@material-ui/icons/Announcement";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const Kunngjoringer = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const kunngjoringer = useSelector((state) =>
-    Object.values(state.kunngjoring)
-  );
+  const kunngjoringer = useSelector((state) => Object.values(state.kunngjoring));
   const [melding, setMelding] = useState("");
   const [vellykket, setVellykket] = useState(false);
   const [visAlert, setVisAlert] = useState(false);
@@ -101,29 +95,16 @@ const Kunngjoringer = (props) => {
               <Grid item xs container direction="column" spacing={2}>
                 <ListItemText
                   primary={
-                    <Typography
-                      variant="body1"
-                    
-                      color="textPrimary"
-                    >
+                    <Typography variant="body1" color="textPrimary">
                       {kunngjoring.tittel}
                     </Typography>
                   }
                   secondary={
                     <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        
-                        color="textSecondary"
-                      >
-                        {kunngjoring.beboer.fornavn +
-                          " " +
-                          kunngjoring.beboer.etternavn}
+                      <Typography component="span" variant="body2" color="textSecondary">
+                        {kunngjoring.beboer.fornavn + " " + kunngjoring.beboer.etternavn}
 
-                        {kunngjoring.tekst &&
-                          " — " +
-                            String(kunngjoring.tekst.substr(0, 50) + "...")}
+                        {kunngjoring.tekst && " — " + String(kunngjoring.tekst.substr(0, 50) + "...")}
                       </Typography>
                     </React.Fragment>
                   }
@@ -152,16 +133,12 @@ const Kunngjoringer = (props) => {
           paddingBottom: "0",
         }}
       >
-        <List component="nav">
-          {kunngjoringTable}
-        </List>
+        <List component="nav">{kunngjoringTable}</List>
       </CardContent>
-      <Snackbar
-        open={visAlert}
-        autoHideDuration={6000}
-        onClose={() => setVisAlert(false)}
-      >
+      <Snackbar open={visAlert} autoHideDuration={6000} onClose={() => setVisAlert(false)}>
         <Alert
+          elevation={6}
+          variant="filled"
           onClose={() => setVisAlert(false)}
           severity={vellykket ? "success" : "error"}
         >

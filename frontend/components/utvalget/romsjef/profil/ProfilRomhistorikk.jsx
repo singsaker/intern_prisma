@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Material-UI
 import Table from "@material-ui/core/Table";
@@ -18,11 +18,7 @@ import { GET_ALLE_ROM } from "../../../../src/query/rom";
 import { getAlleRom } from "../../../../src/actions/rom";
 
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import Alert from "@material-ui/core/Alert";
 
 const Romhistorikk = (props) => {
   const dispatch = useDispatch();
@@ -76,24 +72,16 @@ const Romhistorikk = (props) => {
                   <TableCell component="th" scope="row">
                     {rom[historie.romId] && rom[historie.romId].navn}
                   </TableCell>
-                  <TableCell>
-                    {rom[historie.romId] && rom[historie.romId].romtype.navn}
-                  </TableCell>
+                  <TableCell>{rom[historie.romId] && rom[historie.romId].romtype.navn}</TableCell>
                   <TableCell>{formaterDato(historie.innflyttet)}</TableCell>
-                  <TableCell>
-                    {historie.utflyttet && formaterDato(historie.utflyttet)}
-                  </TableCell>
+                  <TableCell>{historie.utflyttet && formaterDato(historie.utflyttet)}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
         )}
       </Table>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

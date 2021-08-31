@@ -28,17 +28,8 @@ const Permliste = () => {
       </Head>
 
       {/* Beboermodal: */}
-      <Dialog
-        maxWidth="sm"
-        fullWidth
-        onClose={toggleBeboerModal}
-        open={beboerModal}
-      >
-        <ProfilRediger
-          toggleBeboer={() => toggleBeboerModal(null)}
-          beboer_id={beboerId}
-          perm={true}
-        />
+      <Dialog maxWidth="sm" fullWidth onClose={toggleBeboerModal} open={beboerModal}>
+        <ProfilRediger toggleBeboer={() => toggleBeboerModal(null)} beboer_id={beboerId} perm={true} />
       </Dialog>
 
       <Grid container spacing={2}>

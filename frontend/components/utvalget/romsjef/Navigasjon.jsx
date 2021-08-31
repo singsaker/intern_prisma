@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+// ROUTER MÅ BYTTES UT TIL NEXT/LINK HER
+
 import React from "react";
 
 import { useRouter } from "next/router";
@@ -18,44 +21,28 @@ const Navigasjon = () => {
         Beboerliste
       </Link>
       <Link
-        color={
-          router.pathname === "/utvalget/romsjef/gamlebeboere"
-            ? "primary"
-            : "inherit"
-        }
+        color={router.pathname === "/utvalget/romsjef/gamlebeboere" ? "primary" : "inherit"}
         onClick={() => router.push("/utvalget/romsjef/gamlebeboere")}
         style={{ cursor: "pointer" }}
       >
         Gamle beboere
       </Link>
       <Link
-        color={
-          router.pathname === "/utvalget/romsjef/permliste"
-            ? "primary"
-            : "inherit"
-        }
+        color={router.pathname === "/utvalget/romsjef/permliste" ? "primary" : "inherit"}
         onClick={() => router.push("/utvalget/romsjef/permliste")}
         style={{ cursor: "pointer" }}
       >
         Permliste
       </Link>
       <Link
-        color={
-          router.pathname === "/utvalget/romsjef/ansiennitet"
-            ? "primary"
-            : "inherit"
-        }
+        color={router.pathname === "/utvalget/romsjef/ansiennitet" ? "primary" : "inherit"}
         onClick={() => router.push("/utvalget/romsjef/ansiennitet")}
         style={{ cursor: "pointer" }}
       >
         Ansiennitet
       </Link>
       <Link
-        color={
-          router.pathname === "/utvalget/romsjef/storhybelliste"
-            ? "primary"
-            : "inherit"
-        }
+        color={router.pathname === "/utvalget/romsjef/storhybelliste" ? "primary" : "inherit"}
         style={{ cursor: "pointer" }}
         onClick={() => router.push("/utvalget/romsjef/storhybelliste")}
       >
@@ -63,11 +50,7 @@ const Navigasjon = () => {
       </Link>
       <Link
         onClick={() => router.push("/utvalget/romsjef/soknader")}
-        color={
-          router.pathname === "/utvalget/romsjef/soknader"
-            ? "primary"
-            : "inherit"
-        }
+        color={router.pathname === "/utvalget/romsjef/soknader" ? "primary" : "inherit"}
         style={{ cursor: "pointer" }}
       >
         Søknader

@@ -5,14 +5,8 @@ import Spinner from "../CustomSpinner";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getBeboerEpostPrefs,
-  oppdaterBeboerEpostPrefs,
-} from "../../src/actions/beboer";
-import {
-  UPDATE_BEBOER_EPOST_PREFS,
-  GET_BEBOER_EPOST_PREFS,
-} from "../../src/query/beboer";
+import { getBeboerEpostPrefs, oppdaterBeboerEpostPrefs } from "../../src/actions/beboer";
+import { UPDATE_BEBOER_EPOST_PREFS, GET_BEBOER_EPOST_PREFS } from "../../src/query/beboer";
 
 import { useMutation, useLazyQuery } from "@apollo/react-hooks";
 import { isNumber } from "lodash";
@@ -27,12 +21,8 @@ import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
 
-import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 import FormControl from "@material-ui/core/FormControl";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const Varsler = () => {
   const dispatch = useDispatch();
@@ -56,18 +46,15 @@ const Varsler = () => {
   }, [prefs]);
 
   // Henter epostliste-preferanser for aktuell beboer:
-  const [hentEpostPrefs, hentPrefsState] = useLazyQuery(
-    GET_BEBOER_EPOST_PREFS,
-    {
-      variables: { id: beboer_id },
-      onCompleted(data) {
-        dispatch(getBeboerEpostPrefs(data));
-      },
-      onError(error) {
-        console.log(error);
-      },
-    }
-  );
+  const [hentEpostPrefs, hentPrefsState] = useLazyQuery(GET_BEBOER_EPOST_PREFS, {
+    variables: { id: beboer_id },
+    onCompleted(data) {
+      dispatch(getBeboerEpostPrefs(data));
+    },
+    onError(error) {
+      console.log(error);
+    },
+  });
 
   useEffect(() => {
     if (isNumber(beboer_id) && !prefs) {
@@ -76,29 +63,25 @@ const Varsler = () => {
   }, [beboer_id]);
 
   // Oppdaterer epostliste-preferanser for aktuell beboer:
-  const [submitPrefs, submitPrefsState] = useMutation(
-    UPDATE_BEBOER_EPOST_PREFS,
-    {
-      variables: {
-        id: beboer_id,
-        tildelt: tildelt,
-        snartVakt: snart,
-        bytte: bytte,
-        utleie: utleie,
-        barvakt: barvakt,
-      },
-      onCompleted(data) {
-        setVellykket(true);
-        dispatch(oppdaterBeboerEpostPrefs(data));
-      },
-      onError(error) {
-        console.log(error);
-      },
-    }
-  );
+  const [submitPrefs, submitPrefsState] = useMutation(UPDATE_BEBOER_EPOST_PREFS, {
+    variables: {
+      id: beboer_id,
+      tildelt: tildelt,
+      snartVakt: snart,
+      bytte: bytte,
+      utleie: utleie,
+      barvakt: barvakt,
+    },
+    onCompleted(data) {
+      setVellykket(true);
+      dispatch(oppdaterBeboerEpostPrefs(data));
+    },
+    onError(error) {
+      console.log(error);
+    },
+  });
 
-  if (!prefs || submitPrefsState.loading || hentPrefsState.loading)
-    return <Spinner />;
+  if (!prefs || submitPrefsState.loading || hentPrefsState.loading) return <Spinner />;
 
   return (
     <form
@@ -113,76 +96,36 @@ const Varsler = () => {
             <FormLabel component="legend">Få en varsel på epost...</FormLabel>
             <FormGroup>
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={snart}
-                    onChange={() => setSnart(!snart)}
-                    name="snart"
-                  />
-                }
+                control={<Checkbox checked={snart} onChange={() => setSnart(!snart)} name="snart" />}
                 label="24 timer før neste vakt"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={barvakt}
-                    onChange={() => setBarvakt(!barvakt)}
-                    name="barvakt"
-                  />
-                }
+                control={<Checkbox checked={barvakt} onChange={() => setBarvakt(!barvakt)} name="barvakt" />}
                 label="24 timer før neste barvakt"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={tildelt}
-                    onChange={() => setTildelt(!tildelt)}
-                    name="tildelt"
-                  />
-                }
+                control={<Checkbox checked={tildelt} onChange={() => setTildelt(!tildelt)} name="tildelt" />}
                 label="når du har blitt tildelt en vakt"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={bytte}
-                    onChange={() => setBytte(!bytte)}
-                    name="tildelt"
-                  />
-                }
+                control={<Checkbox checked={bytte} onChange={() => setBytte(!bytte)} name="tildelt" />}
                 label="når noen vil bytte eller gi bort en vakt"
               />
               <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={utleie}
-                    onChange={() => setUtleie(!utleie)}
-                    name="tildelt"
-                  />
-                }
+                control={<Checkbox checked={utleie} onChange={() => setUtleie(!utleie)} name="tildelt" />}
                 label="når kosesjef har planlagt et utleie"
               />
             </FormGroup>
           </FormControl>
         </Grid>
         <Grid container item direction="row" justify="flex-end">
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<SaveIcon />}
-            type="submit"
-          >
+          <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
             Lagre
           </Button>
         </Grid>
       </Grid>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
-        <Alert onClose={() => setVellykket(false)} severity="success">
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           Endringene ble lagret!
         </Alert>
       </Snackbar>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import Layout from "../../../../components/Layout";
 import NyBeboerInput from "../../../../components/utvalget/romsjef/soknad/NyBeboerInput";
@@ -12,10 +12,7 @@ import { GET_SOKNAD } from "../../../../src/query/soknad";
 import { getSoknad } from "../../../../src/actions/soknad";
 
 // Material-UI
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Link from "@material-ui/core/Link";
+import { Grid, Breadcrumbs, Link, Paper } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 const NyBeboer = () => {
@@ -24,6 +21,7 @@ const NyBeboer = () => {
   const params = router.query;
   const soknader = useSelector((state) => state.soknader);
 
+  // eslint-disable-next-line no-unused-vars
   const [soknadQuery, { loading, error }] = useLazyQuery(GET_SOKNAD, {
     onCompleted(data) {
       dispatch(getSoknad(data));
@@ -51,10 +49,7 @@ const NyBeboer = () => {
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              style={{ cursor: "pointer" }}
-              onClick={() => router.push("/utvalget/romsjef/soknader")}
-            >
+            <Link style={{ cursor: "pointer" }} onClick={() => router.push("/utvalget/romsjef/soknader")}>
               <KeyboardBackspaceIcon />
               Tilbake
             </Link>

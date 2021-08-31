@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const Epostliste = (props) => {
+const Epostliste = () => {
   return <div>Epostliste</div>;
 };
 

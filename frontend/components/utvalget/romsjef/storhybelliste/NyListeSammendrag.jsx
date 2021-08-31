@@ -45,20 +45,13 @@ const NyListeSammendrag = (props) => {
   return (
     <Grid container spacing={2} direction="column">
       <Grid item xs={12}>
-        <Typography
-          style={{ margin: "10px 30px" }}
-          variant="h5"
-          color="primary"
-        >
+        <Typography style={{ margin: "10px 30px" }} variant="h5" color="primary">
           {props.tittel}
         </Typography>
       </Grid>
       <Grid item xs={12} container spacing={2}>
         <Grid item md={6} xs={12}>
-          <TableContainer
-            style={{ backgroundColor: "#011F26", maxHeight: "500px" }}
-            component={Paper}
-          >
+          <TableContainer style={{ backgroundColor: "#011F26", maxHeight: "500px" }} component={Paper}>
             <Table stickyHeader size="small">
               <TableHead>
                 <TableRow>
@@ -90,10 +83,7 @@ const NyListeSammendrag = (props) => {
           </TableContainer>
         </Grid>
         <Grid item md={6} xs={12}>
-          <TableContainer
-            style={{ backgroundColor: "#011F26", maxHeight: "500px" }}
-            component={Paper}
-          >
+          <TableContainer style={{ backgroundColor: "#011F26", maxHeight: "500px" }} component={Paper}>
             <Table stickyHeader size="small">
               <TableHead>
                 <TableRow>

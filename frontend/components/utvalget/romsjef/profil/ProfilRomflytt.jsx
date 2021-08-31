@@ -2,18 +2,17 @@ import React, { useState } from "react";
 
 // Material-UI
 import TextField from "@material-ui/core/TextField";
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import DatePicker from '@material-ui/lab/DatePicker';
+import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import DatePicker from "@material-ui/lab/DatePicker";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Grid from "@material-ui/core/Grid";
-import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
@@ -21,11 +20,6 @@ import { useMutation } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { flyttBeboer } from "../../../../src/actions/beboer";
 import { FLYTT_BEBOER } from "../../../../src/query/beboer";
-
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const ProfilRomflytt = (props) => {
   const dispatch = useDispatch();
@@ -96,13 +90,7 @@ const ProfilRomflytt = (props) => {
     >
       <Grid container direction="column" spacing={2}>
         <div>
-          <TextField
-            disabled
-            label="Nåværende rom"
-            variant="outlined"
-            value={beboerRom.navn}
-            style={{ margin: 8 }}
-          />
+          <TextField disabled label="Nåværende rom" variant="outlined" value={beboerRom.navn} style={{ margin: 8 }} />
           <FormControl>
             <InputLabel id="rom_label">Nytt rom</InputLabel>
             <Select
@@ -140,32 +128,18 @@ const ProfilRomflytt = (props) => {
         </LocalizationProvider>
 
         <Grid container justify="flex-end">
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<ArrowForwardIcon />}
-            type="submit"
-          >
+          <Button variant="contained" color="primary" size="large" startIcon={<ArrowForwardIcon />} type="submit">
             Flytt
           </Button>
         </Grid>
       </Grid>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
-        <Alert onClose={() => setVellykket(false)} severity="success">
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           {melding}
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

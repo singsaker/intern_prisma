@@ -12,28 +12,16 @@ import PersonIcon from "@material-ui/icons/Person";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import _ from "lodash";
-
 const NyListeRom = (props) => {
-
   const RomObjekt = (rom) => {
     let v = props.valgt.indexOf(rom.id) !== -1;
 
     return (
-      <ListItem
-        key={rom.id}
-        role="listitem"
-        button
-        onClick={() => props.handleVelg(rom.id)}
-      >
+      <ListItem key={rom.id} role="listitem" button onClick={() => props.handleVelg(rom.id)}>
         <ListItemIcon>
           <Checkbox checked={v} />
         </ListItemIcon>
-        <ListItemText
-          id={rom.id}
-          primary={rom.navn}
-          secondary={rom.romtype.navn}
-        />
+        <ListItemText id={rom.id} primary={rom.navn} secondary={rom.romtype.navn} />
 
         {rom.beboer && (
           <Tooltip title={rom.beboer.fornavn + " " + rom.beboer.etternavn}>
@@ -49,9 +37,7 @@ const NyListeRom = (props) => {
   return (
     <Grid container spacing={2} justify="center" alignItems="center">
       <Grid item xs={5}>
-        <Typography variant="h6">
-          Alle rom - {props.venstre && props.venstre.length} stk
-        </Typography>
+        <Typography variant="h6">Alle rom - {props.venstre && props.venstre.length} stk</Typography>
         <Paper>
           <List dense component="div" role="list">
             {props.venstre &&
@@ -66,28 +52,16 @@ const NyListeRom = (props) => {
       </Grid>
       <Grid item xs={2}>
         <Grid container direction="column" alignItems="center">
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={props.handleFlyttRomHoyre}
-            aria-label="move selected right"
-          >
+          <Button variant="outlined" size="small" onClick={props.handleFlyttRomHoyre} aria-label="move selected right">
             &gt;
           </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={props.handleFlyttRomVenstre}
-            aria-label="move selected left"
-          >
+          <Button variant="outlined" size="small" onClick={props.handleFlyttRomVenstre} aria-label="move selected left">
             &lt;
           </Button>
         </Grid>
       </Grid>
       <Grid item xs={5}>
-        <Typography variant="h6">
-          Valgte rom - {props.hoyre && props.hoyre.length} stk
-        </Typography>
+        <Typography variant="h6">Valgte rom - {props.hoyre && props.hoyre.length} stk</Typography>
 
         <Paper>
           <Paper>

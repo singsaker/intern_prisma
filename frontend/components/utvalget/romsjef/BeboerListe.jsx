@@ -27,6 +27,7 @@ const BeboerListeAnsiennitet = (props) => {
   const [sorter, setSorter] = useState("navn");
   const [asc, setAsc] = useState(true);
 
+  // eslint-disable-next-line no-unused-vars
   const { loading } = useQuery(GET_BEBOERE, {
     onCompleted(data) {
       dispatch(getBeboere(data));
@@ -36,6 +37,7 @@ const BeboerListeAnsiennitet = (props) => {
     },
   });
 
+  // eslint-disable-next-line no-unused-vars
   const handleSorter = (kolonne) => {
     if (kolonne === sorter) {
       setAsc(!asc);
@@ -51,14 +53,8 @@ const BeboerListeAnsiennitet = (props) => {
     let objB;
 
     if (sorter === "navn") {
-      objA =
-        a.fornavn.toUpperCase() +
-        a.mellomnavn.toUpperCase() +
-        a.etternavn.toUpperCase();
-      objB =
-        b.fornavn.toUpperCase() +
-        b.mellomnavn.toUpperCase() +
-        b.etternavn.toUpperCase();
+      objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
+      objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
     } else {
       objA = _.get(a, sorter).toUpperCase();
       objB = _.get(b, sorter).toUpperCase();
@@ -133,20 +129,10 @@ const BeboerListeAnsiennitet = (props) => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Chip
-                      variant="outlined"
-                      avatar={<Avatar>#</Avatar>}
-                      label={beboer.rom && beboer.rom.navn}
-                    />
+                    <Chip variant="outlined" avatar={<Avatar>#</Avatar>} label={beboer.rom && beboer.rom.navn} />
                   </TableCell>
                   <TableCell>{beboer.rolle.navn}</TableCell>
-                  <TableCell>
-                    {beboer.kundenr ? (
-                      beboer.kundenr
-                    ) : (
-                      <div style={{ color: "red" }}>Mangler</div>
-                    )}
-                  </TableCell>
+                  <TableCell>{beboer.kundenr ? beboer.kundenr : <div style={{ color: "red" }}>Mangler</div>}</TableCell>
                 </TableRow>
               );
             })}

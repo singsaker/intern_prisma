@@ -38,10 +38,7 @@ const SoknadModal = (props) => {
               </Typography>
             </Grid>
             <Grid item>
-              <CloseIcon
-                onClick={() => props.toggleSoknadModal()}
-                style={{ cursor: "pointer", margin: "8px" }}
-              />
+              <CloseIcon onClick={() => props.toggleSoknadModal()} style={{ cursor: "pointer", margin: "8px" }} />
             </Grid>
           </Grid>
           {/* Body */}
@@ -57,11 +54,7 @@ const SoknadModal = (props) => {
             <Grid container direction="column" item xs={12} md={6}>
               <Grid item container direction="row" spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Innsendt
                   </Typography>
                 </Grid>
@@ -73,11 +66,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Epost
                   </Typography>
                 </Grid>
@@ -89,11 +78,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Født
                   </Typography>
                 </Grid>
@@ -105,11 +90,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Studie
                   </Typography>
                 </Grid>
@@ -121,11 +102,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Skole
                   </Typography>
                 </Grid>
@@ -137,11 +114,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Fagbrev
                   </Typography>
                 </Grid>
@@ -153,20 +126,12 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kompetanse
                   </Typography>
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                    component="div"
-                  >
+                  <Typography color="textSecondary" variant="body1" component="div">
                     <div
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(soknad.kompetanse),
@@ -177,11 +142,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjenner
                   </Typography>
                 </Grid>
@@ -193,11 +154,7 @@ const SoknadModal = (props) => {
               </Grid>
               <Grid item justify="center" container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography
-                    color="textPrimary"
-                    style={{ float: "right" }}
-                    variant="body1"
-                  >
+                  <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjennskap
                   </Typography>
                 </Grid>
@@ -210,16 +167,8 @@ const SoknadModal = (props) => {
             </Grid>
             {/* Søknad */}
             <Grid container item xs={12} md={6}>
-              <Paper
-                variant="elevation"
-                elevation={8}
-                style={{ maxHeight: "500px" }}
-              >
-                <Typography
-                  variant="body1"
-                  component="div"
-                  style={{ maxHeight: "inherit" }}
-                >
+              <Paper variant="elevation" elevation={8} style={{ maxHeight: "500px" }}>
+                <Typography variant="body1" component="div" style={{ maxHeight: "inherit" }}>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(soknad.tekst),
@@ -242,11 +191,7 @@ const SoknadModal = (props) => {
               variant="contained"
               endIcon={<ArrowForwardIcon />}
               color="primary"
-              onClick={() =>
-                router.push(
-                  `/utvalget/romsjef/soknader/${props.id}/?sem=${props.semester}`
-                )
-              }
+              onClick={() => router.push(`/utvalget/romsjef/soknader/${props.id}/?sem=${props.semester}`)}
             >
               Videre til innflytting
             </Button>

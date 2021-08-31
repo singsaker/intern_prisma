@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
 // Redux
@@ -70,14 +71,8 @@ const VervListe = (props) => {
   };
 
   const compare = (a, b) => {
-    const objA =
-      _.get(a, sorter) !== null || _.get(a, sorter).length !== 0
-        ? _.get(a, sorter).toUpperCase()
-        : null;
-    const objB =
-      _.get(b, sorter) !== null || _.get(b, sorter).length !== 0
-        ? _.get(b, sorter).toUpperCase()
-        : null;
+    const objA = _.get(a, sorter) !== null || _.get(a, sorter).length !== 0 ? _.get(a, sorter).toUpperCase() : null;
+    const objB = _.get(b, sorter) !== null || _.get(b, sorter).length !== 0 ? _.get(b, sorter).toUpperCase() : null;
 
     let comparison = 0;
     if (asc) {
@@ -140,9 +135,7 @@ const VervListe = (props) => {
                                 color="textPrimary"
                                 key={beboer.id}
                                 style={{ cursor: "pointer" }}
-                                onClick={() =>
-                                  props.toggleBeboerModal(beboer.id)
-                                }
+                                onClick={() => props.toggleBeboerModal(beboer.id)}
                               >
                                 {beboer.fornavn} {beboer.etternavn}
                               </Typography>
@@ -158,23 +151,11 @@ const VervListe = (props) => {
                               <Typography>{aapmend.length} åpmend</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                              <List
-                                component="nav"
-                                aria-label="main mailbox folders"
-                                dense
-                              >
+                              <List component="nav" aria-label="main mailbox folders" dense>
                                 {aapmend.map((beboer) => {
                                   return (
-                                    <ListItem
-                                      onClick={() =>
-                                        props.toggleBeboerModal(beboer.id)
-                                      }
-                                      button
-                                      key={beboer.id}
-                                    >
-                                      <ListItemText
-                                        primary={`${beboer.fornavn} ${beboer.etternavn}`}
-                                      />
+                                    <ListItem onClick={() => props.toggleBeboerModal(beboer.id)} button key={beboer.id}>
+                                      <ListItemText primary={`${beboer.fornavn} ${beboer.etternavn}`} />
                                     </ListItem>
                                   );
                                 })}

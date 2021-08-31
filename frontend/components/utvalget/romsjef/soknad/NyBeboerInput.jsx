@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
@@ -33,15 +34,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import DatePicker from '@material-ui/lab/DatePicker';
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import Alert from "@material-ui/core/Alert";
+import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import DatePicker from "@material-ui/lab/DatePicker";
 
 const NyBeboerInput = () => {
   const router = useRouter();
@@ -121,11 +117,7 @@ const NyBeboerInput = () => {
 
   // Setter de faste verdiene som søkeren har fyllt inn:
   useEffect(() => {
-    if (
-      soknader &&
-      soknader[params.sem] &&
-      soknader[params.sem][params.params[0]]
-    ) {
+    if (soknader && soknader[params.sem] && soknader[params.sem][params.params[0]]) {
       const soknad = soknader[params.sem][params.params[0]];
       const navn = soknad.navn.split(" ");
 
@@ -214,17 +206,12 @@ const NyBeboerInput = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Trykk på "Kjør" for å legge til ny beboer. Den nye bebeoren vil så
-            dukke opp i beboerlista. Beboeren kan logge inn ved å bruke "Glemt
-            passord"-funksjonen
+            Trykk på "Kjør" for å legge til ny beboer. Den nye bebeoren vil så dukke opp i beboerlista. Beboeren kan
+            logge inn ved å bruke "Glemt passord"-funksjonen
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            autoFocus
-            onClick={() => setLagBeboerDialog(false)}
-            color="primary"
-          >
+          <Button onClick={() => setLagBeboerDialog(false)} color="primary">
             Avbryt
           </Button>
           <Button onClick={handleLagBeboer} color="primary">
@@ -416,21 +403,12 @@ const NyBeboerInput = () => {
           <Grid item>
             <FormControlLabel
               style={{ margin: 8 }}
-              control={
-                <Checkbox
-                  checked={alkDep}
-                  onChange={() => setAlkDep(!alkDep)}
-                  color="primary"
-                />
-              }
+              control={<Checkbox checked={alkDep} onChange={() => setAlkDep(!alkDep)} color="primary" />}
               label="Betalt alkoholdepositum"
             />
           </Grid>
           <Grid item>
-            <FormControl
-              required
-              variant="outlined"
-            >
+            <FormControl required variant="outlined">
               <InputLabel id="rolle-label">Rolle</InputLabel>
               <Select
                 value={rolle}
@@ -452,10 +430,7 @@ const NyBeboerInput = () => {
                   ))}
               </Select>
             </FormControl>
-            <FormControl
-              required
-              variant="outlined"
-            >
+            <FormControl required variant="outlined">
               <InputLabel id="rom-label">Rom</InputLabel>
               <Select
                 value={valgtRom}
@@ -479,32 +454,19 @@ const NyBeboerInput = () => {
             </FormControl>
           </Grid>
           <Grid item container justify="flex-end">
-            <Button
-              endIcon={<GroupAddIcon />}
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
+            <Button endIcon={<GroupAddIcon />} type="submit" variant="contained" color="primary">
               Legg til som beboer
             </Button>
           </Grid>
         </Grid>
       </form>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
-        <Alert onClose={() => setVellykket(false)} severity="success">
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           {melding}
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

@@ -66,8 +66,7 @@ const Kontrollpanel = (props) => {
             </Button>
             <Typography>
               <Box fontStyle="oblique" fontSize={13}>
-                Endringer blir ikke lagret før du trykker på "Lagre" eller
-                "Oppdater"
+                Endringer blir ikke lagret før du trykker på &quot;Lagre&quot; eller &quot;Oppdater&quot;
               </Box>
             </Typography>
           </Grid>

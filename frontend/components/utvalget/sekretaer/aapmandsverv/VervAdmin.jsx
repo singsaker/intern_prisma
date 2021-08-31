@@ -1,12 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const VervAdmin = (props) => {
-    return(
-        <div>
+const VervAdmin = () => {
+  return <div></div>;
+};
 
-        </div>
-
-    )
-}
-
-export default VervAdmin
+export default VervAdmin;

@@ -10,9 +10,7 @@ import ReactTextFormat from "react-text-format";
 import formaterDatoOgKlokke from "../../helpers/formaterDatoOgKlokke";
 
 const KunngjoringCard = (props) => {
-  const kunngjoring = useSelector(
-    (state) => state.kunngjoring[props.kunngjoringId]
-  );
+  const kunngjoring = useSelector((state) => state.kunngjoring[props.kunngjoringId]);
   const date = formaterDatoOgKlokke(new Date(kunngjoring.publisert));
 
   return (
@@ -21,10 +19,7 @@ const KunngjoringCard = (props) => {
         <Grid container justify="space-between">
           <Grid item></Grid>
           <Grid item>
-            <CloseIcon
-              onClick={() => props.toggleKunngjoringModal()}
-              style={{ cursor: "pointer", margin: "8px" }}
-            />
+            <CloseIcon onClick={() => props.toggleKunngjoringModal()} style={{ cursor: "pointer", margin: "8px" }} />
           </Grid>
         </Grid>
         <Grid container direction="column" spacing={2}>
@@ -34,9 +29,7 @@ const KunngjoringCard = (props) => {
             </Typography>
             <Typography color="textSecondary">
               {date.dato} {date.klokkeslett} - {kunngjoring.beboer.fornavn}{" "}
-              {kunngjoring.beboer.mellomnavn &&
-                kunngjoring.beboer.mellomnavn + " "}{" "}
-              {kunngjoring.beboer.etternavn}
+              {kunngjoring.beboer.mellomnavn && kunngjoring.beboer.mellomnavn + " "} {kunngjoring.beboer.etternavn}
             </Typography>
           </Grid>
           <Grid item xs={12}>

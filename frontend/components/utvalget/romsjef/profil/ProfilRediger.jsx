@@ -43,10 +43,7 @@ const ProfilRediger = (props) => {
               </Typography>
             </Grid>
             <Grid item>
-              <CloseIcon
-                onClick={() => props.toggleBeboer()}
-                style={{ cursor: "pointer", margin: "8px" }}
-              />
+              <CloseIcon onClick={() => props.toggleBeboer()} style={{ cursor: "pointer", margin: "8px" }} />
             </Grid>
           </Grid>
           <Paper style={{ backgroundColor: "#011F26" }}>
@@ -65,39 +62,19 @@ const ProfilRediger = (props) => {
             </Tabs>
           </Paper>
           <Grid container>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "info"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "info"}>
               <Info perm={props.perm} beboer_id={props.beboer_id} />
             </Grid>
 
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "admin"}
-            >
-              <Admin
-                lukkModal={() => props.toggleBeboer()}
-                beboer_id={props.beboer_id}
-                perm={props.perm}
-              />
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "admin"}>
+              <Admin lukkModal={() => props.toggleBeboer()} beboer_id={props.beboer_id} perm={props.perm} />
             </Grid>
 
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "romflytt"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "romflytt"}>
               <Romflytt perm={props.perm} beboer_id={props.beboer_id} />
             </Grid>
 
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "romhistorikk"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "romhistorikk"}>
               <Romhistorikk perm={props.perm} beboer_id={props.beboer_id} />
             </Grid>
           </Grid>

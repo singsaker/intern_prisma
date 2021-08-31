@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import _ from "lodash";
+
 // Material-UI
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -186,27 +188,21 @@ const NyListeModal = (props) => {
   return (
     <Card>
       {/* Listemodal */}
-      <Dialog
-        maxWidth="sm"
-        fullWidth
-        open={bekreftListeModal}
-        onClose={toggleBekreftListeModal}
-      >
+      <Dialog maxWidth="sm" fullWidth open={bekreftListeModal} onClose={toggleBekreftListeModal}>
         <DialogTitle>{`Lag storhybellisten ${tittel}?`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Ved å trykke bekreft blir det lagd en storhybelliste hvor det er
-            lagt til {hoyre.length} rom og {hoyreBeboere.length} beboere. Det
-            blir mulig å legge til flere rom og beboere senere også (under
-            utvikling). Listen vil som standard ikke være satt som aktiv. Dette
-            gjøres ved å gå inn på listen etter den er lagd.
+            Ved å trykke bekreft blir det lagd en storhybelliste hvor det er lagt til {hoyre.length} rom og{" "}
+            {hoyreBeboere.length} beboere. Det blir mulig å legge til flere rom og beboere senere også (under
+            utvikling). Listen vil som standard ikke være satt som aktiv. Dette gjøres ved å gå inn på listen etter den
+            er lagd.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={toggleBekreftListeModal} color="secondary">
             Avbryt
           </Button>
-          <Button onClick={handleLagStorhybelliste} color="primary" autoFocus>
+          <Button onClick={handleLagStorhybelliste} color="primary">
             Bekreft
           </Button>
         </DialogActions>
@@ -216,10 +212,7 @@ const NyListeModal = (props) => {
         <Grid container justify="space-between">
           <Grid item></Grid>
           <Grid item>
-            <CloseIcon
-              onClick={() => props.toggleNyListe()}
-              style={{ cursor: "pointer", margin: "8px" }}
-            />
+            <CloseIcon onClick={() => props.toggleNyListe()} style={{ cursor: "pointer", margin: "8px" }} />
           </Grid>
         </Grid>
         <div>
@@ -276,11 +269,7 @@ const NyListeModal = (props) => {
         )}
         {aktivStep === 3 && (
           <Grid contained>
-            <NyListeSammendrag
-              valgtBeboere={hoyreBeboere}
-              valgtRom={hoyre}
-              tittel={tittel}
-            />
+            <NyListeSammendrag valgtBeboere={hoyreBeboere} valgtRom={hoyre} tittel={tittel} />
           </Grid>
         )}
 
@@ -292,19 +281,11 @@ const NyListeModal = (props) => {
           </Grid>
           <Grid item>
             {aktivStep === 3 ? (
-              <Button
-                onClick={() => toggleBekreftListeModal()}
-                variant="contained"
-                color="primary"
-              >
+              <Button onClick={() => toggleBekreftListeModal()} variant="contained" color="primary">
                 Lag liste
               </Button>
             ) : (
-              <Button
-                onClick={() => handleNesteSteg()}
-                variant="contained"
-                color="primary"
-              >
+              <Button onClick={() => handleNesteSteg()} variant="contained" color="primary">
                 Neste
               </Button>
             )}

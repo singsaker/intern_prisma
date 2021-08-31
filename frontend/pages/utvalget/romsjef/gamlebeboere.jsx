@@ -29,17 +29,8 @@ const GamleBeboere = () => {
         <title>Gammel Beboerliste | Internsida</title>
       </Head>
       {/* Beboermodal: */}
-      <Dialog
-        maxWidth="sm"
-        fullWidth
-        onClose={toggleGammelBeboer}
-        open={beboerModal}
-      >
-        <ProfilRediger
-          toggleBeboer={() => toggleGammelBeboer(null)}
-          beboer_id={beboerId}
-          gammelBeboer={true}
-        />
+      <Dialog maxWidth="sm" fullWidth onClose={toggleGammelBeboer} open={beboerModal}>
+        <ProfilRediger toggleBeboer={() => toggleGammelBeboer(null)} beboer_id={beboerId} gammelBeboer={true} />
       </Dialog>
 
       <Grid container spacing={2}>
@@ -47,9 +38,7 @@ const GamleBeboere = () => {
           <Navigasjon />
         </Grid>
         <Grid item xs={12}>
-          <GammelBeboerListe
-            toggleGammelBeboer={(id) => toggleGammelBeboer(id)}
-          />
+          <GammelBeboerListe toggleGammelBeboer={(id) => toggleGammelBeboer(id)} />
         </Grid>
       </Grid>
     </Layout>

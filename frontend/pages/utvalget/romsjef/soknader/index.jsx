@@ -13,9 +13,7 @@ import Kontrollpanel from "../../../../components/utvalget/romsjef/soknad/Kontro
 import { isString, isInteger } from "lodash";
 
 const Soknader = () => {
-  const [semester, setSemester] = useState(
-    new Date().getMonth() < 6 ? "vaar" : "host"
-  );
+  const [semester, setSemester] = useState(new Date().getMonth() < 6 ? "vaar" : "host");
   const [aar, setAar] = useState(new Date().getFullYear());
   const [valgtSoknadId, setValgtSoknadId] = useState(null);
   const [valgtSoknadSemester, setValgtSoknadSemeter] = useState("");
@@ -44,12 +42,7 @@ const Soknader = () => {
       </Head>
 
       {/* Søknadmodal */}
-      <Dialog
-        fullWidth
-        maxWidth="md"
-        onClose={toggleSoknadModal}
-        open={soknadModal}
-      >
+      <Dialog fullWidth maxWidth="md" onClose={toggleSoknadModal} open={soknadModal}>
         <SoknadModal id={valgtSoknadId} semester={valgtSoknadSemester} />
       </Dialog>
 
@@ -59,9 +52,7 @@ const Soknader = () => {
         </Grid>
         <Grid item xs={12} md={8}>
           <SoknadListe
-            toggleSoknadModal={(id, semester) =>
-              toggleSoknadModal(id, semester)
-            }
+            toggleSoknadModal={(id, semester) => toggleSoknadModal(id, semester)}
             aar={aar}
             semester={semester}
           />

@@ -9,19 +9,10 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
-import _ from "lodash";
-
 const NyListeBeboer = (props) => {
-
   const compare = (a, b) => {
-    const objA =
-      a.fornavn.toUpperCase() +
-      a.mellomnavn.toUpperCase() +
-      a.etternavn.toUpperCase();
-    const objB =
-      b.fornavn.toUpperCase() +
-      b.mellomnavn.toUpperCase() +
-      b.etternavn.toUpperCase();
+    const objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
+    const objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
 
     let comparison = 0;
 
@@ -38,12 +29,7 @@ const NyListeBeboer = (props) => {
     let v = props.valgt.indexOf(beboer.id) !== -1;
 
     return (
-      <ListItem
-        key={beboer.id}
-        role="listitem"
-        button
-        onClick={() => props.handleVelg(beboer.id)}
-      >
+      <ListItem key={beboer.id} role="listitem" button onClick={() => props.handleVelg(beboer.id)}>
         <ListItemIcon>
           <Checkbox checked={v} />
         </ListItemIcon>
@@ -54,9 +40,7 @@ const NyListeBeboer = (props) => {
               ? `${beboer.fornavn} ${beboer.mellomnavn} ${beboer.etternavn}`
               : `${beboer.fornavn} ${beboer.etternavn}`
           }
-          secondary={
-            beboer.rom && beboer.rom.navn + " - " + beboer.rom.romtype.navn
-          }
+          secondary={beboer.rom && beboer.rom.navn + " - " + beboer.rom.romtype.navn}
         />
       </ListItem>
     );
@@ -65,9 +49,7 @@ const NyListeBeboer = (props) => {
   return (
     <Grid container spacing={2} justify="center" alignItems="center">
       <Grid item xs={5}>
-        <Typography variant="h6">
-          Alle beboere - {props.venstre && props.venstre.length} stk
-        </Typography>
+        <Typography variant="h6">Alle beboere - {props.venstre && props.venstre.length} stk</Typography>
         <Paper>
           <List dense component="div" role="list">
             {props.venstre &&
@@ -97,16 +79,12 @@ const NyListeBeboer = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={5}>
-        <Typography variant="h6">
-          Valgte beboere - {props.hoyre && props.hoyre.length} stk
-        </Typography>
+        <Typography variant="h6">Valgte beboere - {props.hoyre && props.hoyre.length} stk</Typography>
 
         <Paper>
           <Paper>
             <List dense component="div" role="list">
-              {props.hoyre &&
-                props.hoyre.length > 0 &&
-                props.hoyre.sort(compare).map((beboer) => BeboerObjekt(beboer))}
+              {props.hoyre && props.hoyre.length > 0 && props.hoyre.sort(compare).map((beboer) => BeboerObjekt(beboer))}
             </List>
           </Paper>
         </Paper>

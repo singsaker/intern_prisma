@@ -26,11 +26,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import Alert from "@material-ui/core/Alert";
 
 const BeboerListe = (props) => {
   const dispatch = useDispatch();
@@ -50,6 +46,7 @@ const BeboerListe = (props) => {
     },
   });
 
+  // eslint-disable-next-line no-unused-vars
   const handleSorter = (kolonne) => {
     if (kolonne === sorter) {
       setAsc(!asc);
@@ -67,14 +64,8 @@ const BeboerListe = (props) => {
     let objB;
 
     if (sorter === "navn") {
-      objA =
-        a.fornavn.toUpperCase() +
-        a.mellomnavn.toUpperCase() +
-        a.etternavn.toUpperCase();
-      objB =
-        b.fornavn.toUpperCase() +
-        b.mellomnavn.toUpperCase() +
-        b.etternavn.toUpperCase();
+      objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
+      objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
     } else {
       objA = _.get(a, sorter).toUpperCase();
       objB = _.get(b, sorter).toUpperCase();
@@ -128,8 +119,7 @@ const BeboerListe = (props) => {
           <TableBody>
             {beboere.sort(compare).map((beboer) => {
               const erRadValgt = erValgt(beboer.id);
-              const differanse =
-                props.ansiennitet[beboer.id] - beboer.ansiennitet;
+              const differanse = props.ansiennitet[beboer.id] - beboer.ansiennitet;
               let diffStyle = {};
 
               if (differanse > 0) {
@@ -147,15 +137,9 @@ const BeboerListe = (props) => {
                   selected={erRadValgt}
                 >
                   <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={erRadValgt}
-                      onClick={() => props.handleVelg(beboer.id)}
-                    />
+                    <Checkbox checked={erRadValgt} onClick={() => props.handleVelg(beboer.id)} />
                   </TableCell>
-                  <TableCell
-                    style={{ cursor: "pointer" }}
-                    onClick={() => props.handleVelg(beboer.id)}
-                  >
+                  <TableCell style={{ cursor: "pointer" }} onClick={() => props.handleVelg(beboer.id)}>
                     <Typography variant="subtitle1">
                       {beboer.mellomnavn
                         ? `${beboer.fornavn} ${beboer.mellomnavn} ${beboer.etternavn}`
@@ -170,12 +154,7 @@ const BeboerListe = (props) => {
                       <TextField
                         type="number"
                         value={props.ansiennitet[beboer.id]}
-                        onChange={(e) =>
-                          props.handleAnsiennitetChange(
-                            beboer.id,
-                            e.target.value
-                          )
-                        }
+                        onChange={(e) => props.handleAnsiennitetChange(beboer.id, e.target.value)}
                       />
                     </Typography>
                   </TableCell>
@@ -187,11 +166,7 @@ const BeboerListe = (props) => {
                     </List>
                   </TableCell>
                   <TableCell>
-                    <Button
-                      onClick={() => props.handleLagreValgt(beboer.id)}
-                      variant="contained"
-                      color="primary"
-                    >
+                    <Button onClick={() => props.handleLagreValgt(beboer.id)} variant="contained" color="primary">
                       Oppdater
                     </Button>
                   </TableCell>
@@ -201,12 +176,8 @@ const BeboerListe = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

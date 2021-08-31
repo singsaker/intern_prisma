@@ -1,18 +1,8 @@
 import React from "react";
 
 // Material-UI
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Grid, CircularProgress, Divider, Card, CardContent, Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import Divider from "@material-ui/core/Divider";
-
-// Components
-import Spinner from "./CustomSpinner";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -33,10 +23,7 @@ const Verv = (props) => {
         <Grid container justify="space-between">
           <Grid item></Grid>
           <Grid item>
-            <CloseIcon
-              onClick={() => props.toggleVervModal()}
-              style={{ cursor: "pointer", margin: "8px" }}
-            />
+            <CloseIcon onClick={() => props.toggleVervModal()} style={{ cursor: "pointer", margin: "8px" }} />
           </Grid>
         </Grid>
         <Grid container direction="column" spacing={1}>
@@ -50,9 +37,7 @@ const Verv = (props) => {
 
           <Grid item container spacing={2}>
             <Grid item container justify="flex-end" xs={6}>
-              <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>
-                Regitimer
-              </Typography>
+              <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>Regitimer</Typography>
             </Grid>
             <Grid item container xs={6}>
               <Typography style={{ fontSize: "18px" }} color="textSecondary">
@@ -62,9 +47,7 @@ const Verv = (props) => {
           </Grid>
           <Grid item container spacing={2}>
             <Grid item container justify="flex-end" xs={6}>
-              <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>
-                Utvalget
-              </Typography>
+              <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>Utvalget</Typography>
             </Grid>
             <Grid item container xs={6}>
               <Typography style={{ fontSize: "18px" }} color="textSecondary">
@@ -75,9 +58,7 @@ const Verv = (props) => {
           {verv.epost && (
             <Grid item container spacing={2}>
               <Grid item container justify="flex-end" xs={6}>
-                <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>
-                  Epost
-                </Typography>
+                <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>Epost</Typography>
               </Grid>
               <Grid item container xs={6}>
                 <a style={{ fontSize: "18px" }} href={`mailto:${verv.epost}`}>
@@ -105,74 +86,76 @@ const Verv = (props) => {
     </Card>
   );
 
-  return (
-    <Card bg="dark" text="white">
-      <Card.Header>
-        <Card.Title style={{ textAlign: "center" }}>
-          <h2>{verv.navn}</h2>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body
-        style={{
-          maxHeight: "400px",
-          overflow: "auto",
-          backgroundColor: "#212026",
-        }}
-      >
-        <hr
-          style={{
-            height: "2px",
-            borderWidth: "0",
-            color: "#F28599",
-            backgroundColor: "#F28599",
-            marginTop: "1rem",
-            width: "90%",
-            marginRight: "5%",
-            marginLeft: "5%",
-          }}
-        />
+  // Kan dette fjernes?
 
-        <Container>
-          {verv.epost && (
-            <Row>
-              <Col style={{ textAlign: "right", fontWeight: "bold" }} sm={4}>
-                Epost
-              </Col>
-              <Col sm={8}>
-                <a href={`mailto:${verv.epost}`}>{verv.epost}</a>
-              </Col>
-            </Row>
-          )}
+  // return (
+  //   <Card bg="dark" text="white">
+  //     <Card.Header>
+  //       <Card.Title style={{ textAlign: "center" }}>
+  //         <h2>{verv.navn}</h2>
+  //       </Card.Title>
+  //     </Card.Header>
+  //     <Card.Body
+  //       style={{
+  //         maxHeight: "400px",
+  //         overflow: "auto",
+  //         backgroundColor: "#212026",
+  //       }}
+  //     >
+  //       <hr
+  //         style={{
+  //           height: "2px",
+  //           borderWidth: "0",
+  //           color: "#F28599",
+  //           backgroundColor: "#F28599",
+  //           marginTop: "1rem",
+  //           width: "90%",
+  //           marginRight: "5%",
+  //           marginLeft: "5%",
+  //         }}
+  //       />
 
-          <Row>
-            <Col style={{ textAlign: "right", fontWeight: "bold" }} sm={4}>
-              Regitimer
-            </Col>
-            <Col sm={8}>{verv.regitimer}</Col>
-          </Row>
-          <Row>
-            <Col style={{ textAlign: "right", fontWeight: "bold" }} sm={4}>
-              Utvalget
-            </Col>
-            <Col sm={8}>{verv.utvalg ? "Ja" : "Nei"}</Col>
-          </Row>
-          <hr
-            style={{
-              height: "2px",
-              borderWidth: "0",
-              color: "#F28599",
-              backgroundColor: "#F28599",
-              marginTop: "1rem",
-              width: "90%",
-              marginRight: "5%",
-              marginLeft: "5%",
-            }}
-          />
-          <Row>{verv.beskrivelse}</Row>
-        </Container>
-      </Card.Body>
-    </Card>
-  );
+  //       <Container>
+  //         {verv.epost && (
+  //           <Row>
+  //             <Col style={{ textAlign: "right", fontWeight: "bold" }} sm={4}>
+  //               Epost
+  //             </Col>
+  //             <Col sm={8}>
+  //               <a href={`mailto:${verv.epost}`}>{verv.epost}</a>
+  //             </Col>
+  //           </Row>
+  //         )}
+
+  //         <Row>
+  //           <Col style={{ textAlign: "right", fontWeight: "bold" }} sm={4}>
+  //             Regitimer
+  //           </Col>
+  //           <Col sm={8}>{verv.regitimer}</Col>
+  //         </Row>
+  //         <Row>
+  //           <Col style={{ textAlign: "right", fontWeight: "bold" }} sm={4}>
+  //             Utvalget
+  //           </Col>
+  //           <Col sm={8}>{verv.utvalg ? "Ja" : "Nei"}</Col>
+  //         </Row>
+  //         <hr
+  //           style={{
+  //             height: "2px",
+  //             borderWidth: "0",
+  //             color: "#F28599",
+  //             backgroundColor: "#F28599",
+  //             marginTop: "1rem",
+  //             width: "90%",
+  //             marginRight: "5%",
+  //             marginLeft: "5%",
+  //           }}
+  //         />
+  //         <Row>{verv.beskrivelse}</Row>
+  //       </Container>
+  //     </Card.Body>
+  //   </Card>
+  // );
 };
 
 export default Verv;

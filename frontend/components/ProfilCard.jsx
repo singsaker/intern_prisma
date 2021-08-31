@@ -13,13 +13,8 @@ import { getBeboer } from "../src/actions/beboer";
 import { GET_BEBOER } from "../src/query/beboer";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import CloseIcon from "@material-ui/icons/Close";
-import { Box, Chip, styled } from "@material-ui/core";
+import { Box, Chip, styled, Grid, CircularProgress, Typography, Snackbar, Alert } from "@material-ui/core";
 
 const ProfileImgStyle = styled("img")(({ theme }) => ({
   borderRadius: "100%",
@@ -27,10 +22,6 @@ const ProfileImgStyle = styled("img")(({ theme }) => ({
   margin: "0 auto",
   marginBottom: theme.spacing(2),
 }));
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const Profil = (props) => {
   const dispatch = useDispatch();
@@ -134,7 +125,12 @@ const Profil = (props) => {
           </Grid>
         </Box>
         <Snackbar open={visAlert} autoHideDuration={6000} onClose={() => setVisAlert(false)}>
-          <Alert onClose={() => setVisAlert(false)} severity={vellykket ? "success" : "error"}>
+          <Alert
+            elevation={6}
+            variant="filled"
+            onClose={() => setVisAlert(false)}
+            severity={vellykket ? "success" : "error"}
+          >
             {melding}
           </Alert>
         </Snackbar>

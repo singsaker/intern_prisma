@@ -3,11 +3,7 @@ import React, { useState, useEffect } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSkole,
-  getStudie,
-  oppdaterBeboer,
-} from "../../../src/actions/beboer";
+import { getSkole, getStudie, oppdaterBeboer } from "../../../src/actions/beboer";
 import { UPDATE_BEBOER } from "../../../src/query/beboer";
 import { GET_STUDIE, GET_SKOLE } from "../../../src/query/studie";
 
@@ -24,15 +20,11 @@ import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import DatePicker from '@material-ui/lab/DatePicker';
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import DatePicker from "@material-ui/lab/DatePicker";
 
 const ProfilRedigerInfo = (props) => {
   const dispatch = useDispatch();
@@ -139,13 +131,7 @@ const ProfilRedigerInfo = (props) => {
         submitBeboer();
       }}
     >
-      <Grid
-        container
-        direction="column"
-        justify="flex-start"
-        alignItems="flex-start"
-        spacing={2}
-      >
+      <Grid container direction="column" justify="flex-start" alignItems="flex-start" spacing={2}>
         <TextField
           required
           id="epost_input"
@@ -174,22 +160,6 @@ const ProfilRedigerInfo = (props) => {
           style={{ margin: 8 }}
           fullWidth
         />
-
-        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid container className={classes.datepicker} justify="flex-start">
-            <KeyboardDatePicker
-              margin="normal"
-              id="fodselsdag_input"
-              label="Fødselsdag"
-              format="dd/MM/yyyy"
-              value={fodselsdato}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </Grid>
-        </MuiPickersUtilsProvider> */}
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             label="Fødselsdag"
@@ -276,24 +246,13 @@ const ProfilRedigerInfo = (props) => {
           </FormControl>
         </Grid>
         <Grid container direction="row" justify="flex-end">
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            className={classes.button}
-            startIcon={<SaveIcon />}
-            type="submit"
-          >
+          <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
             Lagre
           </Button>
         </Grid>
       </Grid>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
-        <Alert onClose={() => setVellykket(false)} severity="success">
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           Endringene ble lagret!
         </Alert>
       </Snackbar>

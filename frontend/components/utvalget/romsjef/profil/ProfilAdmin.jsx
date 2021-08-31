@@ -15,7 +15,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
 import FlightIcon from "@material-ui/icons/Flight";
@@ -25,21 +25,8 @@ import { GET_ROLLER } from "../../../../src/query/regi";
 import { getRoller } from "../../../../src/actions/regi";
 import { GET_ALLE_ROM } from "../../../../src/query/rom";
 import { getAlleRom } from "../../../../src/actions/rom";
-import {
-  UPDATE_BEBOER_ADMIN,
-  SLETT_BEBOER,
-  UPDATE_BEBOER_PERM,
-} from "../../../../src/query/beboer";
-import {
-  oppdaterBeboerAdmin,
-  slettBeboer,
-  sendPaaPerm,
-  sendHjemFraPerm,
-} from "../../../../src/actions/beboer";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import { UPDATE_BEBOER_ADMIN, SLETT_BEBOER, UPDATE_BEBOER_PERM } from "../../../../src/query/beboer";
+import { oppdaterBeboerAdmin, slettBeboer, sendPaaPerm, sendHjemFraPerm } from "../../../../src/actions/beboer";
 
 const ProfilAdmin = (props) => {
   const [depositum, setDepositum] = useState(false);
@@ -190,11 +177,7 @@ const ProfilAdmin = (props) => {
                 <FormGroup>
                   <FormControlLabel
                     control={
-                      <Checkbox
-                        checked={depositum}
-                        onChange={(e) => setDepositum(e.target.checked)}
-                        name="depositum"
-                      />
+                      <Checkbox checked={depositum} onChange={(e) => setDepositum(e.target.checked)} name="depositum" />
                     }
                     label="Betalt depositum"
                   />
@@ -264,13 +247,7 @@ const ProfilAdmin = (props) => {
                 </Button>
               </Grid>
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  startIcon={<SaveIcon />}
-                  type="submit"
-                >
+                <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
                   Lagre
                 </Button>
               </Grid>
@@ -287,9 +264,7 @@ const ProfilAdmin = (props) => {
           >
             <Grid item container direction="column" spacing={2}>
               <Grid item>
-                <Typography variant="subtitle1">
-                  Er du sikker på at du vil slette denne beboeren?
-                </Typography>
+                <Typography variant="subtitle1">Er du sikker på at du vil slette denne beboeren?</Typography>
               </Grid>
               <Grid item container>
                 <Grid item>
@@ -303,11 +278,7 @@ const ProfilAdmin = (props) => {
                 </Grid>
                 {slettFornavn === beboer.fornavn && (
                   <Grid item>
-                    <Button
-                      size="large"
-                      type="submit"
-                      startIcon={<DeleteIcon />}
-                    >
+                    <Button size="large" type="submit" startIcon={<DeleteIcon />}>
                       Slett
                     </Button>
                   </Grid>
@@ -318,21 +289,13 @@ const ProfilAdmin = (props) => {
         )}
       </Grid>
 
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
-        <Alert onClose={() => setVellykket(false)} severity="success">
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           {melding}
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

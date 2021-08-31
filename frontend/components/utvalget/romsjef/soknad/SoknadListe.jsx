@@ -18,7 +18,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
-import Chip from "@material-ui/core/Chip";
 
 import formaterDato from "../../../../helpers/formaterDato";
 import DOMPurify from "dompurify";
@@ -53,14 +52,8 @@ const SoknadListe = (props) => {
     let objB;
 
     if (sorter === "navn") {
-      objA =
-        a.fornavn.toUpperCase() +
-        a.mellomnavn.toUpperCase() +
-        a.etternavn.toUpperCase();
-      objB =
-        b.fornavn.toUpperCase() +
-        b.mellomnavn.toUpperCase() +
-        b.etternavn.toUpperCase();
+      objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
+      objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
     } else {
       objA = _.get(a, sorter).toUpperCase();
       objB = _.get(b, sorter).toUpperCase();
@@ -105,16 +98,12 @@ const SoknadListe = (props) => {
                   : "Nei";
                 return (
                   <TableRow key={soknad.id}>
-                    <TableCell>
-                      {formaterDato(innsendt.split("T")[0])}
-                    </TableCell>
+                    <TableCell>{formaterDato(innsendt.split("T")[0])}</TableCell>
                     <TableCell>
                       <Typography
                         variant="subtitle1"
                         style={{ cursor: "pointer" }}
-                        onClick={() =>
-                          props.toggleSoknadModal(soknad.id, valgtSemester)
-                        }
+                        onClick={() => props.toggleSoknadModal(soknad.id, valgtSemester)}
                       >
                         {soknad.navn}
                       </Typography>
@@ -123,11 +112,7 @@ const SoknadListe = (props) => {
                       </Typography>
                     </TableCell>
                     <TableCell>{soknad.fodselsar}</TableCell>
-                    <TableCell
-                      style={
-                        soknad.fagbrev ? { color: "yellow" } : { color: "red" }
-                      }
-                    >
+                    <TableCell style={soknad.fagbrev ? { color: "yellow" } : { color: "red" }}>
                       {soknad.fagbrev ? "Ja" : "Nei"}
                     </TableCell>
                     <TableCell>

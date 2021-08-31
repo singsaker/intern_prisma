@@ -26,17 +26,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import Alert from "@material-ui/core/Alert";
 
 const GammelBeboerListe = (props) => {
   const dispatch = useDispatch();
-  const beboere = useSelector((state) =>
-    Object.values(state.beboer.gamleBeboere)
-  );
+  const beboere = useSelector((state) => Object.values(state.beboer.gamleBeboere));
   const [sorter, setSorter] = useState("navn");
   const [asc, setAsc] = useState(true);
   const [melding, setMelding] = useState("");
@@ -52,6 +46,7 @@ const GammelBeboerListe = (props) => {
     },
   });
 
+  // eslint-disable-next-line no-unused-vars
   const handleSorter = (kolonne) => {
     if (kolonne === sorter) {
       setAsc(!asc);
@@ -67,14 +62,8 @@ const GammelBeboerListe = (props) => {
     let objB;
 
     if (sorter === "navn") {
-      objA =
-        a.fornavn.toUpperCase() +
-        a.mellomnavn.toUpperCase() +
-        a.etternavn.toUpperCase();
-      objB =
-        b.fornavn.toUpperCase() +
-        b.mellomnavn.toUpperCase() +
-        b.etternavn.toUpperCase();
+      objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
+      objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
     } else {
       objA = _.get(a, sorter).toUpperCase();
       objB = _.get(b, sorter).toUpperCase();
@@ -151,10 +140,7 @@ const GammelBeboerListe = (props) => {
                   <TableCell>
                     <Typography variant="body2" color="textPrimary">
                       {beboer.romhistorikk.length > 0 &&
-                        formaterDato(
-                          beboer.romhistorikk[beboer.romhistorikk.length - 1]
-                            .utflyttet
-                        )}
+                        formaterDato(beboer.romhistorikk[beboer.romhistorikk.length - 1].utflyttet)}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -163,12 +149,8 @@ const GammelBeboerListe = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

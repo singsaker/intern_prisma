@@ -20,7 +20,7 @@ import TableRow from "@material-ui/core/TableRow";
 import DoneIcon from "@material-ui/icons/Done";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/core/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 

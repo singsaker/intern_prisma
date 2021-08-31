@@ -11,7 +11,7 @@ import Head from "next/head";
 //Material UI
 import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/core/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 
 const Alert = (props) => {

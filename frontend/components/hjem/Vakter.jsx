@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Card from "react-bootstrap/Card";
 import { useQuery } from "@apollo/react-hooks";
@@ -53,9 +53,7 @@ const Vakter = () => {
                         >
                           {vakt.dato}
                         </p>
-                        <h3 style={{ padding: 0, margin: 0 }}>
-                          {vakt.vakttype}. Vakt
-                        </h3>
+                        <h3 style={{ padding: 0, margin: 0 }}>{vakt.vakttype}. Vakt</h3>
                       </td>
                     </tr>
                   );

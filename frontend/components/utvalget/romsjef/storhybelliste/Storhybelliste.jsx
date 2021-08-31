@@ -50,10 +50,7 @@ const Storhybelliste = (props) => {
         <Grid container justify="space-between">
           <Grid item></Grid>
           <Grid item>
-            <CloseIcon
-              onClick={() => props.toggleListeModal()}
-              style={{ cursor: "pointer", margin: "8px" }}
-            />
+            <CloseIcon onClick={() => props.toggleListeModal()} style={{ cursor: "pointer", margin: "8px" }} />
           </Grid>
         </Grid>
         {storhybellister[props.id] ? (

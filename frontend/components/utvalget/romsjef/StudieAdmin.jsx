@@ -2,41 +2,29 @@ import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import {
-  OPPDATER_STUDIE,
-  SLETT_STUDIE,
-  GET_STUDIER,
-  LAG_STUDIE,
-} from "../../../src/query/studie";
-import {
-  oppdaterStudie,
-  slettStudie,
-  getStudier,
-  lagStudie,
-} from "../../../src/actions/skole";
+import { OPPDATER_STUDIE, SLETT_STUDIE, GET_STUDIER, LAG_STUDIE } from "../../../src/query/studie";
+import { oppdaterStudie, slettStudie, getStudier, lagStudie } from "../../../src/actions/skole";
 
 // Material-UI
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Grid from "@material-ui/core/Grid";
-import InputBase from "@material-ui/core/InputBase";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {
+  Grid,
+  Table,
+  TableContainer,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableBody,
+  CircularProgress,
+  Button,
+  InputBase,
+  IconButton,
+  Snackbar,
+  Alert,
+  TextField,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
-import TextField from "@material-ui/core/TextField";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const StudieAdmin = (props) => {
   const dispatch = useDispatch();
@@ -127,10 +115,7 @@ const StudieAdmin = (props) => {
   return (
     <Grid container>
       <Grid container justify="flex-end" item xs={12}>
-        <CloseIcon
-          onClick={() => props.toggleStudieAdmin()}
-          style={{ cursor: "pointer", margin: "8px" }}
-        />
+        <CloseIcon onClick={() => props.toggleStudieAdmin()} style={{ cursor: "pointer", margin: "8px" }} />
       </Grid>
       <Grid item md={8} xs={12}>
         <TableContainer>
@@ -162,14 +147,11 @@ const StudieAdmin = (props) => {
                         <TableCell>
                           <InputBase
                             value={studieNavn[studie.id].navn}
-                            onChange={(e) =>
-                              handleStudieChange(studie.id, e.target.value)
-                            }
+                            onChange={(e) => handleStudieChange(studie.id, e.target.value)}
                           />
                         </TableCell>
                         <TableCell align="right">
-                          {studier[studie.id].navn !=
-                            studieNavn[studie.id].navn && (
+                          {studier[studie.id].navn != studieNavn[studie.id].navn && (
                             <Button
                               onClick={() =>
                                 oppdaterStudieMutation({
@@ -226,33 +208,20 @@ const StudieAdmin = (props) => {
               />
             </Grid>
             <Grid item>
-              <Button
-                startIcon={<AddIcon />}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
+              <Button startIcon={<AddIcon />} variant="contained" color="primary" type="submit">
                 Legg til
               </Button>
             </Grid>
           </Grid>
         </form>
       </Grid>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
         <Alert onClose={() => setVellykket(false)} severity="success">
           {melding}
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>

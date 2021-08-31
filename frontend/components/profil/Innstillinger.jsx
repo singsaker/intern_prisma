@@ -10,7 +10,6 @@ import Passord from "./Passord";
 import Info from "../BeboerInfoRediger";
 
 // Material-UI
-import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
@@ -28,7 +27,7 @@ const Instillinger = () => {
 
   return (
     <>
-      <Box sx={{mb: 5}}>
+      <Box sx={{ mb: 5 }}>
         <Tabs
           value={tab}
           indicatorColor="primary"
@@ -46,41 +45,20 @@ const Instillinger = () => {
       </Box>
       <Card variant="outlined">
         <CardContent>
-          
           <Grid container>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "info"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "info"}>
               <Info beboer_id={beboer_id} />
             </Grid>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "kryss"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "kryss"}>
               <Kryss />
             </Grid>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "varsler"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "varsler"}>
               <Varsler />
             </Grid>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "epost"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "epost"}>
               <Epostliste />
             </Grid>
-            <Grid
-              item
-              style={{ width: "100%", margin: "20px" }}
-              hidden={tab !== "passord"}
-            >
+            <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "passord"}>
               <Passord />
             </Grid>
           </Grid>

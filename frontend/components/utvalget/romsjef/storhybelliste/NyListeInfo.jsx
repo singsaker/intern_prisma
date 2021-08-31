@@ -16,7 +16,7 @@ const NyListeInfo = (props) => {
           Gi et passende navn til storhybellisten
         </Typography>
         <Typography variant="body1" color="textSecondary">
-          F.eks. "Storhybelliste Vår 2019 - Nr. 1"
+          F.eks. &quot;Storhybelliste Vår 2019 - Nr. 1&quot;
         </Typography>
       </Grid>
       <Grid item xs={12} container direction="column" spacing={2}>
@@ -46,13 +46,7 @@ const NyListeInfo = (props) => {
             </FormControl>
           </Grid>
           <Grid item>
-            <TextField
-              required
-              label="År"
-              value={props.aar}
-              onChange={props.handleAarChange}
-              variant="outlined"
-            />
+            <TextField required label="År" value={props.aar} onChange={props.handleAarChange} variant="outlined" />
           </Grid>
         </Grid>
       </Grid>

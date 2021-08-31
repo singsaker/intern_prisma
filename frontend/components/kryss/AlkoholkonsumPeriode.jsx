@@ -14,9 +14,7 @@ import styles from "../../styles/Table.module.css";
 import formaterDatoOgKlokke from "../../helpers/formaterDatoOgKlokke";
 
 const AlkoholkonsumPeriode = () => {
-  const krysseliste = useSelector((state) =>
-    Object.values(state.kryss.krysseliste)
-  );
+  const krysseliste = useSelector((state) => Object.values(state.kryss.krysseliste));
   const [kryss, setKryss] = useState([]);
 
   useEffect(() => {

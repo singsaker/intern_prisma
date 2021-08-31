@@ -12,11 +12,11 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 
 // Material-UI
 import SaveIcon from "@material-ui/icons/Save";
-import MuiAlert from "@material-ui/lab/Alert";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 import DatePicker from "@material-ui/lab/DatePicker";
 import {
+  Alert,
   Stack,
   TextField,
   InputLabel,
@@ -27,10 +27,6 @@ import {
   Button,
   CircularProgress,
 } from "@material-ui/core";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
 
 const BeboerInfoRediger = (props) => {
   const dispatch = useDispatch();
@@ -58,6 +54,7 @@ const BeboerInfoRediger = (props) => {
   const [postnummer, setPostnummer] = useState("");
   const [melding, setMelding] = useState("");
   const [vellykket, setVellykket] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [feilmelding, setFeilmelding] = useState(false);
 
   const studie = useQuery(GET_STUDIER, {
@@ -154,7 +151,7 @@ const BeboerInfoRediger = (props) => {
   return (
     <>
       {vellykket && (
-        <Alert onClose={() => setVellykket(false)} severity="success">
+        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
           {melding}
         </Alert>
       )}

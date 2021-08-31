@@ -21,7 +21,7 @@ import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/core/Alert";
 
 // NextJS
 import Head from "next/head";

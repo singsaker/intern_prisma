@@ -10,22 +10,20 @@ import _ from "lodash";
 import { useQuery } from "@apollo/react-hooks";
 
 // Material UI
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Chip from "@material-ui/core/Chip";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+import {
+  Paper,
+  TableContainer,
+  Table,
+  TableCell,
+  TableRow,
+  TableBody,
+  Typography,
+  Alert,
+  Snackbar,
+  TableHead,
+  Avatar,
+  Chip,
+} from "@material-ui/core";
 
 const BeboerListeAnsiennitet = (props) => {
   const dispatch = useDispatch();
@@ -45,6 +43,7 @@ const BeboerListeAnsiennitet = (props) => {
     },
   });
 
+  // eslint-disable-next-line no-unused-vars
   const handleSorter = (kolonne) => {
     if (kolonne === sorter) {
       setAsc(!asc);
@@ -60,14 +59,8 @@ const BeboerListeAnsiennitet = (props) => {
     let objB;
 
     if (sorter === "navn") {
-      objA =
-        a.fornavn.toUpperCase() +
-        a.mellomnavn.toUpperCase() +
-        a.etternavn.toUpperCase();
-      objB =
-        b.fornavn.toUpperCase() +
-        b.mellomnavn.toUpperCase() +
-        b.etternavn.toUpperCase();
+      objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
+      objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
     } else {
       objA = _.get(a, sorter).toUpperCase();
       objB = _.get(b, sorter).toUpperCase();
@@ -142,32 +135,18 @@ const BeboerListeAnsiennitet = (props) => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Chip
-                      variant="outlined"
-                      avatar={<Avatar>#</Avatar>}
-                      label={beboer.rom.navn}
-                    />
+                    <Chip variant="outlined" avatar={<Avatar>#</Avatar>} label={beboer.rom.navn} />
                   </TableCell>
                   <TableCell>{beboer.rolle.navn}</TableCell>
-                  <TableCell>
-                    {beboer.kundenr ? (
-                      beboer.kundenr
-                    ) : (
-                      <div style={{ color: "red" }}>Mangler</div>
-                    )}
-                  </TableCell>
+                  <TableCell>{beboer.kundenr ? beboer.kundenr : <div style={{ color: "red" }}>Mangler</div>}</TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
       </TableContainer>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
-        <Alert onClose={() => setFeilmelding(false)} severity="error">
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert elevation={6} variant="filled" onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>
       </Snackbar>
