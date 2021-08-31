@@ -1,6 +1,6 @@
 const { authMutation, authQuery } = require("./auth");
 const { beboerQuery, beboerMutation } = require("./beboer");
-const { kryssQuery } = require("./kryss");
+const { kryssQuery, kryssMutation } = require("./kryss");
 const { vervQuery } = require("./verv");
 const { vaktQuery, vaktMutation } = require("./vakt");
 const { skoleQuery, skoleMutation } = require("./skole");
@@ -20,6 +20,7 @@ const resolver = {
     ...beboerMutation,
     ...drikkeMutation,
     ...kunngjoringMutation,
+    ...kryssMutation,
     ...regiMutation,
     ...vaktMutation,
     ...skoleMutation,

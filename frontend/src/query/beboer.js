@@ -42,7 +42,7 @@ const BEBOER = `
     verv {
       navn
     }
-    perm
+    status
     skole {
       id
       navn

@@ -64,4 +64,47 @@ const kryssQuery = {
   },
 };
 
-module.exports = { kryssQuery };
+const kryssMutation = {
+  migrerKrysseliste: async (parent, args, context) => {
+    try {
+      const krysselister = await context.prisma.krysseliste.findMany();
+      let nyeKryss = [];
+
+      const drikke = await context.prisma.drikke.findMany({
+        select: {
+          id: true,
+        },
+      });
+
+      for (x in krysselister) {
+        const liste = krysselister[x];
+        const drikkeKryss = JSON.parse(liste.krysseliste);
+
+        for (y in drikkeKryss) {
+          nyeKryss.push({
+            beboer: { connect: { id: liste.beboer_id } },
+            drikke: { connect: { id: liste.drikke_id } },
+            antall: Number(drikkeKryss[y].antall),
+            tid: new Date(drikkeKryss[y].tid),
+            fakturert: drikkeKryss[y].fakturert === 1 ? true : false,
+          });
+        }
+      }
+
+      for (z in nyeKryss) {
+        await context.prisma.kryss.create({
+          data: nyeKryss[z],
+        });
+      }
+
+      // await context.prisma.kryss.createMany({
+      //   data: nyeKryss,
+      // });
+      return null;
+    } catch (err) {
+      throw err;
+    }
+  },
+};
+
+module.exports = { kryssQuery, kryssMutation };

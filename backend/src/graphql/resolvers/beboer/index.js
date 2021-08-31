@@ -295,7 +295,6 @@ const beboerMutation = {
       const MIN_LENGDE = 8;
       const SALT_ROUNDS = 10;
       let data = {};
-      let romhistorikk = [];
 
       // Denne er for å kun ta med de feltene som faktisk er fyllt ut når vi skal lage beboer:
       for (let key in args.data) {
@@ -304,12 +303,6 @@ const beboerMutation = {
             return Error("Eposten er ikke gyldig!");
           }
           data[key] = args.data[key];
-        } else if (key === "rom_id") {
-          romhistorikk.push({
-            romId: String(args.data[key]),
-            innflyttet: new Date().toISOString().split("T")[0],
-            utflyttet: null,
-          });
         } else {
           data[key] = args.data[key];
         }
@@ -367,7 +360,16 @@ const beboerMutation = {
       const nyBeboer = await context.prisma.beboer.create({
         data: {
           ...data,
-          romhistorikk: JSON.stringify(romhistorikk),
+          romhistorikk: {
+            create: {
+              rom: {
+                connect: {
+                  id: rom_id,
+                },
+              },
+              innflyttet: new Date(),
+            },
+          },
           bruker_id: bruker.id,
         },
         include: {

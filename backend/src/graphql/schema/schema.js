@@ -86,7 +86,7 @@ const schemaSchema = gql`
     klassetrinn: Int
     kundenr: Int
     postnummer: Int
-    perm: Int
+    status: Int
     kjonn: Boolean
     alkoholdepositum: Boolean
     rolle_id: Int
@@ -438,6 +438,7 @@ const schemaSchema = gql`
     migrerRomhistorikk: String
     migrerRomNy: String
     migrerBeboerStatus: String
+    migrerKrysseliste: String
   }
 `;
 
