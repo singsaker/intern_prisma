@@ -60,7 +60,7 @@ const schemaSchema = gql`
     klassetrinn: Int!
     kundenr: Int
     mellomnavn: String
-    perm: Int!
+    status: Int!
     postnummer: Int
     rolle: Rolle
     rom: Rom
@@ -437,6 +437,7 @@ const schemaSchema = gql`
 
     migrerRomhistorikk: String
     migrerRomNy: String
+    migrerBeboerStatus: String
   }
 `;
 

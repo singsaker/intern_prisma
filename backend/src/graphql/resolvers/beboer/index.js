@@ -50,7 +50,7 @@ const beboerQuery = {
               contains: "Utvalget",
             },
           },
-          perm: false,
+          status: 1,
         },
         include: {
           rolle: true,
@@ -95,11 +95,7 @@ const beboerQuery = {
               contains: "Utvalget",
             },
           },
-          NOT: {
-            romhistorikk: {
-              contains: '"utflyttet":null',
-            },
-          },
+          status: 0,
         },
         include: {
           rolle: true,
@@ -144,7 +140,7 @@ const beboerQuery = {
               contains: "Utvalget",
             },
           },
-          perm: 1,
+          status: 2,
         },
         include: {
           rolle: true,
@@ -205,7 +201,7 @@ const beboerQuery = {
 const beboerMutation = {
   flyttBeboer: async (parent, args, context) => {
     try {
-      const beboerRomhistorikk = await context.prisma.beboer.findUnique({
+      const beboer = await context.prisma.beboer.findUnique({
         where: {
           id: args.id,
         },
@@ -214,27 +210,48 @@ const beboerMutation = {
         },
       });
 
-      // Romhistorikk er en string som vi gjør om til en array av objekter:
-      let beboerRom = JSON.parse(beboerRomhistorikk.romhistorikk);
+      const romhistorikk = beboer.romhistorikk;
+      let romhistorikkId = null;
 
-      // Oppdaterer utflytt til valgt dato
-      beboerRom[beboerRom.length - 1].utflyttet = new Date(args.utflytt)
-        .toISOString()
-        .split("T")[0];
+      // Finner ID til romhistorikk-objektet hvor beboeren ikke har flyttet ut av rommet (nåværende rom):
+      for (let i = 0; i < romhistorikk.length; i++) {
+        if (romhistorikk[i].utflyttet === null) {
+          romhistorikkId = romhistorikk[i].id;
+        }
+      }
 
-      // Legger til et objekt som er det nye rommet og innflytt
-      beboerRom.push({
-        romId: String(args.romId),
-        innflyttet: new Date(args.innflytt).toISOString().split("T")[0],
-        utflyttet: null,
-      });
+      // Oppdaterer romhistorikk-objektet slik at beboeren er flyttet ut:
+      if (romhistorikkId !== null) {
+        await context.prisma.romhistorikk.update({
+          where: {
+            id: romhistorikkId,
+          },
+          data: {
+            utflyttet: new Date(args.utflytt),
+          },
+        });
+      }
 
-      const beboer = await context.prisma.beboer.update({
+      const nyBeboer = await context.prisma.beboer.update({
         where: {
           id: args.id,
         },
         data: {
-          romhistorikk: JSON.stringify(beboerRom),
+          rom: {
+            connect: {
+              id: args.romId,
+            },
+          },
+          romhistorikk: {
+            create: {
+              rom: {
+                connect: {
+                  id: args.romId,
+                },
+              },
+              innflyttet: new Date(args.innflytt),
+            },
+          },
         },
         include: {
           rolle: true,
@@ -263,7 +280,7 @@ const beboerMutation = {
         },
       });
 
-      return formaterBeboer(context, beboer);
+      return formaterBeboer(context, nyBeboer);
     } catch (err) {
       throw err;
     }
@@ -793,6 +810,48 @@ const beboerMutation = {
             },
             data: {
               rom_id: romHist[romHist.length - 1].rom_id,
+            },
+          });
+        }
+      }
+      return null;
+    } catch (err) {
+      throw err;
+    }
+  },
+  migrerBeboerStatus: async (parent, args, context) => {
+    try {
+      const beboere = await context.prisma.beboer.findMany({
+        select: {
+          id: true,
+          perm: true,
+          romhistorikk: true,
+        },
+      });
+
+      for (let i = 0; i < beboere.length; i++) {
+        if (!beboere[i].perm) {
+          if (
+            beboere[i].romhistorikk.length > 0 &&
+            beboere[i].romhistorikk[beboere[i].romhistorikk.length - 1]
+              .utflyttet === null
+          ) {
+            await context.prisma.beboer.update({
+              where: {
+                id: beboere[i].id,
+              },
+              data: {
+                perm: 1,
+              },
+            });
+          }
+        } else {
+          await context.prisma.beboer.update({
+            where: {
+              id: beboere[i].id,
+            },
+            data: {
+              perm: 2,
             },
           });
         }
