@@ -7,7 +7,6 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloProvider } from "@apollo/react-hooks";
 import withReduxStore from "../lib/with-redux-store";
 import { CookiesProvider } from "react-cookie";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ThemeConfig from "../theme";
 
@@ -36,10 +35,7 @@ const MyApp = (props) => {
               href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap"
               rel="stylesheet"
             />
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           </Head>
           <ThemeConfig>
             <CssBaseline />
