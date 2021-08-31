@@ -28,6 +28,27 @@ const GREY = {
   500_80: alpha("#919EAB", 0.8),
 };
 
+// const GREY = {
+//   500_80: "#FFFFFF",
+//   500_56: "#F9FAFB",
+//   500_48: "#F4F6F8",
+//   500_32: "#DFE3E8",
+//   500_24: "#C4CDD5",
+//   500_16: "#919EAB",
+//   500_12: "#637381",
+//   500_8: "#454F5B",
+//   900: "#212B36",
+//   800: "#161C24",
+//   700: alpha("#919EAB", 0.08),
+//   600: alpha("#919EAB", 0.12),
+//   500: alpha("#919EAB", 0.16),
+//   400: alpha("#919EAB", 0.24),
+//   300: alpha("#919EAB", 0.32),
+//   200: alpha("#919EAB", 0.48),
+//   100: alpha("#919EAB", 0.56),
+//   0: alpha("#919EAB", 0.8),
+// };
+
 const SECONDARY = {
   lighter: "#C8FACD",
   light: "#5BE584",
@@ -109,5 +130,31 @@ const palette = {
     disabledOpacity: 0.48,
   },
 };
+
+// const palette = {
+//   mode: "dark",
+//   common: { black: "#000", white: "#fff" },
+//   primary: { ...PRIMARY },
+//   secondary: { ...SECONDARY },
+//   info: { ...INFO },
+//   success: { ...SUCCESS },
+//   warning: { ...WARNING },
+//   error: { ...ERROR },
+//   grey: GREY,
+//   gradients: GRADIENTS,
+//   divider: GREY[500_24],
+//   text: { primary: GREY[300], secondary: GREY[400], disabled: GREY[500] },
+//   background: { paper: GREY[800], default: GREY[900], neutral: GREY[200] },
+//   action: {
+//     active: GREY[600],
+//     hover: GREY[500_8],
+//     selected: GREY[500_16],
+//     disabled: GREY[500_80],
+//     disabledBackground: GREY[500_24],
+//     focus: GREY[500_24],
+//     hoverOpacity: 0.08,
+//     disabledOpacity: 0.48,
+//   },
+// };
 
 export default palette;

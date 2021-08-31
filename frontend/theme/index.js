@@ -1,20 +1,19 @@
 import { useMemo } from "react";
 // material
 import { CssBaseline } from "@material-ui/core";
-import {
-  ThemeProvider,
-  createTheme,
-  StyledEngineProvider,
-} from "@material-ui/core/styles";
+import { ThemeProvider, createTheme, StyledEngineProvider } from "@material-ui/core/styles";
 //
 import shape from "./shape";
 import palette from "./palette";
 import typography from "./typography";
 import GlobalStyles from "./globalStyles";
 import componentsOverride from "./overrides";
-import shadows, { customShadows } from "./shadows";
+import shadows, { customShadows as customShadowsMode } from "./shadows";
 
 // ----------------------------------------------------------------------
+
+const shadowsMode = shadows("LIGHT_MODE");
+const customShadows = customShadowsMode("LIGHT_MODE");
 
 export default function ThemeConfig({ children }) {
   const themeOptions = useMemo(
@@ -22,7 +21,7 @@ export default function ThemeConfig({ children }) {
       palette,
       shape,
       typography,
-      shadows,
+      shadowsMode,
       customShadows,
     }),
     []
