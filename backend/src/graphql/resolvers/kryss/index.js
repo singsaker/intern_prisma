@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 const kryssQuery = {
   hentAktivVin: async (parent, args, context) => {
     try {
@@ -75,10 +77,21 @@ const kryssMutation = {
           id: true,
         },
       });
+      console.log(drikke);
+
+      let drikkeIder = drikke.map((x) => {
+        return x.id;
+      });
+
+      console.log(drikkeIder);
 
       for (x in krysselister) {
         const liste = krysselister[x];
         const drikkeKryss = JSON.parse(liste.krysseliste);
+
+        if (_.indexOf(drikkeIder, liste.drikke_id) === -1) {
+          continue;
+        }
 
         for (y in drikkeKryss) {
           nyeKryss.push({
