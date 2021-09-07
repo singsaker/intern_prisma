@@ -58,6 +58,7 @@ const schemaSchema = gql`
     id: Int!
     kjonn: Boolean!
     klassetrinn: Int!
+    kryss: [Kryss!]
     kundenr: Int
     mellomnavn: String
     status: Int!
