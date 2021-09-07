@@ -41,6 +41,45 @@ const beboerQuery = {
       throw err;
     }
   },
+  hentBeboerKryss: async (parent, args, context) => {
+    try {
+      const beboer = await context.prisma.beboer.findUnique({
+        where: {
+          id: args.id,
+        },
+        include: {
+          rolle: true,
+          studie: true,
+          skole: true,
+          bruker: true,
+          kryss: true,
+          rom: {
+            include: {
+              romtype: true,
+            },
+          },
+          beboer_verv: {
+            include: {
+              verv: true,
+            },
+          },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return formaterBeboer(context, beboer);
+    } catch (err) {
+      throw err;
+    }
+  },
   hentBeboere: async (parent, args, context) => {
     try {
       const beboere = await context.prisma.beboer.findMany({

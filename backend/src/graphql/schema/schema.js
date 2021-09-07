@@ -329,6 +329,7 @@ const schemaSchema = gql`
     hentArbeidskategorier: [Arbeidskategori!]
     hentArbeid(brukerId: Int, semester: String, aar: Int): [Arbeid!]
     hentBeboer(id: Int!): Beboer!
+    hentBeboerKryss(id: Int!): Beboer!
     hentBeboere: [Beboer!]
     hentBeboereKryss: [Beboer!]
     hentBeboerePerm: [Beboer!]
