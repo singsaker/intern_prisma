@@ -153,16 +153,18 @@ const schemaSchema = gql`
   }
 
   type Kryss {
+    beboer: Beboer!
+    drikke: Drikke!
     tid: String!
     fakturert: Int!
     antall: Int!
   }
 
-  type Krysseliste {
-    id: Int!
-    drikke: Drikke!
-    krysseliste: [Kryss!]
-  }
+  # type Krysseliste {
+  #   id: Int!
+  #   drikke: Drikke!
+  #   krysseliste: [Kryss!]
+  # }
 
   type Kunngjoring {
     id: Int!
@@ -333,7 +335,7 @@ const schemaSchema = gql`
     hentEpostPrefs(beboerId: Int!): EpostPrefs!
     hentFakturert(fra_dato: String): [Fakturert!]
     hentGamleBeboere: [Beboer!]
-    hentKrysseliste(beboerId: Int!): [Krysseliste!]
+    #hentKrysseliste(beboerId: Int!): [Krysseliste!]
     hentKunngjoringer: [Kunngjoring!]
     hentLedigeRom: [Rom!]
     hentPrefs(beboerId: Int!): BeboerPrefs!
@@ -351,13 +353,47 @@ const schemaSchema = gql`
   }
 
   type Mutation {
+    fakturerKryss(id: Int!): Kryss!
+    fakturerKryssPeriode(startTid: String!, sluttTid: String!): [Kryss!]
+    fjernKryss(id: Int!): Kryss!
     flyttBeboer(
       id: Int!
       romId: Int!
       utflytt: String!
       innflytt: String!
     ): Beboer!
+    genererVakter(
+      fraDato: String!
+      fraVakt: Int!
+      tilDato: String!
+      tilVakt: Int!
+    ): [Vakt!]
     lagBeboer(data: BeboerInfo!): Beboer!
+    lagDrikke(
+      navn: String!
+      pris: Float!
+      vin: Boolean!
+      aktiv: Boolean!
+      farge: String!
+      kommentar: String
+      forst: Boolean
+      produktnr: Int
+    ): Drikke!
+    lagKryss(beboer_id: Int!, drikke_id: Int!, antall: Int!): Kryss!
+    lagKunngjoring(
+      beboer_id: Int!
+      tittel: String!
+      tekst: String
+    ): Kunngjoring!
+    lagSkole(navn: String!): Skole
+    lagStorhybelliste(
+      navn: String!
+      semester: String!
+      beboere: [Int!]
+      rom: [Int!]
+    ): Storhybel!
+    lagStudie(navn: String!): Studie!
+    lagTommeVakter(fraDato: String!, tilDato: String!, type: Int!): [Vakt!]
     login(epost: String!, passord: String!): AuthData
     migrerRom: [Beboer!]
     oppdaterAnsiennitet(data: [AnsiennitetBeboer!]!): [Beboer!]!
@@ -391,36 +427,6 @@ const schemaSchema = gql`
       semester: String!
       antall: Int!
     ): VaktAntall!
-    lagDrikke(
-      navn: String!
-      pris: Float!
-      vin: Boolean!
-      aktiv: Boolean!
-      farge: String!
-      kommentar: String
-      forst: Boolean
-      produktnr: Int
-    ): Drikke!
-    lagKunngjoring(
-      beboer_id: Int!
-      tittel: String!
-      tekst: String
-    ): Kunngjoring!
-    lagSkole(navn: String!): Skole
-    lagStorhybelliste(
-      navn: String!
-      semester: String!
-      beboere: [Int!]
-      rom: [Int!]
-    ): Storhybel!
-    lagStudie(navn: String!): Studie!
-    lagTommeVakter(fraDato: String!, tilDato: String!, type: Int!): [Vakt!]
-    genererVakter(
-      fraDato: String!
-      fraVakt: Int!
-      tilDato: String!
-      tilVakt: Int!
-    ): [Vakt!]
     registrerRegi(regi: RegistrerRegiInput): Arbeid!
     resettGlemtPassord(brukerId: Int!, token: String!, passord: String!): String
     slettBeboer(id: Int!): Beboer!
