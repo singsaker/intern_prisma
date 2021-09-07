@@ -52,7 +52,11 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
-          kryss: true,
+          kryss: {
+            include: {
+              drikke: true,
+            },
+          },
           rom: {
             include: {
               romtype: true,
@@ -74,6 +78,7 @@ const beboerQuery = {
           },
         },
       });
+      console.log(beboer);
 
       return formaterBeboer(context, beboer);
     } catch (err) {
@@ -141,7 +146,11 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
-          kryss: true,
+          kryss: {
+            include: {
+              drikke: true,
+            },
+          },
           rom: {
             include: {
               romtype: true,

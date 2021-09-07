@@ -154,6 +154,7 @@ const schemaSchema = gql`
   }
 
   type Kryss {
+    id: Int!
     beboer: Beboer!
     drikke: Drikke!
     tid: String!
