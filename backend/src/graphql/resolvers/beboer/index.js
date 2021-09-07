@@ -86,6 +86,52 @@ const beboerQuery = {
       throw err;
     }
   },
+  hentBeboereKryss: async (parent, args, context) => {
+    try {
+      const beboere = await context.prisma.beboer.findMany({
+        where: {
+          NOT: {
+            fornavn: {
+              contains: "Utvalget",
+            },
+          },
+          status: 1,
+        },
+        include: {
+          rolle: true,
+          studie: true,
+          skole: true,
+          bruker: true,
+          kryss: true,
+          rom: {
+            include: {
+              romtype: true,
+            },
+          },
+          beboer_verv: {
+            include: {
+              verv: true,
+            },
+          },
+          romhistorikk: {
+            include: {
+              rom: {
+                include: {
+                  romtype: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return await beboere.map((beboer) => {
+        return formaterBeboer(context, beboer);
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
   hentGamleBeboere: async (parent, args, context) => {
     try {
       const beboere = await context.prisma.beboer.findMany({

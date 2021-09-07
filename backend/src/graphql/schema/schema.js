@@ -330,6 +330,7 @@ const schemaSchema = gql`
     hentArbeid(brukerId: Int, semester: String, aar: Int): [Arbeid!]
     hentBeboer(id: Int!): Beboer!
     hentBeboere: [Beboer!]
+    hentBeboereKryss: [Beboer!]
     hentBeboerePerm: [Beboer!]
     hentDrikke: [Drikke!]
     hentEpostPrefs(beboerId: Int!): EpostPrefs!
@@ -379,7 +380,7 @@ const schemaSchema = gql`
       forst: Boolean
       produktnr: Int
     ): Drikke!
-    lagKryss(beboer_id: Int!, drikke_id: Int!, antall: Int!): Kryss!
+    lagKryss(beboer_id: Int!, drikke_id: Int!, antall: Int!, pin: Int!): Kryss!
     lagKunngjoring(
       beboer_id: Int!
       tittel: String!
