@@ -23,9 +23,7 @@ export const GET_AKTIV_DRIKKE = gql`
       id
       navn
       pris
-      vin
       aktiv
-      farge
       kommentar
       forst
     }
