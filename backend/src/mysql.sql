@@ -16,12 +16,6 @@ ADD FOREIGN KEY (verv_id) REFERENCES verv(id);
 ALTER TABLE krysseliste
 ADD FOREIGN KEY (beboer_id) REFERENCES beboer(id);
 
-ALTER TABLE kryss
-ADD FOREIGN KEY (beboer_id) REFERENCES beboer(id);
-
-ALTER TABLE kryss
-ADD FOREIGN KEY (drikke_id) REFERENCES drikke(id);
-
 ALTER TABLE vin MODIFY typeId int unsigned;
 
 ALTER TABLE vin ADD foreign key (typeId) references vintype(id);
