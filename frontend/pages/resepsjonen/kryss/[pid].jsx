@@ -25,6 +25,7 @@ import { GET_BEBOER_KRYSS } from "../../../src/query/beboer";
 import { GET_AKTIV_DRIKKE } from "../../../src/query/kryss";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import CloseIcon from "@material-ui/icons/Close";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Link from "next/link";
 import Spinner from "../../../components/resepsjonen/Spinner";
@@ -178,35 +179,47 @@ const Kryss = () => {
                 </Typography>
                 <List sx={{ mb: 1, flexGrow: 1 }}>
                   {state != null ? (
-                    Object.entries(state).map(
-                      (item, id) =>
-                        item[1] != null && (
-                          <ListItem
-                            key={id}
-                            disableGutters
-                            secondaryAction={
-                              <IconButton
-                                onClick={() => updateState({ [item[0]]: undefined })}
-                                edge="end"
-                                aria-label="comments"
+                    <AnimatePresence>
+                      {Object.entries(state).map(
+                        (item, id) =>
+                          item[1] != null && (
+                            <motion.div
+                              animate={{ y: 0, opacity: 1 }}
+                              initial={{ y: 5, opacity: 0 }}
+                              exit={{ y: 0, opacity: 0 }}
+                              transition={{
+                                x: { type: "spring", stiffness: 100, duration: 0.4 },
+                                default: { duration: 0.1 },
+                              }}
+                              key={id}
+                            >
+                              <ListItem
+                                disableGutters
+                                secondaryAction={
+                                  <IconButton
+                                    onClick={() => updateState({ [item[0]]: undefined })}
+                                    edge="end"
+                                    aria-label="comments"
+                                  >
+                                    <CloseIcon />
+                                  </IconButton>
+                                }
                               >
-                                <CloseIcon />
-                              </IconButton>
-                            }
-                          >
-                            <Grid container justifyContent="space-between">
-                              <Grid item>
-                                <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
-                                  {item[1].amount}x {item[0]}
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Chip label={item[1].pris + " kr"} size="small" />
-                              </Grid>
-                            </Grid>
-                          </ListItem>
-                        )
-                    )
+                                <Grid container justifyContent="space-between">
+                                  <Grid item>
+                                    <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
+                                      {item[1].amount}x {item[0]}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Chip label={item[1].pris + " kr"} size="small" />
+                                  </Grid>
+                                </Grid>
+                              </ListItem>
+                            </motion.div>
+                          )
+                      )}
+                    </AnimatePresence>
                   ) : (
                     <ListItem disableGutters>
                       <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
