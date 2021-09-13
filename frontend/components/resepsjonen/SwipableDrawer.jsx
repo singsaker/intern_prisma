@@ -25,11 +25,16 @@ function SwipeableEdgeDrawer(props) {
 
   return (
     <>
-      <Drawer anchor="bottom" variant="persistent" open={beboerId}>
+      <Drawer
+        PaperProps={{ sx: { borderTop: "none", boxShadow: 16 } }}
+        variant="persistent"
+        anchor="bottom"
+        open={beboerId}
+      >
         <StyledBox
           sx={{
             py: 3,
-            height: "100%",
+            height: "110px",
             overflow: "auto",
           }}
         >

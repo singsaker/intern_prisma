@@ -1,5 +1,4 @@
 import {
-  Backdrop,
   Box,
   Card,
   CardActionArea,
@@ -12,6 +11,9 @@ import {
   ToggleButtonGroup,
   Typography,
   SpeedDialIcon,
+  List,
+  ListItem,
+  Divider,
 } from "@material-ui/core";
 import { useState } from "react";
 import ResepLayout from "../../components/resepsjonen/ResepLayout";
@@ -30,6 +32,7 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import SaveIcon from "@material-ui/icons/Save";
 import PrintIcon from "@material-ui/icons/Print";
 import HomeIcon from "@material-ui/icons/Home";
+import { GET_KRYSS } from "../../src/query/kryss";
 
 const actions = [
   { icon: <HomeIcon />, name: "Krysseliste" },
@@ -43,16 +46,30 @@ const Resepsjonen = () => {
   const theme = useTheme();
   const [alignment, setAlignment] = useState();
   const { data, loading, error } = useQuery(GET_BEBOERE);
+  const {
+    data: dataKryss,
+    loading: loadingKryss,
+    error: errorKryss,
+  } = useQuery(GET_KRYSS, {
+    variables: {
+      antall: 10,
+    },
+  });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  if (loading) {
+  if (loading || loadingKryss) {
     return <Spinner />;
   }
 
   if (error) {
     console.error(error);
+    return null;
+  }
+
+  if (errorKryss) {
+    console.error(errorKryss);
     return null;
   }
 
@@ -73,10 +90,10 @@ const Resepsjonen = () => {
   return (
     <>
       <ResepLayout>
-        <Grid container spacing={3}>
+        <Grid container spacing={5}>
           <Grid item xs>
             <Box py={4}>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" sx={{ mb: 3 }}>
                 Krysseliste
               </Typography>
               <ToggleButtonGroup color="standard" value={alignment} exclusive onChange={handleSortChange}>
@@ -105,7 +122,7 @@ const Resepsjonen = () => {
                   const { id, fornavn, mellomnavn, etternavn, rom } = row;
 
                   return (
-                    <Grid item xs="3" key={id}>
+                    <Grid item xs={3} key={id}>
                       <Card
                         sx={{
                           ...(selectedUser == id && activeRootStyle),
@@ -136,11 +153,31 @@ const Resepsjonen = () => {
                 })}
             </Grid>
           </Grid>
+          <Divider sx={{ ml: 4 }} orientation="vertical" flexItem />
           <Grid item xs={3}>
             <Box py={4}>
               <Typography variant="h4" gutterBottom>
                 Nylige kryss
               </Typography>
+              <List sx={{ mb: 1 }}>
+                {dataKryss.hentKryss.map((item, id) => (
+                  <ListItem key={id} disableGutters>
+                    <Grid container justifyContent="space-between">
+                      <Grid item>
+                        <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
+                          {item.beboer.fornavn} {item.beboer.etternavn} krysset{" "}
+                          <Typography variant="subtitle2" component="span" sx={{ color: "grey.300" }}>
+                            {item.antall} {item.drikke.navn}
+                          </Typography>
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Chip variant="outlined" label={new Date(item.tid).getTime()} size="small" />
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                ))}
+              </List>
             </Box>
           </Grid>
         </Grid>

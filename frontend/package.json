@@ -30,6 +30,7 @@
     "date-fns": "^2.20.1",
     "dateformat": "^4.5.1",
     "dompurify": "^2.2.7",
+    "framer-motion": "^5.0.0-beta.28",
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
     "next": "^11.1.0",
