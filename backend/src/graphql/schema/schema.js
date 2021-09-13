@@ -155,18 +155,18 @@ const schemaSchema = gql`
 
   type Kryss {
     id: Int!
-    beboer: Beboer!
-    drikke: Drikke!
+    beboer: Beboer
+    drikke: Drikke
     tid: String!
     fakturert: Int!
     antall: Int!
   }
 
-  # type Krysseliste {
-  #   id: Int!
-  #   drikke: Drikke!
-  #   krysseliste: [Kryss!]
-  # }
+  type Krysseliste {
+    id: Int!
+    drikke: Drikke!
+    krysseliste: [Kryss!]
+  }
 
   type Kunngjoring {
     id: Int!
@@ -339,7 +339,8 @@ const schemaSchema = gql`
     hentEpostPrefs(beboerId: Int!): EpostPrefs!
     hentFakturert(fra_dato: String): [Fakturert!]
     hentGamleBeboere: [Beboer!]
-    #hentKrysseliste(beboerId: Int!): [Krysseliste!]
+    hentKryss(last: Int!): [Kryss!]
+    hentKrysseliste(beboerId: Int!): [Krysseliste!]
     hentKunngjoringer: [Kunngjoring!]
     hentLedigeRom: [Rom!]
     hentPrefs(beboerId: Int!): BeboerPrefs!
