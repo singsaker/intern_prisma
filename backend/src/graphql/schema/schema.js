@@ -449,6 +449,7 @@ const schemaSchema = gql`
     migrerRomNy: String
     migrerBeboerStatus: String
     migrerKrysseliste: String
+    migrerPrefs: String
   }
 `;
 

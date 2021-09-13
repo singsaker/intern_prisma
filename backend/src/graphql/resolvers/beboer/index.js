@@ -78,7 +78,6 @@ const beboerQuery = {
           },
         },
       });
-      console.log(beboer);
 
       return formaterBeboer(context, beboer);
     } catch (err) {
@@ -952,6 +951,34 @@ const beboerMutation = {
           });
         }
       }
+      return null;
+    } catch (err) {
+      throw err;
+    }
+  },
+  migrerPrefs: async (parent, args, context) => {
+    try {
+      const prefs = await context.prisma.prefs.findMany({
+        select: {
+          id: true,
+          beboer_id: true,
+        },
+      });
+
+      for (let i = 0; i < prefs.length - 1; i++) {
+        const beboer = await context.prisma.beboer.update({
+          where: {
+            id: prefs[i].beboer_id,
+          },
+          data: {
+            prefs_id: prefs[i].id,
+          },
+          select: {
+            id: true,
+          },
+        });
+      }
+
       return null;
     } catch (err) {
       throw err;
