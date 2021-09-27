@@ -176,6 +176,13 @@ const schemaSchema = gql`
     beboer: Beboer!
   }
 
+  type Pinkode {
+    id: Int!
+    kode: Int
+    resep: Boolean!
+    vinkjeller: Boolean!
+  }
+
   type RegiStatus {
     semester: String!
     godkjent: Int!
@@ -342,6 +349,7 @@ const schemaSchema = gql`
     #hentKrysseliste(beboerId: Int!): [Krysseliste!]
     hentKunngjoringer: [Kunngjoring!]
     hentLedigeRom: [Rom!]
+    hentPinkode(id: Int!): Pinkode!
     hentPrefs(beboerId: Int!): BeboerPrefs!
     hentRegiStatus(brukerId: Int!, semester: String!, aar: Int!): RegiStatus
     hentRoller: [Rolle!]
@@ -352,6 +360,7 @@ const schemaSchema = gql`
     hentStorhybellister: [Storhybel!]
     hentStudie: [Studie!]
     hentVakter(fraDato: String!, tilDato: String!, bruker_id: Int): [Vakt!]
+    hentVakterBruker(bruker_id: Int!): Vakt!
     hentVerv: [Verv!]
     sjekkToken: AuthData
   }
@@ -400,6 +409,7 @@ const schemaSchema = gql`
     lagTommeVakter(fraDato: String!, tilDato: String!, type: Int!): [Vakt!]
     login(epost: String!, passord: String!): AuthData
     migrerRom: [Beboer!]
+    migrerPinkode: [Pinkode!]
     oppdaterAnsiennitet(data: [AnsiennitetBeboer!]!): [Beboer!]!
     oppdaterBeboer(id: Int!, info: BeboerInfo!): Beboer!
     oppdaterBeboerAdmin(
