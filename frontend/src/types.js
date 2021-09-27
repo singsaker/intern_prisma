@@ -37,6 +37,7 @@ export const GET_STUDIE_TYPE = "GET_STUDIE";
 export const SLETT_STUDIE_TYPE = "SLETT_STUDIE";
 
 // Kryss
+export const GET_KRYSS_TYPE = "GET_KRYSS";
 export const GET_KRYSSELISTE_TYPE = "GET_KRYSSELISTE";
 export const GET_AKTIV_VIN_TYPE = "GET_AKTIV_VIN";
 export const GET_AKTIV_DRIKKE_TYPE = "GET_AKTIV_DRIKKE";

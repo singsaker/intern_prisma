@@ -17,15 +17,32 @@ export const GET_AKTIV_VIN = gql`
   }
 `;
 
+export const GET_KRYSS = gql`
+  query GetKryss($antall: Int!) {
+    hentKryss(last: $antall) {
+      id
+      beboer {
+        id
+        fornavn
+        etternavn
+      }
+      drikke {
+        id
+        navn
+      }
+      tid
+      antall
+    }
+  }
+`;
+
 export const GET_AKTIV_DRIKKE = gql`
   query GetAktivDrikke {
     hentAktivDrikke {
       id
       navn
       pris
-      vin
       aktiv
-      farge
       kommentar
       forst
     }

@@ -44,6 +44,19 @@ const kryssQuery = {
       throw err;
     }
   },
+  hentKryss: async (parent, args, context) => {
+    try {
+      return await context.prisma.kryss.findMany({
+        take: -args.last,
+        include: {
+          beboer: true,
+          drikke: true,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
   // hentKrysseliste: async (parent, args, context) => {
   //   try {
   //     const krysseListe = await context.prisma.krysseliste.findMany({

@@ -12,9 +12,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 
-// Misc
-import styles from "../../styles/Login.module.css";
-
 const Login = () => {
   const router = useRouter();
   const [passord1, setPassord1] = useState("");
@@ -38,7 +35,7 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       {/* <Head>
         <title>Resett passord | Internsida</title>
       </Head>

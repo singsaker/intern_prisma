@@ -1,9 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { isString } from "lodash";
 import Card from "../CustomCard";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { GET_REGISTATUS } from "../../src/query/regi";
 import { getRegiStatus } from "../../src/actions/regi";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,8 +41,8 @@ const RegiOversikt = (props) => {
   if (!regiStatus) return <SpinnerComponent />;
 
   return (
-    <Card header="Status">
-      <Container style={{ padding: 0 }}>
+    <>
+      {/* <Container style={{ padding: 0 }}>
         <Row>
           <Col style={{ textAlign: "right", fontWeight: "bold" }} xs={8}>
             Godkjent
@@ -85,8 +83,8 @@ const RegiOversikt = (props) => {
           </Col>
           <Col xs={4}>{sekunderTilTid(regiStatus.totalt).hours + ":" + sekunderTilTid(regiStatus.totalt).minutes}</Col>
         </Row>
-      </Container>
-    </Card>
+      </Container> */}
+    </>
   );
 };
 

@@ -1,10 +1,5 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-
-// Bootstrap
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +13,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 // Components
 import Spinner from "../CustomSpinner";
-import Card from "../CustomCard";
+import { Button } from "@material-ui/core";
 
 const Registrer = () => {
   const dispatch = useDispatch();
@@ -46,7 +41,8 @@ const Registrer = () => {
   );
 
   return (
-    <Form
+    <>
+      {/* <Form
       onSubmit={(e) => {
         e.preventDefault();
       }}
@@ -125,7 +121,8 @@ const Registrer = () => {
           </Col>
         </Form.Group>
       </Card>
-    </Form>
+    </Form> */}
+    </>
   );
 };
 

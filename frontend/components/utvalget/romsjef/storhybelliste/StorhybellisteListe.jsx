@@ -6,7 +6,6 @@ import { GET_ALLE_STORHYBELLISTER } from "../../../../src/query/rom";
 import { getAlleStorhybellister } from "../../../../src/actions/rom";
 
 // Misc
-import _ from "lodash";
 import { useLazyQuery } from "@apollo/react-hooks";
 
 // Material UI
@@ -30,27 +29,22 @@ const Alert = (props) => {
 
 const StorhybellisteListe = (props) => {
   const dispatch = useDispatch();
-  const storhybellister = useSelector((state) =>
-    Object.values(state.rom.storhybellister)
-  );
+  const storhybellister = useSelector((state) => Object.values(state.rom.storhybellister));
   const auth = useSelector((state) => state.auth);
   const [melding, setMelding] = useState("");
   const [vellykket, setVellykket] = useState(false);
   const [visAlert, setVisAlert] = useState(false);
 
-  const [getAlleStorhybellisterQuery, { loading }] = useLazyQuery(
-    GET_ALLE_STORHYBELLISTER,
-    {
-      onCompleted(data) {
-        dispatch(getAlleStorhybellister(data));
-      },
-      onError(err) {
-        setMelding(err.message);
-        setVellykket(false);
-        setVisAlert(true);
-      },
-    }
-  );
+  const [getAlleStorhybellisterQuery, { loading }] = useLazyQuery(GET_ALLE_STORHYBELLISTER, {
+    onCompleted(data) {
+      dispatch(getAlleStorhybellister(data));
+    },
+    onError(err) {
+      setMelding(err.message);
+      setVellykket(false);
+      setVisAlert(true);
+    },
+  });
 
   useEffect(() => {
     if (
@@ -93,9 +87,7 @@ const StorhybellisteListe = (props) => {
                 >
                   <TableCell>{liste.navn}</TableCell>
                   <TableCell>{liste.semester}</TableCell>
-                  <TableCell>
-                    {liste.aktiv ? <AccessTimeIcon /> : <DoneIcon />}
-                  </TableCell>
+                  <TableCell>{liste.aktiv ? <AccessTimeIcon /> : <DoneIcon />}</TableCell>
                   <TableCell></TableCell>
                   <TableCell></TableCell>
                 </TableRow>
@@ -104,15 +96,8 @@ const StorhybellisteListe = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Snackbar
-        open={visAlert}
-        autoHideDuration={6000}
-        onClose={() => setVisAlert(false)}
-      >
-        <Alert
-          onClose={() => setVisAlert(false)}
-          severity={vellykket ? "success" : "error"}
-        >
+      <Snackbar open={visAlert} autoHideDuration={6000} onClose={() => setVisAlert(false)}>
+        <Alert onClose={() => setVisAlert(false)} severity={vellykket ? "success" : "error"}>
           {melding}
         </Alert>
       </Snackbar>

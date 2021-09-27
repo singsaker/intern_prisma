@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 
 // Redux
@@ -7,19 +8,11 @@ import { getBeboer } from "../../src/actions/beboer";
 import { GET_ARBEID } from "../../src/query/regi";
 import { GET_BEBOER } from "../../src/query/beboer";
 
-// Bootstrap
-import Table from "react-bootstrap/Table";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-
 // Components
 import Spinner from "../CustomSpinner";
 
 // Misc
 import { isInteger, isString } from "lodash";
-import styles from "../../styles/Table.module.css";
 import { useLazyQuery } from "@apollo/react-hooks";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
 
@@ -119,8 +112,8 @@ const MinRegi = (props) => {
   if (loading || !beboer) return <Spinner />;
 
   return (
-    <Card bg="dark" text="white">
-      <Card.Header>
+    <>
+      {/* <Card.Header>
         <h2>Utført regi</h2>
         <Form>
           <Form.Group as={Row}>
@@ -200,8 +193,8 @@ const MinRegi = (props) => {
             })}
           </tbody>
         </Table>
-      </div>
-    </Card>
+      </div> */}
+    </>
   );
 };
 

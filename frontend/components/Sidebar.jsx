@@ -48,7 +48,7 @@ const AccountStyle = styled("div")(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadiusSm,
-  backgroundColor: theme.palette.grey[200],
+  backgroundColor: theme.palette.grey[800],
 }));
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(({ theme }) => ({
@@ -80,6 +80,7 @@ const ListSubheaderStyle = styled(ListSubheader)(({ theme }) => ({
   paddingRight: theme.spacing(2.5),
   marginTop: theme.spacing(3),
   marginBottom: theme.spacing(1.5),
+  background: "transparent",
 }));
 
 const ListItemIconStyle = styled(ListItemIcon)({
@@ -154,7 +155,7 @@ const Sidebar = (props) => {
       }}
     >
       <Box sx={{ mt: 5, mx: 2.5, px: 2.5 }}>
-        <img src="/logo.svg" alt="logo" />
+        <img src="/logo.svg" alt="logo" style={{ filter: "invert(1)" }} />
         <Typography variant="h6">Internsida v4</Typography>
       </Box>
       {/* <Divider /> */}
