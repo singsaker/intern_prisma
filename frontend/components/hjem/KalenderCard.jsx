@@ -4,7 +4,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 const KalenderCard = (props) => {
-
+    const vaktTidspunkter = ["01:00-07:00", "07:00-13:00", "13:00-19:00", "19:00-01:00"]
     return (
         <Grid container direction="column" spacing={2} style={{ padding: "10px" }}>
             <Grid item container justify="space-between">
@@ -37,6 +37,21 @@ const KalenderCard = (props) => {
                         {
                             (props.bursdager).map(bursdag =>
                                 <ListItem>{bursdag.fornavn + " " + bursdag.etternavn}</ListItem>)
+                        }
+
+                    </List>}
+            </Grid>
+            <Grid item>
+                <Typography color="secondary" variant="h6">
+                    Dine vakter:
+
+                </Typography>
+
+                {(props.vakter).length == 0 ? "Du har ingen vakter i dag." :
+                    <List>
+                        {
+                            (props.vakter).map(vakt =>
+                                <ListItem>{vakt.vakttype + ". vakt (" + vaktTidspunkter[vakt.vakttype - 1] + ")"}</ListItem>)
                         }
 
                     </List>}

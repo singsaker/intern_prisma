@@ -1,5 +1,9 @@
 import React, { useState, useEffect, componentDidMount } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { GET_VAKTER } from "../../src/query/vakt";
+import { getVakter } from "../../src/actions/vakt";
+
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 
 import { makeStyles } from '@material-ui/styles';
 
@@ -14,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 
 import CakeIcon from '@material-ui/icons/Cake';
+import Notification from '@material-ui/icons/Notifications';
 import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
     calenderHeader: {
         display: 'flex',
         justifyContent: 'center'
+    },
+    vaktDay: {
+        backgroundColor: "rgba(120, 0, 0, 0.20);"
     }
 }));
 
@@ -89,6 +97,8 @@ const Kalender = (props) => {
             return value;
         }
     }
+
+    const dispatch = useDispatch();
     const classes = useStyles();
     const date = new Date();
     let [year, setYear] = useState(date.getFullYear());
@@ -104,7 +114,6 @@ const Kalender = (props) => {
     const monthDays = [31, year % 4 == 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     const beboere = useSelector((state) => Object.values(state.beboer.beboere));
-
     const beboereBursdag = beboere.filter(beboer =>
         (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-") ||
         (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-") ||
@@ -113,6 +122,37 @@ const Kalender = (props) => {
         (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-") ||
         (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-")
     );
+
+    const bruker_id = useSelector((state) => state.auth.bruker_id);
+    //Hent vaktene for personen som er logget inn.
+    const [vakterQuery] = useLazyQuery(GET_VAKTER, {
+        variables: {
+            bruker_id: bruker_id,
+            fraDato: `${year}-01-01T00:00:00.000Z`,
+            tilDato: `${year}-12-31T00:00:00.000Z`,
+        },
+        onCompleted(data) {
+            dispatch(getVakter(data));
+        },
+        onError(error) {
+            console.log(error);
+        },
+    });
+
+    useEffect(() => {
+        vakterQuery();
+    }, [year]);
+
+    const brukerVakter = useSelector((state) => Object.values(state.vakt.vakter));
+    brukerVakter.filter(vakt =>
+        (vakt.dato).includes("-0" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-") ||
+        (vakt.dato).includes("-" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-") ||
+        (vakt.dato).includes("-0" + (correctMonthValues(monthIndex) + 1).toString() + "-") ||
+        (vakt.dato).includes("-" + (correctMonthValues(monthIndex) + 1).toString() + "-") ||
+        (vakt.dato).includes("-0" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-") ||
+        (vakt.dato).includes("-" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-"));
+
+    //vakter for personen som er logget inn.
 
     const calculateDayOffset = (monthIndexCopy) => {
         let offset = 0;
@@ -170,6 +210,7 @@ const Kalender = (props) => {
             let dayNumber;
             let dayClassName = `${classes.day} `;
             let bursdager = [];
+            let vakter = [];
 
 
             // Check if the day is part of the next or previous month.
@@ -182,6 +223,10 @@ const Kalender = (props) => {
                         (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-" + dayNumber.toString()) ||
                         (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-" + dayNumber.toString())
                     );
+                    vakter = brukerVakter.filter(vakt =>
+                        (vakt.dato).includes("-0" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-" + dayNumber.toString()) ||
+                        (vakt.dato).includes("-" + (correctMonthValues(monthIndex - 1) + 1).toString() + "-" + dayNumber.toString())
+                    );
                     dayClassName += `${classes.prevMonth}`;
                     dato += dayNumber.toString() + ". " + months[correctMonthValues(monthIndex - 1)] + ", " + year.toString();
                 }
@@ -193,12 +238,22 @@ const Kalender = (props) => {
                             (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-0" + dayNumber.toString()) ||
                             (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-0" + dayNumber.toString())
                         );
+
+                        vakter = brukerVakter.filter(vakt =>
+                            (vakt.dato).includes("-0" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-0" + dayNumber.toString()) ||
+                            (vakt.dato).includes("-" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-0" + dayNumber.toString())
+                        );
                     }
 
                     else {
                         bursdager = beboereBursdag.filter(beboer =>
                             (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-" + dayNumber.toString()) ||
                             (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-" + dayNumber.toString())
+                        );
+
+                        vakter = brukerVakter.filter(vakt =>
+                            (vakt.dato).includes("-0" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-" + dayNumber.toString()) ||
+                            (vakt.dato).includes("-" + (correctMonthValues(monthIndex + 1) + 1).toString() + "-" + dayNumber.toString())
                         );
                     }
                     dayClassName += `${classes.nextMonth}`;
@@ -223,6 +278,11 @@ const Kalender = (props) => {
                         (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex) + 1).toString() + "-0" + dayNumber.toString()) ||
                         (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex) + 1).toString() + "-0" + dayNumber.toString())
                     );
+
+                    vakter = brukerVakter.filter(vakt =>
+                        (vakt.dato).includes("-0" + (correctMonthValues(monthIndex) + 1).toString() + "-0" + dayNumber.toString()) ||
+                        (vakt.dato).includes("-" + (correctMonthValues(monthIndex) + 1).toString() + "-0" + dayNumber.toString())
+                    );
                 }
 
                 else {
@@ -230,20 +290,21 @@ const Kalender = (props) => {
                         (beboer.fodselsdato).includes("-0" + (correctMonthValues(monthIndex) + 1).toString() + "-" + dayNumber.toString()) ||
                         (beboer.fodselsdato).includes("-" + (correctMonthValues(monthIndex) + 1).toString() + "-" + dayNumber.toString())
                     );
+
+                    vakter = brukerVakter.filter(vakt =>
+                        (vakt.dato).includes("-0" + (correctMonthValues(monthIndex) + 1).toString() + "-" + dayNumber.toString()) ||
+                        (vakt.dato).includes("-" + (correctMonthValues(monthIndex) + 1).toString() + "-" + dayNumber.toString())
+                    );
                 }
                 dato += dayNumber.toString() + ". " + months[correctMonthValues(monthIndex)] + ", " + year.toString();
             }
 
-            if (bursdager.length == 0) {
+            day = <ListItem onClick={() => props.toggleSeDetaljertDag(dato, bursdager, vakter)} button className={dayClassName}>
+                {dayNumber}
+                {bursdager.length != 0 ? < CakeIcon /> : ""}
+                {vakter.length != 0 ? <Notification color="error" /> : ""}
+            </ListItem >;
 
-                day = <ListItem onClick={() => props.toggleSeDetaljertDag(dato, bursdager)} button className={dayClassName}>{dayNumber}</ListItem>;
-            }
-            else {
-                day = <ListItem onClick={() => props.toggleSeDetaljertDag(dato, bursdager)} button className={dayClassName} > {dayNumber}
-                    < CakeIcon />
-
-                </ListItem >;
-            }
             calendar.push(day);
         }
         return calendar;
