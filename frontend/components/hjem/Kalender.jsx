@@ -210,7 +210,7 @@ const Kalender = (props) => {
             // Since the day was not a part of the previous or next month, it has to be the current month.
             else {
                 // If day is the current day, add extra styling properties to that day.
-                if ((currentDay - 1 == i - dayOffset) && (monthIndex == date.getMonth())) {
+                if ((currentDay - 1 == i - dayOffset) && (monthIndex == date.getMonth()) && (year == date.getFullYear())) {
                     dayClassName += `${classes.currentDay}`;
                 }
                 // If the day has not been assigned a day number, assign a value.
