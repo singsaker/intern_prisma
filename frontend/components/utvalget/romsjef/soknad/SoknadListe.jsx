@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +6,7 @@ import { getSoknaderSemester } from "../../../../src/actions/soknad";
 import { GET_SOKNADER_SEMESTER } from "../../../../src/query/soknad";
 
 // Misc
-import _, { isDate } from "lodash";
+import { isDate } from "lodash";
 import { useLazyQuery } from "@apollo/react-hooks";
 
 // Material UI
@@ -25,11 +25,9 @@ import DOMPurify from "dompurify";
 const SoknadListe = (props) => {
   const dispatch = useDispatch();
   const soknader = useSelector((state) => state.soknader);
-  const [sorter, setSorter] = useState("navn");
-  const [asc, setAsc] = useState(true);
   const valgtSemester = String(props.aar) + props.semester;
 
-  const [getSoknaderQuery, { loading }] = useLazyQuery(GET_SOKNADER_SEMESTER, {
+  const [getSoknaderQuery] = useLazyQuery(GET_SOKNADER_SEMESTER, {
     onCompleted(data) {
       dispatch(getSoknaderSemester(data));
     },
@@ -45,37 +43,6 @@ const SoknadListe = (props) => {
   useEffect(() => {
     getSoknaderQuery();
   }, [props.aar, props.semester]);
-
-  // Sorterer etter valgt kolonne:
-  const compare = (a, b) => {
-    let objA;
-    let objB;
-
-    if (sorter === "navn") {
-      objA = a.fornavn.toUpperCase() + a.mellomnavn.toUpperCase() + a.etternavn.toUpperCase();
-      objB = b.fornavn.toUpperCase() + b.mellomnavn.toUpperCase() + b.etternavn.toUpperCase();
-    } else {
-      objA = _.get(a, sorter).toUpperCase();
-      objB = _.get(b, sorter).toUpperCase();
-    }
-
-    let comparison = 0;
-    if (asc) {
-      if (objA > objB) {
-        comparison = 1;
-      } else if (objA < objB) {
-        comparison = -1;
-      }
-    } else {
-      if (objA > objB) {
-        comparison = -1;
-      } else if (objA < objB) {
-        comparison = 1;
-      }
-    }
-
-    return comparison;
-  };
 
   return (
     <Paper variant="outlined">

@@ -12,7 +12,7 @@ import { GET_SOKNAD } from "../../../../src/query/soknad";
 import { getSoknad } from "../../../../src/actions/soknad";
 
 // Material-UI
-import { Grid, Breadcrumbs, Link, Paper } from "@material-ui/core";
+import { Grid, Breadcrumbs, Paper, Button } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 const NyBeboer = () => {
@@ -49,10 +49,10 @@ const NyBeboer = () => {
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link style={{ cursor: "pointer" }} onClick={() => router.push("/utvalget/romsjef/soknader")}>
+            <Button onClick={() => router.push("/utvalget/romsjef/soknader")}>
               <KeyboardBackspaceIcon />
               Tilbake
-            </Link>
+            </Button>
           </Breadcrumbs>
         </Grid>
         <Grid item container spacing={2}>

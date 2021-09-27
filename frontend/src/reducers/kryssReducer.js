@@ -3,6 +3,7 @@ import {
   GET_AKTIV_VIN_TYPE,
   GET_AKTIV_DRIKKE_TYPE,
   LOGG_UT_TYPE,
+  GET_KRYSS_TYPE,
 } from "../types";
 import _ from "lodash";
 
@@ -14,6 +15,13 @@ const INITIAL_STATE = {
 
 export default function kryss(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case GET_KRYSS_TYPE:
+      return {
+        ...state,
+        kryss: _.mapKeys(action.payload, (kryss) => {
+          return kryss.id;
+        }),
+      };
     case GET_KRYSSELISTE_TYPE:
       return {
         ...state,

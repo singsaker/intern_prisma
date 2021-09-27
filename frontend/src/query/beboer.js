@@ -61,6 +61,24 @@ export const GET_BEBOER = gql`
   }
 `;
 
+export const GET_BEBOER_KRYSS = gql`
+  query GetBeboerKryss($id: Int!) {
+    hentBeboerKryss(id: $id) {
+      ${BEBOER}
+      kryss {
+        id
+        tid
+        fakturert
+        antall
+        drikke {
+          id
+          navn
+        }
+      }
+    }
+  }
+`;
+
 export const UPDATE_BEBOER = gql`
   mutation OppdaterBeboer(
     $id: Int!

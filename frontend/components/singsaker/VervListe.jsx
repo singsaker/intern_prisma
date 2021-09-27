@@ -26,19 +26,18 @@ const VervListe = (props) => {
   const dispatch = useDispatch();
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
   const verv = useSelector((state) => Object.values(state.verv.verv));
-  const [errorMelding, setErrorMelding] = useState("");
-
-  const { loading, error } = useQuery(GET_VERV, {
+  const { loading } = useQuery(GET_VERV, {
     onCompleted(data) {
       dispatch(getVerv(data));
     },
     onError(error) {
-      setErrorMelding(error);
+      console.log(error);
     },
   });
   const [sorter, setSorter] = useState("navn");
   const [asc, setAsc] = useState(true);
 
+  // eslint-disable-next-line no-unused-vars
   const handleSorter = (kolonne) => {
     if (kolonne === sorter) {
       setAsc(!asc);

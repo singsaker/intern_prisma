@@ -1,0 +1,64 @@
+import { useQuery } from "@apollo/react-hooks";
+import { Box, CircularProgress, Container, Grid, Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import NumberButton from "../../../components/resepsjonen/NumberButton";
+import { getBeboerKryss } from "../../../src/actions/beboer";
+import { getDrikker } from "../../../src/actions/drikke";
+import { GET_BEBOER_KRYSS } from "../../../src/query/beboer";
+import { GET_DRIKKER } from "../../../src/query/drikke";
+
+const Kryss = () => {
+  const router = useRouter();
+  const { pid } = router.query;
+
+  const dispatch = useDispatch();
+  const beboer = useSelector((state) => state.beboer.beboere[pid]);
+  const drikke = useSelector((state) => state);
+
+  const { loading: beboerQueryLoading } = useQuery(GET_BEBOER_KRYSS, {
+    variables: {
+      id: parseInt(pid),
+    },
+    onCompleted(data) {
+      dispatch(getBeboerKryss(data));
+    },
+    onError(error) {
+      console.log(error);
+    },
+  });
+
+  const { loading: drikkeQueryLoading } = useQuery(GET_DRIKKER, {
+    onCompleted(data) {
+      dispatch(getDrikker(data));
+    },
+    onError(error) {
+      console.log(error);
+    },
+  });
+
+  const numbers = "123456789-0-".split("");
+  console.log(drikke);
+
+  if (beboerQueryLoading || drikkeQueryLoading || beboer == undefined || drikke == undefined)
+    return <CircularProgress />;
+
+  return (
+    <>
+      <Typography variant="h3">Kryssing for {beboer.fornavn + " " + beboer.etternavn}</Typography>
+      <Container>
+        <Box mx="auto" sx={{ maxWidth: 350 }}>
+          <Grid container spacing={2} justifyContent="center">
+            {numbers.map((n, i) => (
+              <Grid key={i} item>
+                <NumberButton>{n}</NumberButton>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
+    </>
+  );
+};
+
+export default Kryss;

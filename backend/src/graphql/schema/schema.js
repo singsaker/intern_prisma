@@ -155,18 +155,18 @@ const schemaSchema = gql`
 
   type Kryss {
     id: Int!
-    beboer: Beboer!
-    drikke: Drikke!
+    beboer: Beboer
+    drikke: Drikke
     tid: String!
     fakturert: Int!
     antall: Int!
   }
 
-  # type Krysseliste {
-  #   id: Int!
-  #   drikke: Drikke!
-  #   krysseliste: [Kryss!]
-  # }
+  type Krysseliste {
+    id: Int!
+    drikke: Drikke!
+    krysseliste: [Kryss!]
+  }
 
   type Kunngjoring {
     id: Int!
@@ -174,6 +174,13 @@ const schemaSchema = gql`
     tittel: String!
     tekst: String
     beboer: Beboer!
+  }
+
+  type Pinkode {
+    id: Int!
+    kode: Int
+    resep: Boolean!
+    vinkjeller: Boolean!
   }
 
   type RegiStatus {
@@ -339,9 +346,11 @@ const schemaSchema = gql`
     hentEpostPrefs(beboerId: Int!): EpostPrefs!
     hentFakturert(fra_dato: String): [Fakturert!]
     hentGamleBeboere: [Beboer!]
-    #hentKrysseliste(beboerId: Int!): [Krysseliste!]
+    hentKryss(last: Int!): [Kryss!]
+    hentKrysseliste(beboerId: Int!): [Krysseliste!]
     hentKunngjoringer: [Kunngjoring!]
     hentLedigeRom: [Rom!]
+    hentPinkode(id: Int!): Pinkode!
     hentPrefs(beboerId: Int!): BeboerPrefs!
     hentRegiStatus(brukerId: Int!, semester: String!, aar: Int!): RegiStatus
     hentRoller: [Rolle!]
@@ -352,6 +361,7 @@ const schemaSchema = gql`
     hentStorhybellister: [Storhybel!]
     hentStudie: [Studie!]
     hentVakter(fraDato: String!, tilDato: String!, bruker_id: Int): [Vakt!]
+    hentVakterBruker(bruker_id: Int!): Vakt!
     hentVerv: [Verv!]
     sjekkToken: AuthData
   }
@@ -400,6 +410,7 @@ const schemaSchema = gql`
     lagTommeVakter(fraDato: String!, tilDato: String!, type: Int!): [Vakt!]
     login(epost: String!, passord: String!): AuthData
     migrerRom: [Beboer!]
+    migrerPinkode: [Pinkode!]
     oppdaterAnsiennitet(data: [AnsiennitetBeboer!]!): [Beboer!]!
     oppdaterBeboer(id: Int!, info: BeboerInfo!): Beboer!
     oppdaterBeboerAdmin(
@@ -449,6 +460,7 @@ const schemaSchema = gql`
     migrerRomNy: String
     migrerBeboerStatus: String
     migrerKrysseliste: String
+    migrerPrefs: String
   }
 `;
 

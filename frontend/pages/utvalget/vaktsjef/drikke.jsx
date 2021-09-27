@@ -15,67 +15,69 @@ import MuiAlert from "@material-ui/core/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 
 const Alert = (props) => {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
+const Drikke = () => {
+  const [nyDrikkeModal, setNyDrikkeModal] = useState(false);
+  const [oppdaterDrikkeModal, setOppdaterDrikkeModal] = useState(false);
+  const [drikkeId, setDrikkeId] = useState(null);
 
-const Drikke = (props) => {
-    const [nyDrikkeModal, setNyDrikkeModal] = useState(false);
-    const [oppdaterDrikkeModal, setOppdaterDrikkeModal] = useState(false);
-    const [drikkeId, setDrikkeId] = useState(null);
+  const toggleNyDrikke = () => {
+    setNyDrikkeModal(!nyDrikkeModal);
+  };
 
-    const toggleNyDrikke = () => {
-        setNyDrikkeModal(!nyDrikkeModal);
-    }
+  const toggleOppdaterDrikke = (id) => {
+    setDrikkeId(id);
+    setOppdaterDrikkeModal(!oppdaterDrikkeModal);
+  };
 
-    const toggleOppdaterDrikke = (id) => {
-        setDrikkeId(id);
-        setOppdaterDrikkeModal(!oppdaterDrikkeModal);
-    }
+  const [feilmelding, setFeilmelding] = useState(false);
+  const [vellykket, setVellykket] = useState(false);
+  const [melding, setMelding] = useState("");
 
-    const [feilmelding, setFeilmelding] = useState(false);
-    const [vellykket, setVellykket] = useState(false);
-    const [melding, setMelding] = useState("");
-
-    return (
-        <Layout>
-            <Head>
-                <title>Drikkeliste | Internsida</title>
-            </Head>
-            <Dialog maxWidth="xs" fullWidth onClose={toggleNyDrikke} open={nyDrikkeModal}>
-                <NyDrikkeModal toggleNyDrikke={toggleNyDrikke} setFeilmelding={setFeilmelding} setVellykket={setVellykket} setMelding={setMelding} />
-            </Dialog>
-            <Dialog maxWidth="xs" fullWidth onClose={toggleOppdaterDrikke} open={oppdaterDrikkeModal}>
-                <OppdaterDrikkeModal toggleOppdaterDrikke={toggleOppdaterDrikke} drikkeId={drikkeId} setFeilmelding={setFeilmelding} setVellykket={setVellykket} setMelding={setMelding} />
-            </Dialog>
-            <Grid container>
-                <Grid item xs={10}>
-                    <DrikkeListe toggleOppdaterDrikke={(id) => toggleOppdaterDrikke(id)} />
-                </Grid>
-                <Grid item xs={2}>
-                    <Kontrollpanel toggleNyDrikke={toggleNyDrikke} />
-                </Grid>
-            </Grid>
-            <Snackbar
-                open={vellykket}
-                autoHideDuration={6000}
-                onClose={() => setVellykket(false)}
-            >
-                <Alert onClose={() => setVellykket(false)} severity="success">
-                    {melding}
-                </Alert>
-            </Snackbar>
-            <Snackbar
-                open={feilmelding}
-                autoHideDuration={6000}
-                onClose={() => setFeilmelding(false)}
-            >
-                <Alert onClose={() => setFeilmelding(false)} severity="error">
-                    {melding}
-                </Alert>
-            </Snackbar>
-        </Layout>
-    );
+  return (
+    <Layout>
+      <Head>
+        <title>Drikkeliste | Internsida</title>
+      </Head>
+      <Dialog maxWidth="xs" fullWidth onClose={toggleNyDrikke} open={nyDrikkeModal}>
+        <NyDrikkeModal
+          toggleNyDrikke={toggleNyDrikke}
+          setFeilmelding={setFeilmelding}
+          setVellykket={setVellykket}
+          setMelding={setMelding}
+        />
+      </Dialog>
+      <Dialog maxWidth="xs" fullWidth onClose={toggleOppdaterDrikke} open={oppdaterDrikkeModal}>
+        <OppdaterDrikkeModal
+          toggleOppdaterDrikke={toggleOppdaterDrikke}
+          drikkeId={drikkeId}
+          setFeilmelding={setFeilmelding}
+          setVellykket={setVellykket}
+          setMelding={setMelding}
+        />
+      </Dialog>
+      <Grid container>
+        <Grid item xs={10}>
+          <DrikkeListe toggleOppdaterDrikke={(id) => toggleOppdaterDrikke(id)} />
+        </Grid>
+        <Grid item xs={2}>
+          <Kontrollpanel toggleNyDrikke={toggleNyDrikke} />
+        </Grid>
+      </Grid>
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
+        <Alert onClose={() => setVellykket(false)} severity="success">
+          {melding}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
+        <Alert onClose={() => setFeilmelding(false)} severity="error">
+          {melding}
+        </Alert>
+      </Snackbar>
+    </Layout>
+  );
 };
 
 export default Drikke;

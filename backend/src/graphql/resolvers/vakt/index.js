@@ -30,6 +30,27 @@ const vaktQuery = {
       throw err;
     }
   },
+  hentVakterBruker: async (parent, args, context) => {
+    try {
+      const vakter = await context.prisma.vakt.findMany({
+        where: {
+          bruker_id: args.bruker_id,
+        },
+        include: {
+          bruker: true,
+        },
+      });
+
+      return vakter.map((vakt) => {
+        return {
+          ...vakt,
+          dato: vakt.dato.toISOString().split("T")[0],
+        };
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
 };
 
 const vaktMutation = {
