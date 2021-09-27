@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import {
   Box,
   Button,
@@ -52,6 +52,16 @@ function useObjectReducer(PropsWithDefaultValues) {
   ];
 }
 
+const LAG_KRYSS = gql`
+  mutation LagKryss($beboer_id: Int!, $drikke_id: Int!, $antall: Int!) {
+    lagKryss(beboer_id: $beboer_id, drikke_id: $drikke_id, antall: $antall, pin: 0) {
+      beboer {
+        fornavn
+      }
+    }
+  }
+`;
+
 const Kryss = () => {
   const router = useRouter();
   const { pid } = router.query;
@@ -65,6 +75,12 @@ const Kryss = () => {
     },
   });
   const { data: drikkeData, loading: drikkeLoading, error: drikkeError } = useQuery(GET_AKTIV_DRIKKE);
+  const [mutateFunction, { error }] = useMutation(LAG_KRYSS);
+
+  if (error) {
+    console.log(error);
+  }
+
   const [valg, setValg] = useState("Pant");
   const [amount, setAmount] = useState(1);
   const [state, updateState] = useObjectReducer();
@@ -158,10 +174,20 @@ const Kryss = () => {
               <Button
                 onClick={() => {
                   updateState({
-                    [valg]: { amount: removeCheck ? -amount : amount, pris: drikke.find((el) => el.navn == valg).pris },
+                    [valg]: {
+                      amount: removeCheck ? -amount : amount,
+                      pris: drikke.find((el) => el.navn == valg).pris,
+                      id: drikke.find((el) => el.navn == valg).id,
+                    },
                   });
                   pantCheck &&
-                    updateState({ Pant: { amount: amount, pris: drikke.find((el) => el.navn == "Pant").pris } });
+                    updateState({
+                      Pant: {
+                        amount: amount,
+                        pris: drikke.find((el) => el.navn == "Pant").pris,
+                        id: drikke.find((el) => el.navn == "Pant").id,
+                      },
+                    });
                   setAmount(1);
                 }}
                 variant="outlined"
@@ -248,7 +274,22 @@ const Kryss = () => {
                     </Grid>
                   </Grid>
                 </Box>
-                <Button fullWidth variant="contained" size="large" color="secondary">
+                <Button
+                  onClick={() => {
+                    Object.entries(state).map((item) => {
+                      if (item[1] != undefined) {
+                        mutateFunction({
+                          variables: { beboer_id: parseInt(pid), drikke_id: item[1].id, antall: item[1].amount },
+                        });
+                      }
+                    });
+                    router.push("/resepsjonen");
+                  }}
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                >
                   Kryss
                 </Button>
               </Paper>

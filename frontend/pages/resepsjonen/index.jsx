@@ -25,6 +25,7 @@ import { useQuery } from "@apollo/client";
 
 // Misc
 import _ from "lodash";
+import dateFormat from "dateformat";
 
 import SwipeableEdgeDrawer from "../../components/resepsjonen/SwipableDrawer";
 import Spinner from "../../components/resepsjonen/Spinner";
@@ -52,7 +53,7 @@ const Resepsjonen = () => {
     error: errorKryss,
   } = useQuery(GET_KRYSS, {
     variables: {
-      antall: 10,
+      antall: 20,
     },
   });
   const [open, setOpen] = useState(false);
@@ -160,23 +161,30 @@ const Resepsjonen = () => {
                 Nylige kryss
               </Typography>
               <List sx={{ mb: 1 }}>
-                {dataKryss.hentKryss.map((item, id) => (
-                  <ListItem key={id} disableGutters>
-                    <Grid container justifyContent="space-between">
-                      <Grid item>
-                        <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
-                          {item.beboer.fornavn} {item.beboer.etternavn} krysset{" "}
-                          <Typography variant="subtitle2" component="span" sx={{ color: "grey.300" }}>
-                            {item.antall} {item.drikke.navn}
+                {dataKryss.hentKryss
+                  .slice(0)
+                  .reverse()
+                  .map((item, id) => (
+                    <ListItem key={id} disableGutters>
+                      <Grid container justifyContent="space-between">
+                        <Grid item>
+                          <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
+                            {item.beboer.fornavn} {item.beboer.etternavn} krysset{" "}
+                            <Typography variant="subtitle2" component="span" sx={{ color: "grey.300" }}>
+                              {item.antall} {item.drikke.navn}
+                            </Typography>
                           </Typography>
-                        </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Chip
+                            variant="outlined"
+                            label={dateFormat(new Date(parseInt(item.tid)), "paddedShortDate")}
+                            size="small"
+                          />
+                        </Grid>
                       </Grid>
-                      <Grid item>
-                        <Chip variant="outlined" label={new Date(item.tid).getTime()} size="small" />
-                      </Grid>
-                    </Grid>
-                  </ListItem>
-                ))}
+                    </ListItem>
+                  ))}
               </List>
             </Box>
           </Grid>

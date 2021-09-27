@@ -106,7 +106,7 @@ const Profil = (props) => {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ width: 1, py: 3, bgcolor: "grey.200", textAlign: "center" }}>
+        <Box sx={{ width: 1, py: 3, bgcolor: "grey.900", textAlign: "center" }}>
           <Grid container spacing={3}>
             <Grid xs={4} item>
               <Typography variant="overline">Bor på rom</Typography>
