@@ -3,11 +3,6 @@ import React, { useEffect } from "react";
 // Apollo
 import { useLazyQuery } from "@apollo/react-hooks";
 
-// Bootstrap
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-
 // Next
 import Head from "next/head";
 
@@ -45,14 +40,7 @@ const Kryss = () => {
       <Head>
         <title>Kryss | Internsida</title>
       </Head>
-      <Container className="py-4" fluid>
-        <Row>
-          <Col md={6} xl={5} className="pb-1">
-            <Kryssehistorikk />
-          </Col>
-          <Col></Col>
-        </Row>
-      </Container>
+      <Kryssehistorikk />
     </Layout>
   );
 };

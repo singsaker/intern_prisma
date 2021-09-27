@@ -1,3 +1,4 @@
+import { GET_BEBOER } from "../query/beboer";
 import {
   GET_BEBOERE_TYPE,
   GET_BEBOER_TYPE,
@@ -80,6 +81,13 @@ export const getBeboer = (data) => {
   return {
     type: GET_BEBOER_TYPE,
     payload: data.hentBeboer,
+  };
+};
+
+export const getBeboerKryss = (data) => {
+  return {
+    type: GET_BEBOER_TYPE,
+    payload: data.hentBeboerKryss,
   };
 };
 

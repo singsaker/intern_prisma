@@ -32,20 +32,17 @@ const Ansiennitet = () => {
   const [feilmelding, setFeilmelding] = useState(false);
   const [melding, setMelding] = useState("");
 
-  const [oppdaterAnsiennitetMutation] = useMutation(
-    UPDATE_BEBOERE_ANSIENNITET,
-    {
-      onCompleted(data) {
-        setMelding("Ansiennitet ble oppdatert!");
-        setVellykket(true);
-        dispatch(oppdaterAnsiennitet(data));
-      },
-      onError(error) {
-        setMelding(error.message);
-        setFeilmelding(true);
-      },
-    }
-  );
+  const [oppdaterAnsiennitetMutation] = useMutation(UPDATE_BEBOERE_ANSIENNITET, {
+    onCompleted(data) {
+      setMelding("Ansiennitet ble oppdatert!");
+      setVellykket(true);
+      dispatch(oppdaterAnsiennitet(data));
+    },
+    onError(error) {
+      setMelding(error.message);
+      setFeilmelding(true);
+    },
+  });
 
   // Lager en liste med alle beboeres ansiennitet:
   useEffect(() => {
@@ -93,10 +90,7 @@ const Ansiennitet = () => {
     } else if (valgtRad === valgt.length - 1) {
       nyeValgt = nyeValgt.concat(valgt.slice(0, -1));
     } else if (valgtRad > 0) {
-      nyeValgt = nyeValgt.concat(
-        valgt.slice(0, valgtRad),
-        valgt.slice(valgtRad + 1)
-      );
+      nyeValgt = nyeValgt.concat(valgt.slice(0, valgtRad), valgt.slice(valgtRad + 1));
     }
 
     setValgt(nyeValgt);
@@ -178,9 +172,7 @@ const Ansiennitet = () => {
           <BeboerListe
             handleVelgAlle={(e) => handleVelgAlle(e)}
             handleVelg={(e, id) => handleVelg(e, id)}
-            handleAnsiennitetChange={(id, verdi) =>
-              handleAnsiennitetChange(id, verdi)
-            }
+            handleAnsiennitetChange={(id, verdi) => handleAnsiennitetChange(id, verdi)}
             oppdaterValgte={(antall) => oppdaterValgte(antall)}
             valgt={valgt}
             ansiennitet={ansiennitet}
@@ -197,20 +189,12 @@ const Ansiennitet = () => {
           />
         </Grid>
       </Grid>
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
         <Alert onClose={() => setVellykket(false)} severity="success">
           {melding}
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={feilmelding}
-        autoHideDuration={6000}
-        onClose={() => setFeilmelding(false)}
-      >
+      <Snackbar open={feilmelding} autoHideDuration={6000} onClose={() => setFeilmelding(false)}>
         <Alert onClose={() => setFeilmelding(false)} severity="error">
           {melding}
         </Alert>

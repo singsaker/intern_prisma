@@ -78,7 +78,6 @@ const beboerQuery = {
           },
         },
       });
-      console.log(beboer);
 
       return formaterBeboer(context, beboer);
     } catch (err) {

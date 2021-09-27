@@ -134,23 +134,13 @@ const Passord = () => {
         </Grid>
 
         <Grid container item justify="flex-end">
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<SaveIcon />}
-            type="submit"
-          >
+          <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
             Lagre
           </Button>
         </Grid>
       </Grid>
 
-      <Snackbar
-        open={vellykket}
-        autoHideDuration={6000}
-        onClose={() => setVellykket(false)}
-      >
+      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
         <Alert onClose={() => setVellykket(false)} severity="success">
           Endringene ble lagret!
         </Alert>

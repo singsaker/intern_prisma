@@ -141,12 +141,7 @@ const Storhybelliste = () => {
       </Head>
 
       {/* Listemodal */}
-      <Dialog
-        maxWidth="md"
-        fullWidth
-        open={listeModal}
-        onClose={toggleListeModal}
-      >
+      <Dialog maxWidth="md" fullWidth open={listeModal} onClose={toggleListeModal}>
         <StorhybellisteModal
           id={listeId}
           handleLagStorhybelliste={handleLagStorhybelliste}
@@ -155,16 +150,8 @@ const Storhybelliste = () => {
       </Dialog>
 
       {/* Ny liste-modal */}
-      <Dialog
-        maxWidth="md"
-        fullWidth
-        open={nyListeModal}
-        onClose={toggleNyListe}
-      >
-        <NyListeModal
-          handleLagStorhybelliste={handleLagStorhybelliste}
-          toggleNyListe={toggleNyListe}
-        />
+      <Dialog maxWidth="md" fullWidth open={nyListeModal} onClose={toggleNyListe}>
+        <NyListeModal handleLagStorhybelliste={handleLagStorhybelliste} toggleNyListe={toggleNyListe} />
       </Dialog>
 
       <Grid container spacing={2}>
@@ -179,15 +166,8 @@ const Storhybelliste = () => {
           <Kontrollpanel toggleNyListe={toggleNyListe} />
         </Grid>
       </Grid>
-      <Snackbar
-        open={visAlert}
-        autoHideDuration={6000}
-        onClose={() => setVisAlert(false)}
-      >
-        <Alert
-          onClose={() => setVisAlert(false)}
-          severity={vellykket ? "success" : "error"}
-        >
+      <Snackbar open={visAlert} autoHideDuration={6000} onClose={() => setVisAlert(false)}>
+        <Alert onClose={() => setVisAlert(false)} severity={vellykket ? "success" : "error"}>
           {melding}
         </Alert>
       </Snackbar>
