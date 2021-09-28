@@ -5,8 +5,7 @@ import {
   Card,
   Container,
   Grid,
-  ToggleButton,
-  ToggleButtonGroup,
+  Tooltip,
   Typography,
   Paper,
   List,
@@ -18,6 +17,8 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Stack,
+  CardActionArea,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useReducer, useState } from "react";
@@ -26,6 +27,7 @@ import { GET_AKTIV_DRIKKE } from "../../../src/query/kryss";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import CloseIcon from "@material-ui/icons/Close";
 import { motion, AnimatePresence } from "framer-motion";
+import { alpha, useTheme } from "@material-ui/core/styles";
 
 import Link from "next/link";
 import Spinner from "../../../components/resepsjonen/Spinner";
@@ -64,6 +66,7 @@ const LAG_KRYSS = gql`
 
 const Kryss = () => {
   const router = useRouter();
+  const theme = useTheme();
   const { pid } = router.query;
   const {
     data: beboerKryssData,
@@ -104,6 +107,17 @@ const Kryss = () => {
     setAmount(newValue);
   };
 
+  const activeRootStyle = {
+    color: "secondary.main",
+    fontWeight: "fontWeightMedium",
+    bgcolor: alpha(theme.palette.secondary.main, theme.palette.action.selectedOpacity),
+    "&:before": { display: "block" },
+  };
+
+  const rootStyle = {
+    bgcolor: "grey.700",
+  };
+
   return (
     <>
       <Container sx={{ py: 10 }}>
@@ -121,13 +135,44 @@ const Kryss = () => {
               <Typography variant="subtitle1" sx={{ mb: 3 }}>
                 Velg vare
               </Typography>
-              <ToggleButtonGroup exclusive value={valg} onChange={handleChange}>
+              <Grid container spacing={2}>
                 {drikke.map((d) => (
-                  <ToggleButton value={d.navn} key={d.id}>
-                    {d.navn}
-                  </ToggleButton>
+                  <Grid key={d.id} item xs={4}>
+                    <Tooltip
+                      TransitionProps={{ sx: { bgcolor: "grey.900", p: 1 } }}
+                      title={d.kommentar.replace("\r\n", ", ")}
+                    >
+                      <Card
+                        sx={{
+                          ...(d.navn == valg ? activeRootStyle : rootStyle),
+                        }}
+                      >
+                        <CardActionArea onClick={() => handleChange(event, d.navn)} sx={{}}>
+                          <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 2 }}>
+                            <Box
+                              sx={{ width: 1 / 3, height: 80, objectFit: "cover" }}
+                              component="img"
+                              alt="profile"
+                              src={"https://picsum.photos/seed/" + d.id + "/200/300"}
+                            />
+                            <Box
+                              py={2}
+                              pr={2}
+                              display="flex"
+                              alignItems="center"
+                              flexGrow="1"
+                              justifyContent="space-between"
+                            >
+                              <Typography variant="subtitle2">{d.navn}</Typography>
+                              <Checkbox checked={d.navn == valg} color="secondary" />
+                            </Box>
+                          </Stack>
+                        </CardActionArea>
+                      </Card>
+                    </Tooltip>
+                  </Grid>
                 ))}
-              </ToggleButtonGroup>
+              </Grid>
               <Box sx={{ my: 3 }}>
                 <Grid container alignItems="end" spacing={3}>
                   <Grid item xs sx={{ mt: 1 }}>
@@ -198,7 +243,7 @@ const Kryss = () => {
                 Oppdater
               </Button>
             </Grid>
-            <Grid xs={5} item>
+            <Grid xs={4} item>
               <Paper sx={{ p: 3, bgcolor: "grey.900", height: "100%", display: "flex", flexDirection: "column" }}>
                 <Typography variant="subtitle1" sx={{ mb: 3 }}>
                   Oppsummering
