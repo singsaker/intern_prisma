@@ -48,7 +48,7 @@ const AccountStyle = styled("div")(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadiusSm,
-  backgroundColor: theme.palette.grey[800],
+  backgroundColor: theme.palette.grey[900],
 }));
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(({ theme }) => ({
@@ -238,7 +238,8 @@ const Sidebar = (props) => {
           PaperProps={{
             sx: {
               width: DRAWER_WIDTH,
-              bgcolor: "background.default",
+              bgcolor: "rgb(0 0 0 / 25%)",
+              border: "none",
             },
           }}
         >
