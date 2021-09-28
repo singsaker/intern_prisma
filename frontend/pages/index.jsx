@@ -23,7 +23,7 @@ const Hjem = () => {
 
   const [seDetaljertDag, setSeDetaljertDag] = useState(false);
   const [dato, setDato] = useState(0);
-  const [bursdager, setBursdager] = useState([])
+  const [bursdager, setBursdager] = useState([]);
   const [vakter, setVakter] = useState([]);
 
   const toggleKunngjoringModal = (id) => {
@@ -41,7 +41,7 @@ const Hjem = () => {
     }
     console.log(dato);
     setSeDetaljertDag(!seDetaljertDag);
-  }
+  };
 
   return (
     <Layout>
@@ -68,10 +68,8 @@ const Hjem = () => {
 
             {/* TODO: Fikse denne komponenten. Det er noe her som rendres i loop! */}
             <Bursdag />
-
           </Stack>
         </Grid>
-
       </Grid>
     </Layout>
   );
