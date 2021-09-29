@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 export const GET_VAKTER = gql`
   query GetVakter($fraDato: String!, $tilDato: String!, $bruker_id: Int) {
     hentVakter(fraDato: $fraDato, tilDato: $tilDato, bruker_id: $bruker_id) {

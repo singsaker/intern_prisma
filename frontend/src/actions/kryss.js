@@ -1,10 +1,6 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_AKTIV_DRIKKE, GET_AKTIV_VIN } from "../query/kryss";
-import {
-  GET_KRYSSELISTE_TYPE,
-  GET_AKTIV_VIN_TYPE,
-  GET_AKTIV_DRIKKE_TYPE,
-} from "../types";
+import { GET_KRYSSELISTE_TYPE, GET_AKTIV_VIN_TYPE, GET_AKTIV_DRIKKE_TYPE } from "../types";
 
 export const getKrysseliste = (data) => {
   return {

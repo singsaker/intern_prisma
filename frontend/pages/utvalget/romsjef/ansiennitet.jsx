@@ -5,12 +5,12 @@ import Navigasjon from "../../../components/utvalget/romsjef/Navigasjon";
 import BeboerListe from "../../../components/utvalget/romsjef/ansiennitet/BeboerListeAnsiennitet";
 import Kontrollpanel from "../../../components/utvalget/romsjef/ansiennitet/Kontrollpanel";
 
-import Grid from "@material-ui/core/Grid";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/core/Alert";
+import Grid from "@mui/material/Grid";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { oppdaterAnsiennitet } from "../../../src/actions/beboer";
 import { UPDATE_BEBOERE_ANSIENNITET } from "../../../src/query/beboer";
 

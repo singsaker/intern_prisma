@@ -10,12 +10,12 @@ import Passord from "./Passord";
 import Info from "../BeboerInfoRediger";
 
 // Material-UI
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import { Box } from "@material-ui/core";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { Box } from "@mui/material";
 
 const Instillinger = () => {
   const [tab, setTab] = useState("info");

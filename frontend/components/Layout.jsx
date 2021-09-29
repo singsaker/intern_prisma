@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { ER_INNLOGGET } from "../src/query/auth";
 import { loggInn, loggUt } from "../src/actions/auth";
 
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { useCookies } from "react-cookie";
 
 // Components
@@ -16,7 +16,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./NavBar";
 
 // Material-UI
-import { Box, Alert, Snackbar, styled, useMediaQuery } from "@material-ui/core";
+import { Box, Alert, Snackbar, styled, useMediaQuery } from "@mui/material";
 
 const RootStyle = styled("div")({
   display: "flex",

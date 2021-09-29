@@ -8,13 +8,13 @@ import { oppdaterBeboer, oppdaterGammelBeboer } from "../src/actions/beboer";
 import { UPDATE_BEBOER } from "../src/query/beboer";
 import { GET_STUDIER, GET_SKOLE } from "../src/query/studie";
 
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 
 // Material-UI
-import SaveIcon from "@material-ui/icons/Save";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import DatePicker from "@material-ui/lab/DatePicker";
+import SaveIcon from "@mui/icons-material/Save";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
 import {
   Alert,
   Stack,
@@ -26,7 +26,7 @@ import {
   Grid,
   Button,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const BeboerInfoRediger = (props) => {
   const dispatch = useDispatch();
@@ -143,7 +143,7 @@ const BeboerInfoRediger = (props) => {
 
   if (studie.loading || skole.loading || loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );
@@ -316,7 +316,7 @@ const BeboerInfoRediger = (props) => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
               Lagre
             </Button>

@@ -2,26 +2,26 @@ import React, { useState, useEffect } from "react";
 
 import { GET_KUNNGJORNGER } from "../../src/query/kunngjoring";
 import { getKunngjoringer } from "../../src/actions/kunngjoring";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
 
 // Material-UI
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import AnnouncementIcon from "@material-ui/icons/Announcement";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import AnnouncementIcon from "@mui/icons-material/Announcement";
 
 const Kunngjoringer = (props) => {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const Kunngjoringer = (props) => {
 
   if (loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );

@@ -14,10 +14,10 @@ import {
   List,
   ListItem,
   Divider,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useState } from "react";
 import ResepLayout from "../../components/resepsjonen/ResepLayout";
-import { alpha, useTheme } from "@material-ui/core/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 
 // Fetch Data
 import { GET_BEBOERE } from "../../src/query/beboer";
@@ -29,10 +29,10 @@ import dateFormat from "dateformat";
 
 import SwipeableEdgeDrawer from "../../components/resepsjonen/SwipableDrawer";
 import Spinner from "../../components/resepsjonen/Spinner";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import SaveIcon from "@material-ui/icons/Save";
-import PrintIcon from "@material-ui/icons/Print";
-import HomeIcon from "@material-ui/icons/Home";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import SaveIcon from "@mui/icons-material/Save";
+import PrintIcon from "@mui/icons-material/Print";
+import HomeIcon from "@mui/icons-material/Home";
 import { GET_KRYSS } from "../../src/query/kryss";
 
 const actions = [

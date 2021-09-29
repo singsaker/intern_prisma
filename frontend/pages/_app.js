@@ -1,13 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import { Provider } from "react-redux";
-// import { HttpLink } from "apollo-link-http";
-// import { ApolloClient } from "apollo-client";
-// import { InMemoryCache } from "apollo-cache-inmemory";
-// import { ApolloProvider } from "@apollo/react-hooks";
 import withReduxStore from "../lib/with-redux-store";
 import { CookiesProvider } from "react-cookie";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import ThemeConfig from "../theme";
 import createEmotionCache from "../src/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
@@ -52,7 +47,6 @@ const MyApp = (props) => {
               />
             </Head>
             <ThemeConfig>
-              <CssBaseline />
               <Component {...pageProps} />
             </ThemeConfig>
           </CacheProvider>

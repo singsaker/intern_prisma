@@ -3,19 +3,19 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
 // Material-UI
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
-import CloseIcon from "@material-ui/icons/Close";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import CloseIcon from "@mui/icons-material/Close";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 // Components
 import NyListeRom from "./NyListeRom";
@@ -209,7 +209,7 @@ const NyListeModal = (props) => {
       </Dialog>
 
       <CardContent>
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item></Grid>
           <Grid item>
             <CloseIcon onClick={() => props.toggleNyListe()} style={{ cursor: "pointer", margin: "8px" }} />
@@ -273,7 +273,7 @@ const NyListeModal = (props) => {
           </Grid>
         )}
 
-        <Grid container spacing={2} justify="flex-end">
+        <Grid container spacing={2} justifyContent="flex-end">
           <Grid item>
             <Button onClick={() => handleTilbake()} disabled={aktivStep === 0}>
               Tilbake

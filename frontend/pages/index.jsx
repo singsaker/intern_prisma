@@ -10,9 +10,9 @@ import Layout from "../components/Layout";
 import Kalender from "../components/hjem/Kalender";
 import KalenderCard from "../components/hjem/KalenderCard";
 
-import Dialog from "@material-ui/core/Dialog";
-import Grid from "@material-ui/core/Grid";
-import Stack from "@material-ui/core/Stack";
+import Dialog from "@mui/material/Dialog";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 
 // Next
 import Head from "next/head";

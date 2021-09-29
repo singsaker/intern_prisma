@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Container, Drawer, Stack, styled, Typography } from "@material-ui/core";
+import { Box, Button, CircularProgress, Container, Drawer, Stack, styled, Typography } from "@mui/material";
 
 import { GET_BEBOER_KRYSS } from "../../src/query/beboer";
 

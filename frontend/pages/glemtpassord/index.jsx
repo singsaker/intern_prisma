@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Apollo
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 // Redux
 import { GLEMT_PASSORD } from "../../src/query/auth";
@@ -11,16 +11,16 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
+import Grid from "@mui/material/Grid";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Login = () => {
   const router = useRouter();
@@ -45,9 +45,9 @@ const Login = () => {
         <title>Glemt passord | Internsida</title>
       </Head>
 
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Paper variant="outlined" style={{ height: "300px", marginTop: "10%" }}>
-          <Grid container justify="center" style={{ margin: "3% 0" }}>
+          <Grid container justifyContent="center" style={{ margin: "3% 0" }}>
             <Typography variant="h4" color="primary">
               Glemt passord
             </Typography>
@@ -58,7 +58,7 @@ const Login = () => {
               sendResettLink();
             }}
           >
-            <Grid container justify="center" xs={12}>
+            <Grid container justifyContent="center" xs={12}>
               <Grid item xs={10} style={{ margin: 8 }}>
                 <FormControl required variant="outlined" style={{ width: "100%" }}>
                   <InputLabel htmlFor="component-outlined">Epost</InputLabel>
@@ -72,7 +72,7 @@ const Login = () => {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container justify="center" spacing={2}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Button
                   type="submit"

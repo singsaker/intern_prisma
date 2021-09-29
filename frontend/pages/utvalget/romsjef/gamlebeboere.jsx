@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Head from "next/head";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Dialog from "@material-ui/core/Dialog";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
 
 import Layout from "../../../components/Layout";
 import ProfilRediger from "../../../components/utvalget/romsjef/profil/ProfilGammelRediger";

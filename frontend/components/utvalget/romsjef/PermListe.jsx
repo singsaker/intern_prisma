@@ -7,7 +7,7 @@ import { GET_PERMLISTE } from "../../../src/query/beboer";
 
 // Misc
 import _ from "lodash";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 
 // Material UI
 import {
@@ -23,7 +23,7 @@ import {
   TableHead,
   Avatar,
   Chip,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const BeboerListeAnsiennitet = (props) => {
   const dispatch = useDispatch();

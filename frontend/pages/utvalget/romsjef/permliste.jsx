@@ -5,8 +5,8 @@ import Navigasjon from "../../../components/utvalget/romsjef/Navigasjon";
 import PermListe from "../../../components/utvalget/romsjef/PermListe";
 import ProfilRediger from "../../../components/utvalget/romsjef/profil/ProfilRediger";
 
-import Grid from "@material-ui/core/Grid";
-import Dialog from "@material-ui/core/Dialog";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
 
 import Head from "next/head";
 

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
 // Beboer Query
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { GET_BEBOER } from "../src/query/beboer";
 import { getBeboer } from "../src/actions/beboer";
 
@@ -17,20 +17,20 @@ import {
   List,
   Box,
   Avatar,
-  Link as MuiLink,
   ListItemButton,
   ListSubheader,
   ListItemText,
-} from "@material-ui/core";
-import { styled, alpha, useTheme } from "@material-ui/core/styles";
+  Button,
+} from "@mui/material";
+import { styled, alpha, useTheme } from "@mui/material/styles";
 
 // Material-UI Icons
-import HomeIcon from "@material-ui/icons/Home";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import HomeIcon from "@mui/icons-material/Home";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 import Scrollbar from "./Scrollbar";
 
@@ -43,9 +43,11 @@ const RootStyle = styled("div")(({ theme }) => ({
   },
 }));
 
-const AccountStyle = styled("div")(({ theme }) => ({
+const AccountStyle = styled(Button)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  justifyContent: "start",
+  textAlign: "start",
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadiusSm,
   backgroundColor: theme.palette.grey[900],
@@ -160,57 +162,55 @@ const Sidebar = (props) => {
       </Box>
       {/* <Divider /> */}
       <Box sx={{ mt: 5, mb: 3, mx: 2.5 }}>
-        <Link href="/profil">
-          <MuiLink underline="none">
-            <AccountStyle>
-              <Avatar src={"https://source.unsplash.com/200x200/?mugshot"} alt="photoURL" />
-              <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                  {beboerId && beboere[beboerId]
-                    ? beboere[beboerId].fornavn + " " + beboere[beboerId].etternavn
-                    : "Laster..."}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Beboer
-                </Typography>
-              </Box>
-            </AccountStyle>
-          </MuiLink>
+        <Link href="/profil" passHref>
+          <AccountStyle fullWidth>
+            <Avatar src={"https://source.unsplash.com/200x200/?mugshot"} alt="photoURL" />
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
+                {beboerId && beboere[beboerId]
+                  ? beboere[beboerId].fornavn + " " + beboere[beboerId].etternavn
+                  : "Laster..."}
+              </Typography>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Beboer
+              </Typography>
+            </Box>
+          </AccountStyle>
         </Link>
       </Box>
 
       <List component="div" disablePadding>
-        {routes.map((item) => {
+        {routes.map((item, index) => {
           const { title, path, icon } = item;
 
           return (
-            <Link key={title} href={path}>
-              <ListItemStyle
-                sx={{
-                  ...(router.pathname === path && activeRootStyle),
-                }}
-              >
-                <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
-                <ListItemText disableTypography primary={title} />
-              </ListItemStyle>
-            </Link>
+            <ListItemStyle
+              key={index}
+              onClick={() => router.push(path)}
+              sx={{
+                ...(router.pathname === path && activeRootStyle),
+              }}
+            >
+              <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
+              <ListItemText disableTypography primary={title} />
+            </ListItemStyle>
           );
         })}
         <ListSubheaderStyle>Admin</ListSubheaderStyle>
-        {adminRoutes.map((item) => {
+        {adminRoutes.map((item, index) => {
           const { title, path, icon } = item;
 
           return (
-            <Link key={title} href={path}>
-              <ListItemStyle
-                sx={{
-                  ...(router.pathname === path && activeRootStyle),
-                }}
-              >
-                <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
-                <ListItemText disableTypography primary={title} />
-              </ListItemStyle>
-            </Link>
+            <ListItemStyle
+              key={index}
+              onClick={() => router.push(path)}
+              sx={{
+                ...(router.pathname === path && activeRootStyle),
+              }}
+            >
+              <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
+              <ListItemText disableTypography primary={title} />
+            </ListItemStyle>
           );
         })}
       </List>
@@ -231,7 +231,7 @@ const Sidebar = (props) => {
         </Drawer>
       </Hidden>
 
-      <Hidden lgDown>
+      <Hidden xlDown>
         <Drawer
           open
           variant="persistent"

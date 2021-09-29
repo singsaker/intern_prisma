@@ -18,13 +18,13 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { useReducer, useState } from "react";
 import { GET_BEBOER_KRYSS } from "../../../src/query/beboer";
 import { GET_AKTIV_DRIKKE } from "../../../src/query/kryss";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import CloseIcon from "@material-ui/icons/Close";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CloseIcon from "@mui/icons-material/Close";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Link from "next/link";
@@ -226,6 +226,7 @@ const Kryss = () => {
                                     onClick={() => updateState({ [item[0]]: undefined })}
                                     edge="end"
                                     aria-label="comments"
+                                    size="large"
                                   >
                                     <CloseIcon />
                                   </IconButton>

@@ -7,21 +7,21 @@ import { ENDRE_PASSORD } from "../../src/query/auth";
 // Components
 import Spinner from "../CustomSpinner";
 
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 
 // Material-UI
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Grid from "@material-ui/core/Grid";
-import SaveIcon from "@material-ui/icons/Save";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/core/Alert";
-import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import SaveIcon from "@mui/icons-material/Save";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -99,6 +99,7 @@ const Passord = () => {
                     onClick={() => setShowPswd1(!showPswd1)}
                     onMouseDown={(e) => e.preventDefault()}
                     edge="end"
+                    size="large"
                   >
                     {showPswd1 ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
@@ -123,6 +124,7 @@ const Passord = () => {
                     onClick={() => setShowPswd2(!showPswd2)}
                     onMouseDown={(e) => e.preventDefault()}
                     edge="end"
+                    size="large"
                   >
                     {showPswd2 ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
@@ -133,7 +135,7 @@ const Passord = () => {
           </FormControl>
         </Grid>
 
-        <Grid container item justify="flex-end">
+        <Grid container item justifyContent="flex-end">
           <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
             Lagre
           </Button>
