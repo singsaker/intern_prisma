@@ -17,10 +17,10 @@ import {
   List,
   Box,
   Avatar,
-  Link as MuiLink,
   ListItemButton,
   ListSubheader,
   ListItemText,
+  Button,
 } from "@mui/material";
 import { styled, alpha, useTheme } from "@mui/material/styles";
 
@@ -43,9 +43,11 @@ const RootStyle = styled("div")(({ theme }) => ({
   },
 }));
 
-const AccountStyle = styled("div")(({ theme }) => ({
+const AccountStyle = styled(Button)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  justifyContent: "start",
+  textAlign: "start",
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadiusSm,
   backgroundColor: theme.palette.grey[900],
@@ -160,57 +162,55 @@ const Sidebar = (props) => {
       </Box>
       {/* <Divider /> */}
       <Box sx={{ mt: 5, mb: 3, mx: 2.5 }}>
-        <Link href="/profil">
-          <MuiLink underline="none">
-            <AccountStyle>
-              <Avatar src={"https://source.unsplash.com/200x200/?mugshot"} alt="photoURL" />
-              <Box sx={{ ml: 2 }}>
-                <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                  {beboerId && beboere[beboerId]
-                    ? beboere[beboerId].fornavn + " " + beboere[beboerId].etternavn
-                    : "Laster..."}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Beboer
-                </Typography>
-              </Box>
-            </AccountStyle>
-          </MuiLink>
+        <Link href="/profil" passHref>
+          <AccountStyle fullWidth>
+            <Avatar src={"https://source.unsplash.com/200x200/?mugshot"} alt="photoURL" />
+            <Box sx={{ ml: 2 }}>
+              <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
+                {beboerId && beboere[beboerId]
+                  ? beboere[beboerId].fornavn + " " + beboere[beboerId].etternavn
+                  : "Laster..."}
+              </Typography>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Beboer
+              </Typography>
+            </Box>
+          </AccountStyle>
         </Link>
       </Box>
 
       <List component="div" disablePadding>
-        {routes.map((item) => {
+        {routes.map((item, index) => {
           const { title, path, icon } = item;
 
           return (
-            <Link key={title} href={path}>
-              <ListItemStyle
-                sx={{
-                  ...(router.pathname === path && activeRootStyle),
-                }}
-              >
-                <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
-                <ListItemText disableTypography primary={title} />
-              </ListItemStyle>
-            </Link>
+            <ListItemStyle
+              key={index}
+              onClick={() => router.push(path)}
+              sx={{
+                ...(router.pathname === path && activeRootStyle),
+              }}
+            >
+              <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
+              <ListItemText disableTypography primary={title} />
+            </ListItemStyle>
           );
         })}
         <ListSubheaderStyle>Admin</ListSubheaderStyle>
-        {adminRoutes.map((item) => {
+        {adminRoutes.map((item, index) => {
           const { title, path, icon } = item;
 
           return (
-            <Link key={title} href={path}>
-              <ListItemStyle
-                sx={{
-                  ...(router.pathname === path && activeRootStyle),
-                }}
-              >
-                <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
-                <ListItemText disableTypography primary={title} />
-              </ListItemStyle>
-            </Link>
+            <ListItemStyle
+              key={index}
+              onClick={() => router.push(path)}
+              sx={{
+                ...(router.pathname === path && activeRootStyle),
+              }}
+            >
+              <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
+              <ListItemText disableTypography primary={title} />
+            </ListItemStyle>
           );
         })}
       </List>
