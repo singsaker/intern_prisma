@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GET_VAKTER } from "../../src/query/vakt";
 import { getVakter } from "../../src/actions/vakt";
 
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 import { makeStyles } from "@mui/styles";
 

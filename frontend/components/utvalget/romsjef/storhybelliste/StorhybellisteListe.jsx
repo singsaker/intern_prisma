@@ -6,7 +6,7 @@ import { GET_ALLE_STORHYBELLISTER } from "../../../../src/query/rom";
 import { getAlleStorhybellister } from "../../../../src/actions/rom";
 
 // Misc
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 // Material UI
 import Paper from "@mui/material/Paper";

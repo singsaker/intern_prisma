@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_ALLE_ROM } from "../../../../src/query/rom";
 import { getAlleRom } from "../../../../src/actions/rom";
 import { GET_SKOLE, GET_STUDIER } from "../../../../src/query/studie";

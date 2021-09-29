@@ -7,7 +7,7 @@ import { GET_SOKNADER_SEMESTER } from "../../../../src/query/soknad";
 
 // Misc
 import { isDate } from "lodash";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 // Material UI
 import Paper from "@mui/material/Paper";

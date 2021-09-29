@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Apollo
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 // Redux
 import { GLEMT_PASSORD } from "../../src/query/auth";

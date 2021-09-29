@@ -10,7 +10,7 @@ import Person from "@mui/icons-material/Person";
 import Settings from "@mui/icons-material/Settings";
 
 // Beboer Query
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { GET_BEBOER } from "../src/query/beboer";
 import { getBeboer } from "../src/actions/beboer";
 // ----------------------------------------------------------------------

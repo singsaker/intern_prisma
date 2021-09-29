@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GET_BEBOERE } from "../../src/query/beboer";
 import { getBeboere } from "../../src/actions/beboer";
 
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";

@@ -20,7 +20,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import FlightIcon from "@mui/icons-material/Flight";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_ROLLER } from "../../../../src/query/regi";
 import { getRoller } from "../../../../src/actions/regi";
 import { GET_ALLE_ROM } from "../../../../src/query/rom";

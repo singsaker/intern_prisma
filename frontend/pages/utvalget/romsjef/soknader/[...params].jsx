@@ -7,7 +7,7 @@ import NyBeboerSoknad from "../../../../components/utvalget/romsjef/soknad/NyBeb
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { GET_SOKNAD } from "../../../../src/query/soknad";
 import { getSoknad } from "../../../../src/actions/soknad";
 

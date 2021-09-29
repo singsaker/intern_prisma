@@ -7,7 +7,7 @@ import { ENDRE_PASSORD } from "../../src/query/auth";
 // Components
 import Spinner from "../CustomSpinner";
 
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 
 // Material-UI
 import InputLabel from "@mui/material/InputLabel";

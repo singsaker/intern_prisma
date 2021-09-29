@@ -10,7 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { oppdaterAnsiennitet } from "../../../src/actions/beboer";
 import { UPDATE_BEBOERE_ANSIENNITET } from "../../../src/query/beboer";
 

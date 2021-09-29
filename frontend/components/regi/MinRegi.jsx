@@ -13,7 +13,7 @@ import Spinner from "../CustomSpinner";
 
 // Misc
 import { isInteger, isString } from "lodash";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
 
 const MinRegi = (props) => {

@@ -8,7 +8,7 @@ import { oppdaterBeboer, oppdaterGammelBeboer } from "../src/actions/beboer";
 import { UPDATE_BEBOER } from "../src/query/beboer";
 import { GET_STUDIER, GET_SKOLE } from "../src/query/studie";
 
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 
 // Material-UI
 import SaveIcon from "@mui/icons-material/Save";

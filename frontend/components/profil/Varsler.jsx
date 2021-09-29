@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBeboerEpostPrefs, oppdaterBeboerEpostPrefs } from "../../src/actions/beboer";
 import { UPDATE_BEBOER_EPOST_PREFS, GET_BEBOER_EPOST_PREFS } from "../../src/query/beboer";
 
-import { useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { isNumber } from "lodash";
 
 // Material-UI

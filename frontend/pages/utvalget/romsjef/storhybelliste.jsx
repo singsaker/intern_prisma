@@ -15,7 +15,7 @@ import { GET_BEBOERE } from "../../../src/query/beboer";
 import { getBeboere } from "../../../src/actions/beboer";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useLazyQuery, useMutation } from "@apollo/react-hooks";
+import { useLazyQuery, useMutation } from "@apollo/client";
 
 // Material-UI
 import Grid from "@mui/material/Grid";

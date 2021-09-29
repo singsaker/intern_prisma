@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // Apollo
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 
 // Redux
 import { RESETT_GLEMT_PASSORD } from "../../src/query/auth";

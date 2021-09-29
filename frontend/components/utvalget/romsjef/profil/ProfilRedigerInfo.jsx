@@ -8,7 +8,7 @@ import { UPDATE_BEBOER } from "../../../src/query/beboer";
 import { GET_STUDIE, GET_SKOLE } from "../../../src/query/studie";
 
 // Components
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 
 // Material-UI
 import TextField from "@mui/material/TextField";

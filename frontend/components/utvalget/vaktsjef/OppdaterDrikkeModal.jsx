@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 
 // Lag drikke query

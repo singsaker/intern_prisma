@@ -8,7 +8,7 @@ import { GET_DRIKKER } from "../../../src/query/drikke";
 import { getDrikker } from "../../../src/actions/drikke";
 
 // Misc
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 
 // Material UI
 import Paper from "@mui/material/Paper";

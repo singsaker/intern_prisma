@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { OPPDATER_STUDIE, SLETT_STUDIE, GET_STUDIER, LAG_STUDIE } from "../../../src/query/studie";
 import { oppdaterStudie, slettStudie, getStudier, lagStudie } from "../../../src/actions/skole";
 

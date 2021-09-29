@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Apollo
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 // Helpers
 import formaterTelefon from "../helpers/formaterTelefon";

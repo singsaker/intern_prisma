@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 // Apollo
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 
 // Redux
 import { LOGIN_MUTATION, ER_INNLOGGET } from "../src/query/auth";

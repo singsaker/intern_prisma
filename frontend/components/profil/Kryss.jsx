@@ -8,7 +8,7 @@ import { UPDATE_PREFS, GET_BEBOER_PREFS } from "../../src/query/beboer";
 // Components
 import Spinner from "../CustomSpinner";
 
-import { useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { isNumber } from "lodash";
 
 // Material-UI

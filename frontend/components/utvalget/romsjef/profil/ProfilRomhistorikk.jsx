@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import formaterDato from "../../../../helpers/formaterDato";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 
 import { GET_ALLE_ROM } from "../../../../src/query/rom";
 import { getAlleRom } from "../../../../src/actions/rom";

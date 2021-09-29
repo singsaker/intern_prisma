@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 
 // Beboer Query
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { GET_BEBOER } from "../src/query/beboer";
 import { getBeboer } from "../src/actions/beboer";
 

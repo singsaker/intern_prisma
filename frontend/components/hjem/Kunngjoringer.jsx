@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { GET_KUNNGJORNGER } from "../../src/query/kunngjoring";
 import { getKunngjoringer } from "../../src/actions/kunngjoring";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
 

@@ -16,7 +16,7 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { flyttBeboer } from "../../../../src/actions/beboer";
 import { FLYTT_BEBOER } from "../../../../src/query/beboer";
