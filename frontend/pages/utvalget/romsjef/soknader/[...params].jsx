@@ -12,8 +12,8 @@ import { GET_SOKNAD } from "../../../../src/query/soknad";
 import { getSoknad } from "../../../../src/actions/soknad";
 
 // Material-UI
-import { Grid, Breadcrumbs, Paper, Button } from "@material-ui/core";
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import { Grid, Breadcrumbs, Paper, Button } from "@mui/material";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 const NyBeboer = () => {
   const router = useRouter();

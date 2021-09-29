@@ -9,19 +9,19 @@ import { getAlleStorhybellister } from "../../../../src/actions/rom";
 import { useLazyQuery } from "@apollo/react-hooks";
 
 // Material UI
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import DoneIcon from "@material-ui/icons/Done";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/core/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from "@material-ui/core/Grid";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import DoneIcon from "@mui/icons-material/Done";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -58,7 +58,7 @@ const StorhybellisteListe = (props) => {
 
   if (loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );

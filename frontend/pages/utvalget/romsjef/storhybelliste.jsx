@@ -18,10 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Dialog from "@material-ui/core/Dialog";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/core/Alert";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 // NextJS
 import Head from "next/head";

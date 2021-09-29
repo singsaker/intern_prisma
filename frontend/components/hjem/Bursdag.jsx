@@ -7,17 +7,17 @@ import { getBeboere } from "../../src/actions/beboer";
 
 import { useQuery } from "@apollo/react-hooks";
 
-import Avatar from "@material-ui/core/Avatar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
-import Grid from "@material-ui/core/Grid";
+import Avatar from "@mui/material/Avatar";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import CircularProgress from "@mui/material/CircularProgress";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import Grid from "@mui/material/Grid";
 
 const Bursdag = () => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const Bursdag = () => {
 
   if (loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );

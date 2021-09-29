@@ -13,7 +13,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 // Components
 import Spinner from "../CustomSpinner";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 const Registrer = () => {
   const dispatch = useDispatch();

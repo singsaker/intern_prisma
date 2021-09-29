@@ -8,7 +8,7 @@ import Layout from "../components/Layout";
 import Registrer from "../components/regi/Registrer";
 import MinRegi from "../components/regi/MinRegi";
 import RegiOversikt from "../components/regi/RegiOversikt";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 
 const Regi = () => {
   const [semester, setSemester] = useState("");

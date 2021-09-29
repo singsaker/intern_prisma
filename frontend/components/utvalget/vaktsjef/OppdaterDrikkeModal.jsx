@@ -7,15 +7,15 @@ import { OPPDATER_DRIKKE } from "../../../src/query/drikke";
 import { oppdaterDrikke } from "../../../src/actions/drikke";
 
 // Material UI
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
-import FormControllLabel from "@material-ui/core/FormControlLabel";
-import Typography from "@material-ui/core/Typography";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import FormControllLabel from "@mui/material/FormControlLabel";
+import Typography from "@mui/material/Typography";
 
 // Matrial UI icons
-import CloseIcon from "@material-ui/icons/Close";
+import CloseIcon from "@mui/icons-material/Close";
 
 const OppdaterDrikkeModal = (props) => {
   const dispatch = useDispatch();
@@ -75,7 +75,7 @@ const OppdaterDrikkeModal = (props) => {
       }}
     >
       <Grid container direction="column" spacing="2">
-        <Grid item container justify="space-between">
+        <Grid item container justifyContent="space-between">
           <Grid item>
             <Typography color="primary" variant="h6">
               Oppdater Drikke
@@ -124,7 +124,7 @@ const OppdaterDrikkeModal = (props) => {
             onChange={(event) => setProduktnr(event.target.value)}
           />
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <FormControllLabel
             label="Aktiv?"
             control={
@@ -132,7 +132,7 @@ const OppdaterDrikkeModal = (props) => {
             }
           />
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <label htmlFor="drikkeFarge">Velg farge:</label>
           <input
             style={{ marginLeft: "10px" }}
@@ -142,7 +142,7 @@ const OppdaterDrikkeModal = (props) => {
             onChange={(event) => setFarge(event.target.value)}
           />
         </Grid>
-        <Grid item container justify="flex-end">
+        <Grid item container justifyContent="flex-end">
           <Button variant="contained" color="primary" type="submit">
             Oppdater drikke
           </Button>

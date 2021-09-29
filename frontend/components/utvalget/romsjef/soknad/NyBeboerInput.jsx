@@ -17,27 +17,27 @@ import { isBoolean } from "lodash";
 import validerEpost from "../../../../helpers/validerEpost";
 
 // Material-UI
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import Typography from "@material-ui/core/Typography";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import DatePicker from "@material-ui/lab/DatePicker";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
+import DialogContentText from "@mui/material/DialogContentText";
+import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
 
 const NyBeboerInput = () => {
   const router = useRouter();
@@ -453,7 +453,7 @@ const NyBeboerInput = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item container justify="flex-end">
+          <Grid item container justifyContent="flex-end">
             <Button endIcon={<GroupAddIcon />} type="submit" variant="contained" color="primary">
               Legg til som beboer
             </Button>

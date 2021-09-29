@@ -5,8 +5,8 @@ import Head from "next/head";
 import Navigasjon from "../../../../components/utvalget/romsjef/Navigasjon";
 import SoknadModal from "../../../../components/utvalget/romsjef/soknad/SoknadModal";
 
-import Grid from "@material-ui/core/Grid";
-import Dialog from "@material-ui/core/Dialog";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
 
 import SoknadListe from "../../../../components/utvalget/romsjef/soknad/SoknadListe";
 import Kontrollpanel from "../../../../components/utvalget/romsjef/soknad/Kontrollpanel";

@@ -23,7 +23,7 @@ import {
   TableHead,
   Avatar,
   Chip,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const BeboerListeAnsiennitet = (props) => {
   const dispatch = useDispatch();

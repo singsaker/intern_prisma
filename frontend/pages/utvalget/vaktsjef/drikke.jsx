@@ -9,10 +9,10 @@ import Layout from "../../../components/Layout";
 import Head from "next/head";
 
 //Material UI
-import Grid from "@material-ui/core/Grid";
-import Dialog from "@material-ui/core/Dialog";
-import MuiAlert from "@material-ui/core/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

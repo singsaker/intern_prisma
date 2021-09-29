@@ -1,7 +1,7 @@
 import SimpleBarReact from "simplebar-react";
 // material
-import { alpha, styled } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
+import { alpha, styled } from "@mui/material/styles";
+import { Box } from "@mui/material";
 
 // ----------------------------------------------------------------------
 

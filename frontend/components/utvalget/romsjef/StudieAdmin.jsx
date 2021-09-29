@@ -21,10 +21,10 @@ import {
   Snackbar,
   Alert,
   TextField,
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CloseIcon from "@material-ui/icons/Close";
-import AddIcon from "@material-ui/icons/Add";
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
 
 const StudieAdmin = (props) => {
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const StudieAdmin = (props) => {
 
   return (
     <Grid container>
-      <Grid container justify="flex-end" item xs={12}>
+      <Grid container justifyContent="flex-end" item xs={12}>
         <CloseIcon onClick={() => props.toggleStudieAdmin()} style={{ cursor: "pointer", margin: "8px" }} />
       </Grid>
       <Grid item md={8} xs={12}>
@@ -131,7 +131,7 @@ const StudieAdmin = (props) => {
               {studierQuery.loading || Object.keys(studieNavn).length < 1 ? (
                 <TableRow>
                   <TableCell>
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                       <CircularProgress />
                     </Grid>
                   </TableCell>
@@ -179,7 +179,7 @@ const StudieAdmin = (props) => {
                             }
                             color="primary"
                             aria-label="slett"
-                          >
+                            size="large">
                             <DeleteIcon />
                           </IconButton>
                         </TableCell>

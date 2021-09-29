@@ -11,20 +11,20 @@ import { GET_STUDIE, GET_SKOLE } from "../../../src/query/studie";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
 // Material-UI
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Grid from "@material-ui/core/Grid";
-import SaveIcon from "@material-ui/icons/Save";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import DatePicker from "@material-ui/lab/DatePicker";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Grid from "@mui/material/Grid";
+import SaveIcon from "@mui/icons-material/Save";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
 
 const ProfilRedigerInfo = (props) => {
   const dispatch = useDispatch();
@@ -119,7 +119,7 @@ const ProfilRedigerInfo = (props) => {
 
   if (studie.loading || skole.loading || loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );
@@ -131,7 +131,7 @@ const ProfilRedigerInfo = (props) => {
         submitBeboer();
       }}
     >
-      <Grid container direction="column" justify="flex-start" alignItems="flex-start" spacing={2}>
+      <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={2}>
         <TextField
           required
           id="epost_input"
@@ -245,7 +245,7 @@ const ProfilRedigerInfo = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid container direction="row" justify="flex-end">
+        <Grid container direction="row" justifyContent="flex-end">
           <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
             Lagre
           </Button>

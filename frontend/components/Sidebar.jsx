@@ -21,16 +21,16 @@ import {
   ListItemButton,
   ListSubheader,
   ListItemText,
-} from "@material-ui/core";
-import { styled, alpha, useTheme } from "@material-ui/core/styles";
+} from "@mui/material";
+import { styled, alpha, useTheme } from "@mui/material/styles";
 
 // Material-UI Icons
-import HomeIcon from "@material-ui/icons/Home";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import HomeIcon from "@mui/icons-material/Home";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 import Scrollbar from "./Scrollbar";
 
@@ -231,7 +231,7 @@ const Sidebar = (props) => {
         </Drawer>
       </Hidden>
 
-      <Hidden lgDown>
+      <Hidden xlDown>
         <Drawer
           open
           variant="persistent"

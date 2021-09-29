@@ -11,10 +11,10 @@ import { GET_STUDIER, GET_SKOLE } from "../src/query/studie";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
 // Material-UI
-import SaveIcon from "@material-ui/icons/Save";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import DatePicker from "@material-ui/lab/DatePicker";
+import SaveIcon from "@mui/icons-material/Save";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
 import {
   Alert,
   Stack,
@@ -26,7 +26,7 @@ import {
   Grid,
   Button,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const BeboerInfoRediger = (props) => {
   const dispatch = useDispatch();
@@ -143,188 +143,186 @@ const BeboerInfoRediger = (props) => {
 
   if (studie.loading || skole.loading || loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );
 
-  return (
-    <>
-      {vellykket && (
-        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
-          {melding}
-        </Alert>
-      )}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitBeboer();
-        }}
-      >
-        <Stack spacing={2}>
-          <TextField
-            required
-            id="fornavn_input"
-            label="Fornavn"
-            variant="outlined"
-            value={fornavn}
-            onChange={(e) => setFornavn(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            id="mellomnavn_input"
-            label="Mellomnavn"
-            variant="outlined"
-            value={mellomnavn}
-            onChange={(e) => setMellomnavn(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            required
-            id="etternavn_input"
-            label="Etternavn"
-            variant="outlined"
-            value={etternavn}
-            onChange={(e) => setEtternavn(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            required
-            id="epost_input"
-            label="Epost"
-            variant="outlined"
-            value={epost}
-            onChange={(e) => setEpost(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            id="telefon_input"
-            label="Telefon"
-            variant="outlined"
-            value={tlf}
-            onChange={(e) => setTlf(e.target.value)}
-            fullWidth
-          />
-          <div>
-            <Grid xs={12} container spacing={2}>
-              <Grid md={6} xs={12} item>
-                <TextField
-                  id="adresse_input"
-                  label="Adresse"
-                  variant="outlined"
-                  value={adresse}
-                  onChange={(e) => setAdresse(e.target.value)}
-                  fullWidth
-                />
-              </Grid>
-              <Grid md={6} xs={12} item>
-                <TextField
-                  id="postnummer_input"
-                  label="Postnummer"
-                  variant="outlined"
-                  value={postnummer}
-                  onChange={(e) => setPostnummer(e.target.value)}
-                  fullWidth
-                />
-              </Grid>
+  return <>
+    {vellykket && (
+      <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
+        {melding}
+      </Alert>
+    )}
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitBeboer();
+      }}
+    >
+      <Stack spacing={2}>
+        <TextField
+          required
+          id="fornavn_input"
+          label="Fornavn"
+          variant="outlined"
+          value={fornavn}
+          onChange={(e) => setFornavn(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          id="mellomnavn_input"
+          label="Mellomnavn"
+          variant="outlined"
+          value={mellomnavn}
+          onChange={(e) => setMellomnavn(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          required
+          id="etternavn_input"
+          label="Etternavn"
+          variant="outlined"
+          value={etternavn}
+          onChange={(e) => setEtternavn(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          required
+          id="epost_input"
+          label="Epost"
+          variant="outlined"
+          value={epost}
+          onChange={(e) => setEpost(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          id="telefon_input"
+          label="Telefon"
+          variant="outlined"
+          value={tlf}
+          onChange={(e) => setTlf(e.target.value)}
+          fullWidth
+        />
+        <div>
+          <Grid xs={12} container spacing={2}>
+            <Grid md={6} xs={12} item>
+              <TextField
+                id="adresse_input"
+                label="Adresse"
+                variant="outlined"
+                value={adresse}
+                onChange={(e) => setAdresse(e.target.value)}
+                fullWidth
+              />
             </Grid>
-          </div>
-
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="Fødselsdag"
-              id="fodselsdag_input"
-              value={fodselsdato}
-              onChange={handleDateChange}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-
-          <Grid container xs={12}>
-            <FormControl>
-              <InputLabel id="skole_label">Skole</InputLabel>
-              <Select
-                labelId="skole_label"
-                id="skole_input"
-                value={skole_id}
-                onChange={(e) => setSkoleId(e.target.value)}
-              >
-                {skoler.length > 0 ? (
-                  skoler
-                    .sort((a, b) => {
-                      const navn1 = a.navn.toUpperCase();
-                      const navn2 = b.navn.toUpperCase();
-                      if (navn1 < navn2) return -1;
-                      if (navn1 > navn2) return 1;
-                      return 0;
-                    })
-                    .map((skole) => {
-                      return (
-                        <MenuItem key={skole.id} value={skole.id}>
-                          {skole.navn}
-                        </MenuItem>
-                      );
-                    })
-                ) : (
-                  <MenuItem>Laster inn...</MenuItem>
-                )}
-              </Select>
-            </FormControl>
-            <FormControl>
-              <InputLabel id="studie_label">Studie</InputLabel>
-              <Select
-                labelId="studie_label"
-                id="studie_input"
-                value={studie_id}
-                onChange={(e) => setStudieId(e.target.value)}
-              >
-                {studier.length > 0 ? (
-                  studier
-                    .sort((a, b) => {
-                      const navn1 = a.navn.toUpperCase();
-                      const navn2 = b.navn.toUpperCase();
-                      if (navn1 < navn2) return -1;
-                      if (navn1 > navn2) return 1;
-                      return 0;
-                    })
-                    .map((studie) => {
-                      return (
-                        <MenuItem key={studie.id} value={studie.id}>
-                          {studie.navn}
-                        </MenuItem>
-                      );
-                    })
-                ) : (
-                  <MenuItem>Laster inn...</MenuItem>
-                )}
-              </Select>
-            </FormControl>
-            <FormControl>
-              <InputLabel id="klasse_label">Klassetrinn</InputLabel>
-              <Select
-                labelId="klasse_label"
-                id="klasse_input"
-                value={klassetrinn}
-                onChange={(e) => setKlassetrinn(e.target.value)}
-              >
-                <MenuItem value="1">1</MenuItem>
-                <MenuItem value="2">2</MenuItem>
-                <MenuItem value="3">3</MenuItem>
-                <MenuItem value="4">4</MenuItem>
-                <MenuItem value="5">5</MenuItem>
-                <MenuItem value="6">6</MenuItem>
-              </Select>
-            </FormControl>
+            <Grid md={6} xs={12} item>
+              <TextField
+                id="postnummer_input"
+                label="Postnummer"
+                variant="outlined"
+                value={postnummer}
+                onChange={(e) => setPostnummer(e.target.value)}
+                fullWidth
+              />
+            </Grid>
           </Grid>
-          <Grid container justify="flex-end">
-            <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
-              Lagre
-            </Button>
-          </Grid>
-        </Stack>
-      </form>
-    </>
-  );
+        </div>
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Fødselsdag"
+            id="fodselsdag_input"
+            value={fodselsdato}
+            onChange={handleDateChange}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+
+        <Grid container xs={12}>
+          <FormControl>
+            <InputLabel id="skole_label">Skole</InputLabel>
+            <Select
+              labelId="skole_label"
+              id="skole_input"
+              value={skole_id}
+              onChange={(e) => setSkoleId(e.target.value)}
+            >
+              {skoler.length > 0 ? (
+                skoler
+                  .sort((a, b) => {
+                    const navn1 = a.navn.toUpperCase();
+                    const navn2 = b.navn.toUpperCase();
+                    if (navn1 < navn2) return -1;
+                    if (navn1 > navn2) return 1;
+                    return 0;
+                  })
+                  .map((skole) => {
+                    return (
+                      <MenuItem key={skole.id} value={skole.id}>
+                        {skole.navn}
+                      </MenuItem>
+                    );
+                  })
+              ) : (
+                <MenuItem>Laster inn...</MenuItem>
+              )}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel id="studie_label">Studie</InputLabel>
+            <Select
+              labelId="studie_label"
+              id="studie_input"
+              value={studie_id}
+              onChange={(e) => setStudieId(e.target.value)}
+            >
+              {studier.length > 0 ? (
+                studier
+                  .sort((a, b) => {
+                    const navn1 = a.navn.toUpperCase();
+                    const navn2 = b.navn.toUpperCase();
+                    if (navn1 < navn2) return -1;
+                    if (navn1 > navn2) return 1;
+                    return 0;
+                  })
+                  .map((studie) => {
+                    return (
+                      <MenuItem key={studie.id} value={studie.id}>
+                        {studie.navn}
+                      </MenuItem>
+                    );
+                  })
+              ) : (
+                <MenuItem>Laster inn...</MenuItem>
+              )}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel id="klasse_label">Klassetrinn</InputLabel>
+            <Select
+              labelId="klasse_label"
+              id="klasse_input"
+              value={klassetrinn}
+              onChange={(e) => setKlassetrinn(e.target.value)}
+            >
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="3">3</MenuItem>
+              <MenuItem value="4">4</MenuItem>
+              <MenuItem value="5">5</MenuItem>
+              <MenuItem value="6">6</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid container justifyContent="flex-end">
+          <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
+            Lagre
+          </Button>
+        </Grid>
+      </Stack>
+    </form>
+  </>;
 };
 
 export default BeboerInfoRediger;

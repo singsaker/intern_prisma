@@ -13,8 +13,8 @@ import { getBeboer } from "../src/actions/beboer";
 import { GET_BEBOER } from "../src/query/beboer";
 
 // Material-UI
-import CloseIcon from "@material-ui/icons/Close";
-import { Box, Chip, styled, Grid, CircularProgress, Typography, Snackbar, Alert } from "@material-ui/core";
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Chip, styled, Grid, CircularProgress, Typography, Snackbar, Alert } from "@mui/material";
 
 const ProfileImgStyle = styled("img")(({ theme }) => ({
   borderRadius: "100%",
@@ -57,7 +57,7 @@ const Profil = (props) => {
 
   if (!beboer)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );

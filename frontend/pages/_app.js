@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 // import { ApolloProvider } from "@apollo/react-hooks";
 import withReduxStore from "../lib/with-redux-store";
 import { CookiesProvider } from "react-cookie";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 import ThemeConfig from "../theme";
 import createEmotionCache from "../src/createEmotionCache";
 import { CacheProvider } from "@emotion/react";

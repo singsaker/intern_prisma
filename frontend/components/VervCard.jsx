@@ -1,8 +1,8 @@
 import React from "react";
 
 // Material-UI
-import { Grid, CircularProgress, Divider, Card, CardContent, Typography } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import { Grid, CircularProgress, Divider, Card, CardContent, Typography } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ const Verv = (props) => {
 
   if (!verv)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );
@@ -20,14 +20,14 @@ const Verv = (props) => {
   return (
     <Card variant="outlined" style={{ maxHeight: "800px" }}>
       <CardContent>
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item></Grid>
           <Grid item>
             <CloseIcon onClick={() => props.toggleVervModal()} style={{ cursor: "pointer", margin: "8px" }} />
           </Grid>
         </Grid>
         <Grid container direction="column" spacing={1}>
-          <Grid item xs={12} container justify="center">
+          <Grid item xs={12} container justifyContent="center">
             <Typography color="secondary" variant="h4">
               {verv.navn}
             </Typography>
@@ -36,7 +36,7 @@ const Verv = (props) => {
           <Divider variant="middle" />
 
           <Grid item container spacing={2}>
-            <Grid item container justify="flex-end" xs={6}>
+            <Grid item container justifyContent="flex-end" xs={6}>
               <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>Regitimer</Typography>
             </Grid>
             <Grid item container xs={6}>
@@ -46,7 +46,7 @@ const Verv = (props) => {
             </Grid>
           </Grid>
           <Grid item container spacing={2}>
-            <Grid item container justify="flex-end" xs={6}>
+            <Grid item container justifyContent="flex-end" xs={6}>
               <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>Utvalget</Typography>
             </Grid>
             <Grid item container xs={6}>
@@ -57,7 +57,7 @@ const Verv = (props) => {
           </Grid>
           {verv.epost && (
             <Grid item container spacing={2}>
-              <Grid item container justify="flex-end" xs={6}>
+              <Grid item container justifyContent="flex-end" xs={6}>
                 <Typography style={{ fontSize: "18px", fontWeight: "bold" }}>Epost</Typography>
               </Grid>
               <Grid item container xs={6}>

@@ -27,9 +27,9 @@ import {
   CircularProgress,
   Snackbar,
   InputAdornment,
-} from "@material-ui/core";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Login = () => {
   const [cookies, setCookies] = useCookies();
@@ -105,9 +105,9 @@ const Login = () => {
         <title>Login | Internsida</title>
       </Head>
 
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Paper variant="outlined" style={{ height: "300px", marginTop: "10%" }}>
-          <Grid container justify="center" style={{ margin: "3% 0" }}>
+          <Grid container justifyContent="center" style={{ margin: "3% 0" }}>
             <Typography variant="h4" color="primary">
               Singsaker Internside
             </Typography>
@@ -118,7 +118,7 @@ const Login = () => {
               handleSubmit(e);
             }}
           >
-            <Grid container justify="center">
+            <Grid container justifyContent="center">
               <Grid item xs={10} style={{ margin: 8 }}>
                 <FormControl required variant="outlined" style={{ width: "100%" }}>
                   <InputLabel htmlFor="component-outlined">Epost</InputLabel>
@@ -149,7 +149,7 @@ const Login = () => {
                           onClick={() => setShowPswd(!showPswd)}
                           onMouseDown={(e) => e.preventDefault()}
                           edge="end"
-                        >
+                          size="large">
                           {showPswd ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
@@ -158,7 +158,7 @@ const Login = () => {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container justify="center" spacing={2}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Button onClick={() => router.push("/glemtpassord")} size="large" variant="contained" color="secondary">
                   Glemt passord

@@ -1,7 +1,7 @@
 // material
-import { alpha, styled } from "@material-ui/core/styles";
-import { Box, Stack, AppBar, Toolbar, IconButton, Hidden } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { alpha, styled } from "@mui/material/styles";
+import { Box, Stack, AppBar, Toolbar, IconButton, Hidden } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import AccountPopover from "./AccountPopover";
 import Searchbar from "./Searchbar";
@@ -37,7 +37,10 @@ const Navbar = ({ onOpenSidebar }) => {
     <RootStyle>
       <ToolbarStyle>
         <Hidden lgUp>
-          <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: "text.primary" }}>
+          <IconButton
+            onClick={onOpenSidebar}
+            sx={{ mr: 1, color: "text.primary" }}
+            size="large">
             <MenuIcon />
           </IconButton>
         </Hidden>
