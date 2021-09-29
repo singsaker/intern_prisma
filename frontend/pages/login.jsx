@@ -149,7 +149,8 @@ const Login = () => {
                           onClick={() => setShowPswd(!showPswd)}
                           onMouseDown={(e) => e.preventDefault()}
                           edge="end"
-                          size="large">
+                          size="large"
+                        >
                           {showPswd ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>

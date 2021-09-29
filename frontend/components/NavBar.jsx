@@ -37,10 +37,7 @@ const Navbar = ({ onOpenSidebar }) => {
     <RootStyle>
       <ToolbarStyle>
         <Hidden lgUp>
-          <IconButton
-            onClick={onOpenSidebar}
-            sx={{ mr: 1, color: "text.primary" }}
-            size="large">
+          <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: "text.primary" }} size="large">
             <MenuIcon />
           </IconButton>
         </Hidden>

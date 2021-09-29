@@ -99,7 +99,8 @@ const Passord = () => {
                     onClick={() => setShowPswd1(!showPswd1)}
                     onMouseDown={(e) => e.preventDefault()}
                     edge="end"
-                    size="large">
+                    size="large"
+                  >
                     {showPswd1 ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
@@ -123,7 +124,8 @@ const Passord = () => {
                     onClick={() => setShowPswd2(!showPswd2)}
                     onMouseDown={(e) => e.preventDefault()}
                     edge="end"
-                    size="large">
+                    size="large"
+                  >
                     {showPswd2 ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>

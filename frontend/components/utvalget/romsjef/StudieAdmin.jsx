@@ -179,7 +179,8 @@ const StudieAdmin = (props) => {
                             }
                             color="primary"
                             aria-label="slett"
-                            size="large">
+                            size="large"
+                          >
                             <DeleteIcon />
                           </IconButton>
                         </TableCell>
