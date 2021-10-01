@@ -16,7 +16,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./NavBar";
 
 // Material-UI
-import { Box, Alert, Snackbar, styled, useMediaQuery, Container } from "@mui/material";
+import { Alert, Snackbar, styled, useMediaQuery, Container } from "@mui/material";
 
 const RootStyle = styled("div")({
   display: "flex",

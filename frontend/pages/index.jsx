@@ -3,16 +3,14 @@ import React, { useState } from "react";
 import "simplebar/src/simplebar.css";
 
 // Components
-import Kunngjoringer from "../components/hjem/Kunngjoringer";
-import KunngjoringCard from "../components/hjem/KunngjoringCard";
-import Bursdag from "../components/hjem/Bursdag";
-import Layout from "../components/Layout";
-import Kalender from "../components/hjem/Kalender";
-import KalenderCard from "../components/hjem/KalenderCard";
+import Kunngjoringer from "@components/hjem/Kunngjoringer";
+import KunngjoringCard from "@components/hjem/KunngjoringCard";
+import Bursdag from "@components/hjem/Bursdag";
+import Layout from "@components/Layout";
+import Kalender from "@components/hjem/Kalender";
+import KalenderCard from "@components/hjem/KalenderCard";
 
-import Dialog from "@mui/material/Dialog";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
+import { Dialog, Grid, Stack } from "@mui/material";
 
 // Next
 import Head from "next/head";

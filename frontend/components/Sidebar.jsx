@@ -191,7 +191,7 @@ const Sidebar = (props) => {
                 ...(router.pathname === path && activeRootStyle),
               }}
             >
-              <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
+              <ListItemIconStyle>{icon && <item.icon fontSize="small" />}</ListItemIconStyle>
               <ListItemText disableTypography primary={title} />
             </ListItemStyle>
           );
@@ -208,7 +208,7 @@ const Sidebar = (props) => {
                 ...(router.pathname === path && activeRootStyle),
               }}
             >
-              <ListItemIconStyle>{icon && <item.icon />}</ListItemIconStyle>
+              <ListItemIconStyle>{icon && <item.icon fontSize="small" />}</ListItemIconStyle>
               <ListItemText disableTypography primary={title} />
             </ListItemStyle>
           );
