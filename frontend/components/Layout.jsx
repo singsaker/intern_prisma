@@ -16,7 +16,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./NavBar";
 
 // Material-UI
-import { Box, Alert, Snackbar, styled, useMediaQuery } from "@mui/material";
+import { Box, Alert, Snackbar, styled, useMediaQuery, Container } from "@mui/material";
 
 const RootStyle = styled("div")({
   display: "flex",
@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
       <RootStyle>
         <Navbar onOpenSidebar={() => setOpen(true)} />
         <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-        <Box sx={{ px: 5, py: 15, flexGrow: 1 }}>{children}</Box>
+        <Container sx={{ py: 15, flexGrow: 1 }}>{children}</Container>
       </RootStyle>
     </>
   );
