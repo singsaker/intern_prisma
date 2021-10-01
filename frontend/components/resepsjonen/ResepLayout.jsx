@@ -1,5 +1,5 @@
 import { Global } from "@emotion/react";
-import { Box } from "@material-ui/system";
+import { Box } from "@mui/system";
 
 const ResepLayout = (props) => {
   return (

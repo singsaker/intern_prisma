@@ -9,11 +9,11 @@ import { GET_ARBEIDSKATEGORIER } from "../../src/query/regi";
 // Misc
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 
 // Components
 import Spinner from "../CustomSpinner";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 const Registrer = () => {
   const dispatch = useDispatch();

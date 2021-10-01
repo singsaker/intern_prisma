@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Head from "next/head";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Dialog from "@material-ui/core/Dialog";
-import CloseIcon from "@material-ui/icons/Close";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Components
 import RolleOversikt from "../../../components/utvalget/romsjef/RolleOversikt";
@@ -57,7 +57,7 @@ const Romsjef = () => {
 
       {/* Ny beboer-modal */}
       <Dialog fullWidth maxWidth="sm" onClose={toggleNyBeboer} open={nyBeboerModal}>
-        <Grid container justify="flex-end" item xs={12}>
+        <Grid container justifyContent="flex-end" item xs={12}>
           <CloseIcon onClick={() => toggleNyBeboer()} style={{ cursor: "pointer", margin: "8px" }} />
         </Grid>
         <NyBeboerInput toggleNyBeboer={toggleNyBeboer} />

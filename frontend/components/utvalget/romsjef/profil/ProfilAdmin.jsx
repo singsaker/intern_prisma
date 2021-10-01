@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
+import Grid from "@mui/material/Grid";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import SaveIcon from "@material-ui/icons/Save";
-import TextField from "@material-ui/core/TextField";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Typography from "@material-ui/core/Typography";
-import FlightIcon from "@material-ui/icons/Flight";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import SaveIcon from "@mui/icons-material/Save";
+import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
+import FlightIcon from "@mui/icons-material/Flight";
 
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_ROLLER } from "../../../../src/query/regi";
 import { getRoller } from "../../../../src/actions/regi";
 import { GET_ALLE_ROM } from "../../../../src/query/rom";
@@ -148,7 +148,7 @@ const ProfilAdmin = (props) => {
     oppdaterPermStatusMutation.loading
   )
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );
@@ -223,7 +223,7 @@ const ProfilAdmin = (props) => {
               )}
             </Grid>
 
-            <Grid container justify="flex-end" spacing={2}>
+            <Grid container justifyContent="flex-end" spacing={2}>
               <Grid item>
                 <Button
                   variant="text"

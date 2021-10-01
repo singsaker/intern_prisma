@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 // Apollo
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 
 // Next
 import Head from "next/head";

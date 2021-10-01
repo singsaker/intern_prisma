@@ -1,5 +1,5 @@
-import { CircularProgress } from "@material-ui/core";
-import { Box } from "@material-ui/system";
+import { CircularProgress } from "@mui/material";
+import { Box } from "@mui/system";
 
 const Spinner = () => {
   return (

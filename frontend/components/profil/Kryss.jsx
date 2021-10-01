@@ -8,22 +8,22 @@ import { UPDATE_PREFS, GET_BEBOER_PREFS } from "../../src/query/beboer";
 // Components
 import Spinner from "../CustomSpinner";
 
-import { useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { isNumber } from "lodash";
 
 // Material-UI
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import SaveIcon from "@material-ui/icons/Save";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import SaveIcon from "@mui/icons-material/Save";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Kryss = () => {
   const dispatch = useDispatch();
@@ -157,7 +157,7 @@ const Kryss = () => {
             />
           </Grid>
         </Grid>
-        <Grid item container direction="row" justify="flex-end">
+        <Grid item container direction="row" justifyContent="flex-end">
           <Button variant="contained" type="submit" size="large" color="primary" startIcon={<SaveIcon />}>
             Lagre
           </Button>

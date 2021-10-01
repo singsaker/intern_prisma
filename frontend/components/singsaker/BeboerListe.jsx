@@ -11,20 +11,20 @@ import { GET_BEBOERE } from "../../src/query/beboer";
 
 // Misc
 import { filter } from "lodash";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 
 // Material UI
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Chip from "@material-ui/core/Chip";
-import { Stack, TablePagination } from "@material-ui/core";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
+import { Hidden, Stack, TablePagination, useMediaQuery, useTheme } from "@mui/material";
 
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -72,6 +72,8 @@ const BeboerListe = (props) => {
   const [filterName, setFilterName] = useState("");
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -117,10 +119,13 @@ const BeboerListe = (props) => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ pl: 3 }}>Navn</TableCell>
-              <TableCell>Epost</TableCell>
-              <TableCell>Studie</TableCell>
-              <TableCell>Universitet</TableCell>
-              <TableCell>Rom</TableCell>
+              <Hidden smDown>
+                <TableCell>Epost</TableCell>
+                <TableCell>Studie</TableCell>
+                <TableCell>Universitet</TableCell>
+                <TableCell>Rom</TableCell>
+                <TableCell></TableCell>
+              </Hidden>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -143,15 +148,17 @@ const BeboerListe = (props) => {
                       </Typography>
                     </Stack>
                   </TableCell>
-                  <TableCell align="left">{epost}</TableCell>
-                  <TableCell align="left">{studie && studie.navn}</TableCell>
-                  <TableCell align="left">{skole.navn}</TableCell>
-                  <TableCell align="left">
-                    <Chip variant="outlined" avatar={<Avatar>#</Avatar>} label={rom && rom.navn} />
-                  </TableCell>
-                  <TableCell sx={{ pr: 3 }} align="right">
-                    {rolle.navn}
-                  </TableCell>
+                  <Hidden smDown>
+                    <TableCell align="left">{epost}</TableCell>
+                    <TableCell align="left">{studie && studie.navn}</TableCell>
+                    <TableCell align="left">{skole.navn}</TableCell>
+                    <TableCell align="left">
+                      <Chip variant="outlined" avatar={<Avatar>#</Avatar>} label={rom && rom.navn} />
+                    </TableCell>
+                    <TableCell sx={{ pr: 3 }} align="right">
+                      {rolle.navn}
+                    </TableCell>
+                  </Hidden>
                 </TableRow>
               );
             })}
@@ -172,11 +179,12 @@ const BeboerListe = (props) => {
           )}
         </Table>
         <TablePagination
-          rowsPerPageOptions={[25, 50, 150]}
           component="div"
           count={beboere.length}
           rowsPerPage={rowsPerPage}
           page={page}
+          labelRowsPerPage={isMobile ? "" : "Rader per side:"}
+          rowsPerPageOptions={isMobile ? -1 : [25, 50, 150]}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />

@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
 import ReactTextFormat from "react-text-format";
 import formaterDatoOgKlokke from "../../helpers/formaterDatoOgKlokke";
 
@@ -16,7 +16,7 @@ const KunngjoringCard = (props) => {
   return (
     <Card variant="outlined">
       <CardContent>
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item></Grid>
           <Grid item>
             <CloseIcon onClick={() => props.toggleKunngjoringModal()} style={{ cursor: "pointer", margin: "8px" }} />

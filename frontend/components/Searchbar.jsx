@@ -1,8 +1,8 @@
 import { useState } from "react";
 // material
-import { styled, alpha } from "@material-ui/core/styles";
-import { Input, Slide, Button, InputAdornment, ClickAwayListener, IconButton } from "@material-ui/core";
-import Search from "@material-ui/icons/Search";
+import { styled, alpha } from "@mui/material/styles";
+import { Input, Slide, Button, InputAdornment, ClickAwayListener, IconButton } from "@mui/material";
+import Search from "@mui/icons-material/Search";
 
 // ----------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Card from "react-bootstrap/Card";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_VAKTER } from "../../src/query/vakt";
 import { useDispatch, useSelector } from "react-redux";
 import { getVakter } from "../../src/actions/vakt";

@@ -1,9 +1,9 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ const NyBeboerSoknad = () => {
       <Card style={{ maxHeight: "100%", overflowY: "auto" }}>
         <CardContent>
           {/* Header: */}
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <Typography color="primary" variant="h5">
               {soknad.navn}
             </Typography>
@@ -53,7 +53,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Epost
@@ -65,7 +65,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Født
@@ -77,7 +77,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Studie
@@ -89,7 +89,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Skole
@@ -101,7 +101,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Fagbrev
@@ -113,7 +113,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kompetanse
@@ -129,7 +129,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjenner
@@ -141,7 +141,7 @@ const NyBeboerSoknad = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjennskap

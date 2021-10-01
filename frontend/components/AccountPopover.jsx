@@ -1,16 +1,16 @@
 import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // material
-import { alpha } from "@material-ui/core/styles";
-import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from "@material-ui/core";
+import { alpha } from "@mui/material/styles";
+import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from "@mui/material";
 // components
 import MenuPopover from "./MenuPopover";
 //
-import Person from "@material-ui/icons/Person";
-import Settings from "@material-ui/icons/Settings";
+import Person from "@mui/icons-material/Person";
+import Settings from "@mui/icons-material/Settings";
 
 // Beboer Query
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { GET_BEBOER } from "../src/query/beboer";
 import { getBeboer } from "../src/actions/beboer";
 // ----------------------------------------------------------------------
@@ -86,6 +86,7 @@ export default function AccountPopover() {
             },
           }),
         }}
+        size="large"
       >
         <Avatar src="https://source.unsplash.com/200x200/?mugshot" alt="photoURL" />
       </IconButton>

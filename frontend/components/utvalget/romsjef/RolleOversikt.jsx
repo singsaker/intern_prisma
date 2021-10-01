@@ -6,10 +6,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import RolleOversiktPie from "./RolleOversiktPie";
 
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 const RolleOversikt = () => {
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
@@ -49,7 +49,7 @@ const RolleOversikt = () => {
         <Typography variant="h5" component="h2" color="primary">
           Rollefordeling
         </Typography>
-        <Grid container justify="center" style={{ height: "200px" }}>
+        <Grid container justifyContent="center" style={{ height: "200px" }}>
           <RolleOversiktPie data={rolleData} />
         </Grid>
       </CardContent>

@@ -1,15 +1,15 @@
 import React from "react";
 
 // Material-UI
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import CloseIcon from "@material-ui/icons/Close";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import DOMPurify from "dompurify";
 import formaterDato from "../../../../helpers/formaterDato";
@@ -31,7 +31,7 @@ const SoknadModal = (props) => {
       <Card style={{ maxHeight: "100%", overflowY: "auto" }}>
         <CardContent>
           {/* Header: */}
-          <Grid container justify="space-between">
+          <Grid container justifyContent="space-between">
             <Grid item>
               <Typography color="primary" variant="h5">
                 {soknad.navn}
@@ -64,7 +64,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Epost
@@ -76,7 +76,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Født
@@ -88,7 +88,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Studie
@@ -100,7 +100,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Skole
@@ -112,7 +112,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Fagbrev
@@ -124,7 +124,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kompetanse
@@ -140,7 +140,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjenner
@@ -152,7 +152,7 @@ const SoknadModal = (props) => {
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item justify="center" container spacing={2}>
+              <Grid item justifyContent="center" container spacing={2}>
                 <Grid item xs={4}>
                   <Typography color="textPrimary" style={{ float: "right" }} variant="body1">
                     Kjennskap
@@ -186,7 +186,7 @@ const SoknadModal = (props) => {
           </Grid>
         </CardContent>
         <CardActions>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Button
               variant="contained"
               endIcon={<ArrowForwardIcon />}

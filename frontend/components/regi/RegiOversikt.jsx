@@ -5,7 +5,7 @@ import Card from "../CustomCard";
 import { GET_REGISTATUS } from "../../src/query/regi";
 import { getRegiStatus } from "../../src/actions/regi";
 import { useDispatch, useSelector } from "react-redux";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import sekunderTilTid from "../../helpers/sekunderTilTid";
 import SpinnerComponent from "../CustomSpinner";
 

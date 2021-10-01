@@ -1,7 +1,7 @@
 // material
-import { styled } from "@material-ui/core/styles";
-import { Toolbar, OutlinedInput, InputAdornment } from "@material-ui/core";
-import Search from "@material-ui/icons/Search";
+import { styled } from "@mui/material/styles";
+import { Toolbar, OutlinedInput, InputAdornment } from "@mui/material";
+import Search from "@mui/icons-material/Search";
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ const RootStyle = styled(Toolbar)(({ theme }) => ({
   height: 96,
   display: "flex",
   justifyContent: "space-between",
-  padding: theme.spacing(0, 1, 0, 3),
+  padding: theme.spacing(0, 1, 0, 2),
 }));
 
 const SearchStyle = styled(OutlinedInput)(({ theme }) => ({

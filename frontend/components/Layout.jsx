@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { ER_INNLOGGET } from "../src/query/auth";
 import { loggInn, loggUt } from "../src/actions/auth";
 
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { useCookies } from "react-cookie";
 
 // Components
@@ -16,7 +16,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./NavBar";
 
 // Material-UI
-import { Box, Alert, Snackbar, styled, useMediaQuery } from "@material-ui/core";
+import { Alert, Snackbar, styled, useMediaQuery, Container } from "@mui/material";
 
 const RootStyle = styled("div")({
   display: "flex",
@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
       <RootStyle>
         <Navbar onOpenSidebar={() => setOpen(true)} />
         <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-        <Box sx={{ px: 5, py: 15, flexGrow: 1 }}>{children}</Box>
+        <Container sx={{ py: 15, flexGrow: 1 }}>{children}</Container>
       </RootStyle>
     </>
   );

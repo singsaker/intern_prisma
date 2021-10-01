@@ -1,10 +1,10 @@
 import React from "react";
 
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import AddIcon from "@material-ui/icons/Add";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import AddIcon from "@mui/icons-material/Add";
 
 const Kontrollpanel = (props) => {
   return (

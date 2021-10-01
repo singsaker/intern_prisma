@@ -3,15 +3,14 @@ import React, { useState } from "react";
 import "simplebar/src/simplebar.css";
 
 // Components
-import Kunngjoringer from "../components/hjem/Kunngjoringer";
-import KunngjoringCard from "../components/hjem/KunngjoringCard";
-import Bursdag from "../components/hjem/Bursdag";
-import Layout from "../components/Layout";
-import Kalender from "../components/hjem/Kalender";
-import KalenderCard from "../components/hjem/KalenderCard";
+import Kunngjoringer from "@components/hjem/Kunngjoringer";
+import KunngjoringCard from "@components/hjem/KunngjoringCard";
+import Bursdag from "@components/hjem/Bursdag";
+import Layout from "@components/Layout";
+import Kalender from "@components/hjem/Kalender";
+import KalenderCard from "@components/hjem/KalenderCard";
 
-import Dialog from "@material-ui/core/Dialog";
-import Grid from "@material-ui/core/Grid";
+import { Dialog, Grid, Stack } from "@mui/material";
 
 // Next
 import Head from "next/head";
@@ -22,7 +21,8 @@ const Hjem = () => {
 
   const [seDetaljertDag, setSeDetaljertDag] = useState(false);
   const [dato, setDato] = useState(0);
-  const [bursdager, setBursdager] = useState([])
+  const [bursdager, setBursdager] = useState([]);
+  const [vakter, setVakter] = useState([]);
 
   const toggleKunngjoringModal = (id) => {
     if (!kunngjoringModal) {
@@ -31,14 +31,15 @@ const Hjem = () => {
     setKunngjoringModal(!kunngjoringModal);
   };
 
-  const toggleSeDetaljertDag = (dato, bursdager) => {
+  const toggleSeDetaljertDag = (dato, bursdager, vakter) => {
     if (!seDetaljertDag) {
       setDato(dato);
       setBursdager(bursdager);
+      setVakter(vakter);
     }
     console.log(dato);
     setSeDetaljertDag(!seDetaljertDag);
-  }
+  };
 
   return (
     <Layout>
@@ -52,19 +53,20 @@ const Hjem = () => {
       </Dialog>
 
       <Dialog open={seDetaljertDag} onClose={toggleSeDetaljertDag}>
-        <KalenderCard toggleSeDetaljertDag={toggleSeDetaljertDag} dato={dato} bursdager={bursdager} />
+        <KalenderCard toggleSeDetaljertDag={toggleSeDetaljertDag} dato={dato} bursdager={bursdager} vakter={vakter} />
       </Dialog>
 
       <Grid container spacing={4}>
-        <Grid item xs={12} md={8}>
-          <Kunngjoringer toggleKunngjoringModal={(id) => toggleKunngjoringModal(id)} />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          {/* TODO: Fikse denne komponenten. Det er noe her som rendres i loop! */}
-          <Bursdag />
-        </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={7}>
           <Kalender toggleSeDetaljertDag={toggleSeDetaljertDag} />
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <Stack spacing={2}>
+            <Kunngjoringer toggleKunngjoringModal={(id) => toggleKunngjoringModal(id)} />
+
+            {/* TODO: Fikse denne komponenten. Det er noe her som rendres i loop! */}
+            <Bursdag />
+          </Stack>
         </Grid>
       </Grid>
     </Layout>

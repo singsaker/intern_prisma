@@ -8,21 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBeboerEpostPrefs, oppdaterBeboerEpostPrefs } from "../../src/actions/beboer";
 import { UPDATE_BEBOER_EPOST_PREFS, GET_BEBOER_EPOST_PREFS } from "../../src/query/beboer";
 
-import { useMutation, useLazyQuery } from "@apollo/react-hooks";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { isNumber } from "lodash";
 
 // Material-UI
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import SaveIcon from "@material-ui/icons/Save";
-import Snackbar from "@material-ui/core/Snackbar";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import SaveIcon from "@mui/icons-material/Save";
+import Snackbar from "@mui/material/Snackbar";
 
-import Alert from "@material-ui/core/Alert";
-import FormControl from "@material-ui/core/FormControl";
+import Alert from "@mui/material/Alert";
+import FormControl from "@mui/material/FormControl";
 
 const Varsler = () => {
   const dispatch = useDispatch();
@@ -118,7 +118,7 @@ const Varsler = () => {
             </FormGroup>
           </FormControl>
         </Grid>
-        <Grid container item direction="row" justify="flex-end">
+        <Grid container item direction="row" justifyContent="flex-end">
           <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
             Lagre
           </Button>

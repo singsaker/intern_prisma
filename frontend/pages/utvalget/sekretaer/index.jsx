@@ -6,8 +6,8 @@ import VervListe from "../../../components/utvalget/sekretaer/aapmandsverv/VervL
 import ProfilCard from "../../../components/ProfilCard";
 import VervAdmin from "../../../components/utvalget/sekretaer/aapmandsverv/VervAdmin";
 
-import Dialog from "@material-ui/core/Dialog";
-import Grid from "@material-ui/core/Grid";
+import Dialog from "@mui/material/Dialog";
+import Grid from "@mui/material/Grid";
 
 import Head from "next/head";
 

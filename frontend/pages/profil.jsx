@@ -1,7 +1,7 @@
 import React from "react";
 
 // Material-UI
-import { Breadcrumbs, Typography, Link, Box } from "@material-ui/core";
+import { Breadcrumbs, Typography, Link, Box } from "@mui/material";
 
 // Redux
 // import { useSelector } from "react-redux";

@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
 // Material-UI
-import TextField from "@material-ui/core/TextField";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import DatePicker from "@material-ui/lab/DatePicker";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/core/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
 import { flyttBeboer } from "../../../../src/actions/beboer";
 import { FLYTT_BEBOER } from "../../../../src/query/beboer";
@@ -76,7 +76,7 @@ const ProfilRomflytt = (props) => {
 
   if (loading)
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <CircularProgress />
       </Grid>
     );
@@ -127,7 +127,7 @@ const ProfilRomflytt = (props) => {
           />
         </LocalizationProvider>
 
-        <Grid container justify="flex-end">
+        <Grid container justifyContent="flex-end">
           <Button variant="contained" color="primary" size="large" startIcon={<ArrowForwardIcon />} type="submit">
             Flytt
           </Button>
