@@ -9,7 +9,7 @@ datasource db {
 
 model beboer {
   id               Int             @id @default(autoincrement()) @db.UnsignedInt
-  bruker_id        Int?            @unique(map: "bruker_id") @db.UnsignedInt
+  bruker_id        Int?            @unique @db.UnsignedInt
   fornavn          String          @db.VarChar(20)
   mellomnavn       String?         @db.VarChar(40)
   etternavn        String          @db.VarChar(40)
@@ -22,19 +22,21 @@ model beboer {
   klassetrinn      Int             @default(0) @db.UnsignedInt
   alkoholdepositum Boolean         @default(false)
   rolle_id         Int             @db.UnsignedInt
-  epost            String?         @unique(map: "epost") @db.VarChar(40)
+  epost            String?         @unique @db.VarChar(40)
   bilde            String?         @db.VarChar(256)
   ansiennitet      Int             @default(0) @db.UnsignedSmallInt
   kjonn            Int             @default(0) @db.UnsignedTinyInt
-  kundenr          Int?            @unique(map: "kundenr") @db.UnsignedMediumInt
+  kundenr          Int?            @unique @db.UnsignedMediumInt
   status           Int             @db.TinyInt
   rom_id           Int?            @db.UnsignedInt
   prefs_id         Int?            @db.UnsignedInt
-  bruker           bruker?         @relation(fields: [bruker_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_1")
-  rolle            rolle           @relation(fields: [rolle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_3")
-  rom              rom?            @relation(fields: [rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_2")
-  skole            skole           @relation(fields: [skole_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_4")
-  studie           studie          @relation(fields: [studie_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_5")
+  pinkode_id       Int?            @unique @db.UnsignedInt
+  bruker           bruker?         @relation(fields: [bruker_id], references: [id])
+  pinkode          pinkode?        @relation(fields: [pinkode_id], references: [id])
+  rolle            rolle           @relation(fields: [rolle_id], references: [id])
+  rom              rom?            @relation(fields: [rom_id], references: [id])
+  skole            skole           @relation(fields: [skole_id], references: [id])
+  studie           studie          @relation(fields: [studie_id], references: [id])
   beboer_verv      beboer_verv[]
   drikke_pafyll    drikke_pafyll[]
   kjop             kjop[]
@@ -43,20 +45,20 @@ model beboer {
   romhistorikk     romhistorikk[]
   vare_pafyll      vare_pafyll[]
 
-  @@index([rolle_id], map: "rolle_id")
-  @@index([rom_id], map: "rom_id")
-  @@index([skole_id], map: "skole_id")
-  @@index([studie_id], map: "studie_id")
+  @@index([rolle_id], name: "rolle_id")
+  @@index([rom_id], name: "rom_id")
+  @@index([skole_id], name: "skole_id")
+  @@index([studie_id], name: "studie_id")
 }
 
 model beboer_verv {
   beboer_id Int    @db.UnsignedInt
   verv_id   Int    @db.UnsignedInt
-  beboer    beboer @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_verv_ibfk_1")
-  verv      verv   @relation(fields: [verv_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_verv_ibfk_2")
+  beboer    beboer @relation(fields: [beboer_id], references: [id])
+  verv      verv   @relation(fields: [verv_id], references: [id])
 
-  @@unique([beboer_id, verv_id], map: "beboer_id")
-  @@index([verv_id], map: "verv_id")
+  @@unique([beboer_id, verv_id], name: "beboer_id")
+  @@index([verv_id], name: "verv_id")
 }
 
 model bruker {
@@ -77,11 +79,11 @@ model drikke {
   kommentar       String?          @db.TinyText
   produktnr       Int?             @db.UnsignedInt
   kategori_id     Int?             @db.UnsignedInt
-  drikke_kategori drikke_kategori? @relation(fields: [kategori_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "drikke_ibfk_1")
+  drikke_kategori drikke_kategori? @relation(fields: [kategori_id], references: [id])
   drikke_pafyll   drikke_pafyll[]
   kryss           kryss[]
 
-  @@index([kategori_id], map: "kategori_id")
+  @@index([kategori_id], name: "kategori_id")
 }
 
 model drikke_kategori {
@@ -97,11 +99,11 @@ model drikke_pafyll {
   drikke_id Int      @db.UnsignedInt
   antall    Int      @db.SmallInt
   tid       DateTime @default(now()) @db.DateTime(0)
-  beboer    beboer   @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "drikke_pafyll_ibfk_1")
-  drikke    drikke   @relation(fields: [drikke_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "drikke_pafyll_ibfk_2")
+  beboer    beboer   @relation(fields: [beboer_id], references: [id])
+  drikke    drikke   @relation(fields: [drikke_id], references: [id])
 
-  @@index([beboer_id], map: "beboer_id")
-  @@index([drikke_id], map: "drikke_id")
+  @@index([beboer_id], name: "beboer_id")
+  @@index([drikke_id], name: "drikke_id")
 }
 
 model kjop {
@@ -110,11 +112,11 @@ model kjop {
   vare_id   Int      @db.UnsignedInt
   antall    Int      @db.SmallInt
   tid       DateTime @default(now()) @db.DateTime(0)
-  beboer    beboer   @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "kjop_ibfk_2")
-  vare      vare     @relation(fields: [vare_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "kjop_ibfk_1")
+  beboer    beboer   @relation(fields: [beboer_id], references: [id])
+  vare      vare     @relation(fields: [vare_id], references: [id])
 
-  @@index([beboer_id], map: "beboer_id")
-  @@index([vare_id], map: "vare_id")
+  @@index([beboer_id], name: "beboer_id")
+  @@index([vare_id], name: "vare_id")
 }
 
 model kryss {
@@ -124,11 +126,11 @@ model kryss {
   antall    Int      @db.SmallInt
   tid       DateTime @default(now()) @db.DateTime(0)
   fakturert Boolean  @default(false)
-  beboer    beboer   @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "kryss_ibfk_1")
-  drikke    drikke   @relation(fields: [drikke_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "kryss_ibfk_2")
+  beboer    beboer   @relation(fields: [beboer_id], references: [id])
+  drikke    drikke   @relation(fields: [drikke_id], references: [id])
 
-  @@index([beboer_id], map: "beboer_id")
-  @@index([drikke_id], map: "drikke_id")
+  @@index([beboer_id], name: "beboer_id")
+  @@index([drikke_id], name: "drikke_id")
 }
 
 model kunngjoring {
@@ -137,13 +139,21 @@ model kunngjoring {
   tekst     String?  @db.Text
   publisert DateTime @default(now()) @db.DateTime(0)
   beboer_id Int      @db.UnsignedInt
-  beboer    beboer   @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "kunngjoring_ibfk_1")
+  beboer    beboer   @relation(fields: [beboer_id], references: [id])
 
-  @@index([beboer_id], map: "beboer_id")
+  @@index([beboer_id], name: "beboer_id")
+}
+
+model pinkode {
+  id         Int     @id @default(autoincrement()) @db.UnsignedInt
+  kode       Int?    @db.UnsignedInt
+  resep      Boolean @default(false)
+  vinkjeller Boolean @default(false)
+  beboer     beboer?
 }
 
 model prefs {
-  beboer_id  Int      @unique(map: "beboerId") @db.UnsignedInt
+  beboer_id  Int      @unique @db.UnsignedInt
   resepp     Boolean? @default(true)
   vinkjeller Boolean? @default(true)
   pinboo     Boolean? @default(false)
@@ -166,11 +176,11 @@ model rom {
   id           Int            @id @default(autoincrement()) @db.UnsignedInt
   romtype_id   Int            @db.UnsignedInt
   navn         String         @db.VarChar(20)
-  romtype      romtype        @relation(fields: [romtype_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rom_ibfk_1")
+  romtype      romtype        @relation(fields: [romtype_id], references: [id])
   beboer       beboer[]
   romhistorikk romhistorikk[]
 
-  @@index([romtype_id], map: "romtype_id")
+  @@index([romtype_id], name: "romtype_id")
 }
 
 model romhistorikk {
@@ -179,11 +189,11 @@ model romhistorikk {
   beboer_id  Int       @db.UnsignedInt
   innflyttet DateTime  @db.DateTime(0)
   utflyttet  DateTime? @db.DateTime(0)
-  beboer     beboer    @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "romhistorikk_ibfk_1")
-  rom        rom       @relation(fields: [rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "romhistorikk_ibfk_2")
+  beboer     beboer    @relation(fields: [beboer_id], references: [id])
+  rom        rom       @relation(fields: [rom_id], references: [id])
 
-  @@index([beboer_id], map: "beboer_id")
-  @@index([rom_id], map: "rom_id")
+  @@index([beboer_id], name: "beboer_id")
+  @@index([rom_id], name: "rom_id")
 }
 
 model romtype {
@@ -204,6 +214,22 @@ model studie {
   beboer beboer[]
 }
 
+model vakt {
+  id           Int      @id @default(autoincrement()) @db.UnsignedInt
+  bruker_id    Int?     @db.UnsignedInt
+  vakttype     String   @db.VarChar(1)
+  dato         DateTime @db.Date
+  bekreftet    Boolean?
+  bytte        Boolean?
+  autogenerert Boolean? @default(true)
+  dobbelvakt   Boolean?
+  straffevakt  Boolean?
+  vaktbytte_id String?  @db.VarChar(255)
+  bruker       bruker?  @relation(fields: [bruker_id], references: [id])
+
+  @@index([bruker_id], name: "bruker_id")
+}
+
 model vare {
   id            Int            @id @default(autoincrement()) @db.UnsignedInt
   navn          String         @db.VarChar(255)
@@ -212,11 +238,11 @@ model vare {
   aktiv         Boolean?
   pris          Decimal?       @db.Decimal(65, 2)
   produktnr     Int?           @db.UnsignedMediumInt
-  vare_kategori vare_kategori? @relation(fields: [kategori_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vare_ibfk_1")
+  vare_kategori vare_kategori? @relation(fields: [kategori_id], references: [id])
   kjop          kjop[]
   vare_pafyll   vare_pafyll[]
 
-  @@index([kategori_id], map: "kategori_id")
+  @@index([kategori_id], name: "kategori_id")
 }
 
 model vare_kategori {
@@ -232,35 +258,19 @@ model vare_pafyll {
   vare_id   Int      @db.UnsignedInt
   antall    Int      @db.SmallInt
   tid       DateTime @default(now()) @db.DateTime(0)
-  beboer    beboer   @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vare_pafyll_ibfk_2")
-  vare      vare     @relation(fields: [vare_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vare_pafyll_ibfk_1")
+  beboer    beboer   @relation(fields: [beboer_id], references: [id])
+  vare      vare     @relation(fields: [vare_id], references: [id])
 
-  @@index([beboer_id], map: "beboer_id")
-  @@index([vare_id], map: "vare_id")
+  @@index([beboer_id], name: "beboer_id")
+  @@index([vare_id], name: "vare_id")
 }
 
 model verv {
   id          Int           @id @default(autoincrement()) @db.UnsignedInt
-  navn        String        @unique(map: "navn") @db.VarChar(20)
+  navn        String        @unique @db.VarChar(20)
   regitimer   Int           @default(0) @db.UnsignedTinyInt
   utvalg      Boolean       @default(false)
   epost       String?       @db.VarChar(40)
   beskrivelse String?       @db.Text
   beboer_verv beboer_verv[]
-}
-
-model vakt {
-  id           Int      @id @default(autoincrement()) @db.UnsignedInt
-  bruker_id    Int?     @db.UnsignedInt
-  vakttype     String   @db.VarChar(1)
-  dato         DateTime @db.Date
-  bekreftet    Boolean?
-  bytte        Boolean?
-  autogenerert Boolean? @default(true)
-  dobbelvakt   Boolean?
-  straffevakt  Boolean?
-  vaktbytte_id String?  @db.VarChar(255)
-  bruker       bruker?  @relation(fields: [bruker_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vakt_ibfk_1")
-
-  @@index([bruker_id], map: "bruker_id")
 }
