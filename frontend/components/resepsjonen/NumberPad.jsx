@@ -1,32 +1,44 @@
-import { Button, IconButton, Typography, Box, Card, Stack, Paper } from "@material-ui/core";
+import { Button, IconButton, Typography, Box, Card, Stack, Paper } from "@mui/material";
 import { useState } from "react";
-import KeyboardBackspaceOutlinedIcon from "@material-ui/icons/KeyboardBackspaceOutlined";
-import ClearOutlinedIcon from "@material-ui/icons/ClearOutlined";
-import CircleIcon from "@material-ui/icons/Circle";
+import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
+import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
+import CircleIcon from "@mui/icons-material/Circle";
+import { styled } from "@mui/system";
+import { motion, AnimatePresence } from "framer-motion";
+
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  margin: theme.spacing(2, 2, 0, 2),
+  width: theme.spacing(6),
+  height: theme.spacing(6),
+  color: "white",
+}));
+
+const NumberButton = (props) => {
+  return (
+    <Button
+      onClick={props.onClick}
+      sx={{
+        width: (theme) => theme.spacing(13),
+        height: (theme) => theme.spacing(10),
+        borderRadius: 0,
+      }}
+    >
+      <Typography variant="h4" sx={{ color: "grey.200" }}>
+        {props.number}
+      </Typography>
+    </Button>
+  );
+};
 
 const NumberPad = (props) => {
   const [pin, setPin] = useState("");
 
-  const addNumber = (number) => (number != undefined ? setPin(pin + number) : setPin(number));
+  const addNumber = (number) => setPin(pin + number);
   const removeNumber = () => pin != undefined && setPin(pin.slice(0, -1));
 
   const numbers = "123456789".split("");
   const rows = numbers
-    .map((n) => (
-      <Button
-        key={n}
-        onClick={() => addNumber(n)}
-        sx={{
-          width: (theme) => theme.spacing(13),
-          height: (theme) => theme.spacing(10),
-          borderRadius: "0",
-        }}
-      >
-        <Typography variant="h4" sx={{ color: "grey.200" }}>
-          {n}
-        </Typography>
-      </Button>
-    ))
+    .map((n) => <NumberButton key={n} number={n} onClick={() => addNumber(n)} />)
     .reduce((r, element, index) => {
       index % 3 === 0 && r.push([]);
       r[r.length - 1].push(element);
@@ -42,60 +54,42 @@ const NumberPad = (props) => {
 
   return (
     <Card sx={{ width: "fit-content", p: 2 }}>
-      <Paper sx={{ bgcolor: "grey.900", p: 3, mb: 2, height: 56, minWidth: 350 }}>
+      <Paper sx={{ bgcolor: "grey.900", p: 2, mb: 2, height: 56, minWidth: 350 }}>
         <Box display="flex" justifyContent="center">
           <Stack direction="row" spacing={1}>
-            {pin.split("").map((n, i) => (
-              <CircleIcon sx={{ fontSize: 10 }} key={i} color="disabled" />
-            ))}
+            <AnimatePresence>
+              {pin.split("").map((n, i) => (
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    default: { duration: 0.1 },
+                  }}
+                  key={i}
+                >
+                  <CircleIcon sx={{ fontSize: 10 }} color="disabled" />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </Stack>
         </Box>
       </Paper>
 
-      <Box display="flex" flexDirection="column" alignItems="center" mx={-2}>
+      <Box display="flex" flexDirection="column" alignItems="center" mx={-2} mb={3}>
         <div>{rows}</div>
 
         <Stack direction="row">
-          <IconButton
-            onClick={() => setPin("")}
-            sx={{
-              mx: 2,
-              mt: 2,
-              width: (theme) => theme.spacing(6),
-              height: (theme) => theme.spacing(6),
-              color: "white",
-            }}
-          >
+          <StyledIconButton onClick={() => setPin("")}>
             <ClearOutlinedIcon />
-          </IconButton>
-          <Button
-            onClick={() => addNumber(0)}
-            sx={{
-              width: (theme) => theme.spacing(13),
-              height: (theme) => theme.spacing(10),
-              borderRadius: "0",
-            }}
-          >
-            <Typography variant="h4" sx={{ color: "grey.200" }}>
-              0
-            </Typography>
-          </Button>
-          <IconButton
-            onClick={() => removeNumber()}
-            sx={{
-              mx: 2,
-              mt: 2,
-              width: (theme) => theme.spacing(6),
-              height: (theme) => theme.spacing(6),
-              color: "white",
-            }}
-          >
+          </StyledIconButton>
+          <NumberButton number={0} onClick={() => addNumber(0)} />
+          <StyledIconButton onClick={() => removeNumber()}>
             <KeyboardBackspaceOutlinedIcon />
-          </IconButton>
+          </StyledIconButton>
         </Stack>
       </Box>
 
-      <Button onClick={() => props.code(pin)} size="large" color="inherit" fullWidth sx={{ mt: 3 }} variant="outlined">
+      <Button onClick={() => props.code(pin)} size="large" color="inherit" fullWidth variant="outlined">
         Submit
       </Button>
     </Card>
