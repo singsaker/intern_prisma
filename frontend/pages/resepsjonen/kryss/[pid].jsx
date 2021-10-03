@@ -19,6 +19,7 @@ import {
   Checkbox,
   CardActionArea,
   Stack,
+  Radio,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useReducer, useState } from "react";
@@ -27,10 +28,11 @@ import { GET_AKTIV_DRIKKE } from "../../../src/query/kryss";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CloseIcon from "@mui/icons-material/Close";
 import { motion, AnimatePresence } from "framer-motion";
-import { alpha, useTheme } from "@material-ui/core/styles";
+import { alpha, useTheme } from "@mui/system";
 
 import Link from "next/link";
 import Spinner from "../../../components/resepsjonen/Spinner";
+import NumberPad from "@components/resepsjonen/NumberPad";
 
 function useObjectReducer(PropsWithDefaultValues) {
   const [state, dispatch] = useReducer(reducer, PropsWithDefaultValues);
@@ -89,6 +91,7 @@ const Kryss = () => {
   const [state, updateState] = useObjectReducer();
   const [removeCheck, setRemoveCheck] = useState(false);
   const [pantCheck, setPantCheck] = useState(false);
+  const [pin, setPin] = useState("");
 
   if (beboerLoading || drikkeLoading) return <Spinner />;
   if (beboerError) console.error(beboerError);
@@ -128,220 +131,231 @@ const Kryss = () => {
             </Button>
           </Link>
         </Box>
-        <Typography variant="h4">Kryssing for {beboer.fornavn + " " + beboer.etternavn}</Typography>
-        <Card sx={{ p: 2, mt: 5 }}>
-          <Grid container spacing={3}>
-            <Grid xs item sx={{ m: 2, mb: 1 }}>
-              <Typography variant="subtitle1" sx={{ mb: 3 }}>
-                Velg vare
-              </Typography>
-              <Grid container spacing={2}>
-                {drikke.map((d) => (
-                  <Grid key={d.id} item xs={4}>
-                    <Tooltip
-                      TransitionProps={{ sx: { bgcolor: "grey.900", p: 1 } }}
-                      title={d.kommentar.replace("\r\n", ", ")}
-                    >
-                      <Card
-                        sx={{
-                          ...(d.navn == valg ? activeRootStyle : rootStyle),
-                        }}
-                      >
-                        <CardActionArea onClick={() => handleChange(event, d.navn)} sx={{}}>
-                          <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 2 }}>
-                            <Box
-                              sx={{ width: 1 / 3, height: 80, objectFit: "cover" }}
-                              component="img"
-                              alt="profile"
-                              src={"https://picsum.photos/seed/" + d.id + "/200/300"}
-                            />
-                            <Box
-                              py={2}
-                              pr={2}
-                              display="flex"
-                              alignItems="center"
-                              flexGrow="1"
-                              justifyContent="space-between"
-                            >
-                              <Typography variant="subtitle2">{d.navn}</Typography>
-                              <Checkbox checked={d.navn == valg} color="secondary" />
-                            </Box>
-                          </Stack>
-                        </CardActionArea>
-                      </Card>
-                    </Tooltip>
+        {pin == "" ? (
+          <Box display="flex" alignItems="center" flexDirection="column">
+            <Typography variant="h4" sx={{ mb: 3 }}>
+              Skriv inn pinkode for {beboer.fornavn + " " + beboer.etternavn}
+            </Typography>
+            <NumberPad code={(num) => setPin(num)} />
+          </Box>
+        ) : (
+          <>
+            <Typography variant="h4">Kryssing for {beboer.fornavn + " " + beboer.etternavn}</Typography>
+            <Card sx={{ p: 2, mt: 5 }}>
+              <Grid container spacing={3}>
+                <Grid xs item sx={{ m: 2, mb: 1 }}>
+                  <Typography variant="subtitle1" sx={{ mb: 3 }}>
+                    Velg vare
+                  </Typography>
+                  <Grid container spacing={2}>
+                    {drikke.map((d) => (
+                      <Grid key={d.id} item xs={4}>
+                        <Tooltip
+                          TransitionProps={{ sx: { bgcolor: "grey.900", p: 1 } }}
+                          title={d.kommentar.replace("\r\n", ", ")}
+                        >
+                          <Card
+                            sx={{
+                              ...(d.navn == valg ? activeRootStyle : rootStyle),
+                            }}
+                          >
+                            <CardActionArea onClick={() => handleChange(event, d.navn)} sx={{}}>
+                              <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 2, md: 2 }}>
+                                <Box
+                                  sx={{ width: 1 / 3, height: 80, objectFit: "cover" }}
+                                  component="img"
+                                  alt="profile"
+                                  src={"https://picsum.photos/seed/" + d.id + "/200/300"}
+                                />
+                                <Box
+                                  py={2}
+                                  pr={2}
+                                  display="flex"
+                                  alignItems="center"
+                                  flexGrow="1"
+                                  justifyContent="space-between"
+                                >
+                                  <Typography variant="subtitle2">{d.navn}</Typography>
+                                  <Radio checked={d.navn == valg} color="secondary" />
+                                </Box>
+                              </Stack>
+                            </CardActionArea>
+                          </Card>
+                        </Tooltip>
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
-              </Grid>
-              <Box sx={{ my: 3 }}>
-                <Grid container alignItems="end" spacing={3}>
-                  <Grid item xs sx={{ mt: 1 }}>
-                    <Slider
-                      aria-label="Antall"
-                      color="secondary"
-                      valueLabelDisplay="auto"
-                      step={1}
-                      min={0}
-                      max={12}
-                      value={amount}
-                      marks
-                      onChange={handleAmountChange}
+                  <Box sx={{ my: 3 }}>
+                    <Grid container alignItems="end" spacing={3}>
+                      <Grid item xs sx={{ mt: 1 }}>
+                        <Slider
+                          aria-label="Antall"
+                          color={removeCheck ? "error" : "secondary"}
+                          valueLabelDisplay="auto"
+                          step={1}
+                          min={0}
+                          max={12}
+                          value={amount}
+                          marks
+                          onChange={handleAmountChange}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Grid alignItems="end" container spacing={1}>
+                          <Grid item>
+                            <Typography variant="h2" sx={{ minWidth: 50, textAlign: "right" }}>
+                              {(removeCheck && amount != 0 ? "-" : "") + amount}
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Typography variant="body2" sx={{ mb: "11px", color: "grey.500" }}>
+                              {valg}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  <FormGroup row sx={{ mb: 2 }}>
+                    <FormControlLabel
+                      disabled={valg == "Pant" || removeCheck}
+                      checked={pantCheck && valg != "Pant" && !removeCheck}
+                      onChange={() => setPantCheck(!pantCheck)}
+                      control={<Checkbox />}
+                      label="Jeg panter ikke hjemme"
                     />
-                  </Grid>
-                  <Grid item>
-                    <Grid alignItems="end" container spacing={1}>
-                      <Grid item>
-                        <Typography variant="h2">{amount}</Typography>
-                      </Grid>
-                      <Grid item>
-                        <Typography variant="body2" sx={{ mb: "11px", color: "grey.500" }}>
-                          {valg}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Box>
-              <FormGroup sx={{ mb: 2 }}>
-                <FormControlLabel
-                  checked={pantCheck}
-                  onChange={() => setPantCheck(!pantCheck)}
-                  control={<Checkbox />}
-                  label="Jeg vil pante boksen hjemme"
-                />
-                <FormControlLabel
-                  checked={removeCheck}
-                  onChange={() => setRemoveCheck(!removeCheck)}
-                  control={<Checkbox />}
-                  label="Fjern kryss"
-                />
-              </FormGroup>
-              <Button
-                onClick={() => {
-                  updateState({
-                    [valg]: {
-                      amount: removeCheck ? -amount : amount,
-                      pris: drikke.find((el) => el.navn == valg).pris,
-                      id: drikke.find((el) => el.navn == valg).id,
-                    },
-                  });
-                  pantCheck &&
-                    updateState({
-                      Pant: {
-                        amount: amount,
-                        pris: drikke.find((el) => el.navn == "Pant").pris,
-                        id: drikke.find((el) => el.navn == "Pant").id,
-                      },
-                    });
-                  setAmount(1);
-                }}
-                variant="outlined"
-                fullWidth
-                color="inherit"
-                size="large"
-              >
-                Oppdater
-              </Button>
-            </Grid>
-            <Grid xs={4} item>
-              <Paper sx={{ p: 3, bgcolor: "grey.900", height: "100%", display: "flex", flexDirection: "column" }}>
-                <Typography variant="subtitle1" sx={{ mb: 3 }}>
-                  Oppsummering
-                </Typography>
-                <List sx={{ mb: 1, flexGrow: 1 }}>
-                  {state != null ? (
-                    <AnimatePresence>
-                      {Object.entries(state).map(
-                        (item, id) =>
-                          item[1] != null && (
-                            <motion.div
-                              animate={{ y: 0, opacity: 1 }}
-                              initial={{ y: 5, opacity: 0 }}
-                              exit={{ y: 0, opacity: 0 }}
-                              transition={{
-                                x: { type: "spring", stiffness: 100, duration: 0.4 },
-                                default: { duration: 0.1 },
-                              }}
-                              key={id}
-                            >
-                              <ListItem
-                                disableGutters
-                                secondaryAction={
-                                  <IconButton
-                                    onClick={() => updateState({ [item[0]]: undefined })}
-                                    edge="end"
-                                    aria-label="comments"
-                                    size="large"
-                                  >
-                                    <CloseIcon />
-                                  </IconButton>
-                                }
-                              >
-                                <Grid container justifyContent="space-between">
-                                  <Grid item>
-                                    <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
-                                      {item[1].amount}x {item[0]}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item>
-                                    <Chip label={item[1].pris + " kr"} size="small" />
-                                  </Grid>
-                                </Grid>
-                              </ListItem>
-                            </motion.div>
-                          )
-                      )}
-                    </AnimatePresence>
-                  ) : (
-                    <ListItem disableGutters>
-                      <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
-                        Du har ikke valgt en vare enda.
-                      </Typography>
-                    </ListItem>
-                  )}
-                </List>
-                <Divider />
-                <Box sx={{ py: 3 }}>
-                  <Grid container justifyContent="space-between">
-                    <Grid item>
-                      <Typography variant="h6">Total</Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="h6">
-                        {state != null
-                          ? Object.entries(state)
-                              .map(
-                                (a) =>
-                                  a[1] != null && (a[0] == "Pant" ? -a[1].pris * a[1].amount : a[1].pris * a[1].amount)
-                              )
-                              .reduce((a, b) => a + b, 0) + " Kr"
-                          : "0 Kr"}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <Button
-                  onClick={() => {
-                    Object.entries(state).map((item) => {
-                      if (item[1] != undefined) {
-                        mutateFunction({
-                          variables: { beboer_id: parseInt(pid), drikke_id: item[1].id, antall: item[1].amount },
+                    <FormControlLabel
+                      checked={removeCheck}
+                      onChange={() => setRemoveCheck(!removeCheck)}
+                      control={<Checkbox color="error" />}
+                      label="Korriger kryss"
+                    />
+                  </FormGroup>
+                  <Button
+                    onClick={() => {
+                      updateState({
+                        [valg]: {
+                          amount: removeCheck ? -amount : amount,
+                          pris: drikke.find((el) => el.navn == valg).pris,
+                          id: drikke.find((el) => el.navn == valg).id,
+                        },
+                      });
+                      pantCheck &&
+                        updateState({
+                          Pant: {
+                            amount: amount,
+                            pris: drikke.find((el) => el.navn == "Pant").pris,
+                            id: drikke.find((el) => el.navn == "Pant").id,
+                          },
                         });
-                      }
-                    });
-                    router.push("/resepsjonen");
-                  }}
-                  fullWidth
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                >
-                  Kryss
-                </Button>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Card>
+                      setAmount(1);
+                    }}
+                    variant="outlined"
+                    fullWidth
+                    color="inherit"
+                    size="large"
+                  >
+                    Oppdater
+                  </Button>
+                </Grid>
+                <Grid xs={4} item>
+                  <Paper sx={{ p: 3, bgcolor: "grey.900", height: "100%", display: "flex", flexDirection: "column" }}>
+                    <Typography variant="subtitle1" sx={{ mb: 3 }}>
+                      Oppsummering
+                    </Typography>
+                    <List sx={{ mb: 1, flexGrow: 1 }}>
+                      {state != null ? (
+                        <AnimatePresence>
+                          {Object.entries(state).map(
+                            (item, id) =>
+                              item[1] != null && (
+                                <motion.div
+                                  animate={{ y: 0, opacity: 1 }}
+                                  initial={{ y: 5, opacity: 0 }}
+                                  exit={{ y: 0, opacity: 0 }}
+                                  transition={{
+                                    x: { type: "spring", stiffness: 100, duration: 0.4 },
+                                    default: { duration: 0.1 },
+                                  }}
+                                  key={id}
+                                >
+                                  <ListItem
+                                    disableGutters
+                                    secondaryAction={
+                                      <IconButton
+                                        onClick={() => updateState({ [item[0]]: undefined })}
+                                        edge="end"
+                                        aria-label="comments"
+                                        size="large"
+                                      >
+                                        <CloseIcon />
+                                      </IconButton>
+                                    }
+                                  >
+                                    <Grid container justifyContent="space-between">
+                                      <Grid item>
+                                        <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
+                                          {item[1].amount}x {item[0]}
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item>
+                                        <Chip label={item[1].pris + " kr"} size="small" />
+                                      </Grid>
+                                    </Grid>
+                                  </ListItem>
+                                </motion.div>
+                              )
+                          )}
+                        </AnimatePresence>
+                      ) : (
+                        <ListItem disableGutters>
+                          <Typography variant="subtitle2" sx={{ color: "grey.500" }}>
+                            Du har ikke valgt en vare enda.
+                          </Typography>
+                        </ListItem>
+                      )}
+                    </List>
+                    <Divider />
+                    <Box sx={{ py: 3 }}>
+                      <Grid container justifyContent="space-between">
+                        <Grid item>
+                          <Typography variant="h6">Total</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="h6">
+                            {state != null
+                              ? Object.entries(state)
+                                  .map((a) => a[1] != null && a[1].pris * a[1].amount)
+                                  .reduce((a, b) => a + b, 0) + " Kr"
+                              : "0 Kr"}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                    <Button
+                      onClick={() => {
+                        Object.entries(state).map((item) => {
+                          if (item[1] != undefined) {
+                            mutateFunction({
+                              variables: { beboer_id: parseInt(pid), drikke_id: item[1].id, antall: item[1].amount },
+                            });
+                          }
+                        });
+                        router.push("/resepsjonen");
+                      }}
+                      fullWidth
+                      variant="contained"
+                      size="large"
+                      color="secondary"
+                    >
+                      Kryss
+                    </Button>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Card>
+          </>
+        )}
       </Container>
     </>
   );
