@@ -9,8 +9,8 @@ import Bursdag from "@components/hjem/Bursdag";
 import Layout from "@components/Layout";
 import Kalender from "@components/hjem/Kalender";
 import KalenderCard from "@components/hjem/KalenderCard";
-
-import { Dialog, Grid, Stack } from "@mui/material";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { Dialog, Grid, Stack, Card } from "@mui/material";
 
 // Next
 import Head from "next/head";
@@ -69,6 +69,23 @@ const Hjem = () => {
           </Stack>
         </Grid>
       </Grid>
+      <Card xs={{ mt: 3 }}>
+        <TransformWrapper initialScale={1} initialPositionX={200} initialPositionY={100} style={{ width: "100%" }}>
+          {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+            <React.Fragment>
+              <div className="tools">
+                <button onClick={() => zoomIn()}>+</button>
+                <button onClick={() => zoomOut()}>-</button>
+                <button onClick={() => resetTransform()}>x</button>
+              </div>
+              <TransformComponent style={{ width: "100%" }}>
+                <img src="singkart.svg" alt="test" style={{ width: "100%" }} />
+                <div>Example text</div>
+              </TransformComponent>
+            </React.Fragment>
+          )}
+        </TransformWrapper>
+      </Card>
     </Layout>
   );
 };
