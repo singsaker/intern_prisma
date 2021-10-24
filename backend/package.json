@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Internside Backend",
   "main": "src/server.js",
+  "bin": "src/server.js",
   "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

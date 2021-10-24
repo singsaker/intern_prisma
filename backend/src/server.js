@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const express = require("express");
 const typeDefs = require("./graphql/schema/schema");
 const resolvers = require("./graphql/resolvers/index");
