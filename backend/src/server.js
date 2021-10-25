@@ -48,6 +48,9 @@ app.use((req, res, next) => {
     req.brukerId = bruker_id;
     req.beboerId = beboer_id;
   }
+  // else {
+  //   throw new AuthenticationError("Brukeren må være logget inn!");
+  // }
   next();
 });
 

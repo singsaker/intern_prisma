@@ -201,6 +201,12 @@ const schemaSchema = gql`
     beboere: [Beboer!]
   }
 
+  type Rettigheter {
+    id: Int!
+    navn: String!
+    nivaa: Int!
+  }
+
   type Rom {
     id: Int!
     navn: String!
@@ -353,6 +359,7 @@ const schemaSchema = gql`
     hentPinkode(id: Int!): Pinkode!
     hentPrefs(beboerId: Int!): BeboerPrefs!
     hentRegiStatus(brukerId: Int!, semester: String!, aar: Int!): RegiStatus
+    hentRettigheter: [Rettigheter!]
     hentRoller: [Rolle!]
     hentSkole: [Skole!]
     hentSoknad(id: Int!): Soknad!
@@ -399,6 +406,7 @@ const schemaSchema = gql`
       tittel: String!
       tekst: String
     ): Kunngjoring!
+    lagRettigheter(navn: String!, nivaa: Int!): Rettigheter!
     lagSkole(navn: String!): Skole
     lagStorhybelliste(
       navn: String!
@@ -435,6 +443,7 @@ const schemaSchema = gql`
     oppdaterPermStatus(id: Int!, perm: Int!): Beboer!
     oppdaterPrefs(id: Int!, prefs: BeboerPrefsInput!): BeboerPrefs!
     oppdaterPassord(id: Int!, nyttPassord: String!): Bruker!
+    oppdaterRettigheter(id: Int!, navn: String!, nivaa: Int!): Rettigheter!
     oppdaterSkole(id: Int!, navn: String!): Skole!
     oppdaterStudie(id: Int!, navn: String!): Studie!
     oppdaterVaktAntall(
@@ -446,6 +455,7 @@ const schemaSchema = gql`
     resettGlemtPassord(brukerId: Int!, token: String!, passord: String!): String
     slettBeboer(id: Int!): Beboer!
     slettDrikke(id: Int!): Drikke!
+    slettRettigheter(id: Int!): Rettigheter!
     slettStorhybelliste(id: Int!): Storhybel!
     slettStudie(id: Int!): Studie!
     slettSkole(id: Int!): Skole!
