@@ -62,6 +62,7 @@ const schemaSchema = gql`
     kundenr: Int
     mellomnavn: String
     status: Int!
+    pinkode: Pinkode
     postnummer: Int
     rolle: Rolle
     rom: Rom
@@ -178,7 +179,7 @@ const schemaSchema = gql`
 
   type Pinkode {
     id: Int!
-    kode: Int
+    kode: String
     resep: Boolean!
     vinkjeller: Boolean!
   }

@@ -30,7 +30,11 @@ model beboer {
   status           Int             @db.TinyInt
   rom_id           Int?            @db.UnsignedInt
   prefs_id         Int?            @db.UnsignedInt
+  pinkode_id       Int?            @unique(map: "pinkode_id") @db.UnsignedInt
+  rettigheter_id   Int             @default(4) @db.UnsignedInt
   bruker           bruker?         @relation(fields: [bruker_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_1")
+  pinkode          pinkode?        @relation(fields: [pinkode_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_9")
+  rettigheter      rettigheter     @relation(fields: [rettigheter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_8")
   rolle            rolle           @relation(fields: [rolle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_3")
   rom              rom?            @relation(fields: [rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_2")
   skole            skole           @relation(fields: [skole_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_4")
@@ -43,6 +47,7 @@ model beboer {
   romhistorikk     romhistorikk[]
   vare_pafyll      vare_pafyll[]
 
+  @@index([rettigheter_id], map: "rettigheter_id")
   @@index([rolle_id], map: "rolle_id")
   @@index([rom_id], map: "rom_id")
   @@index([skole_id], map: "skole_id")
@@ -263,4 +268,19 @@ model vakt {
   bruker       bruker?  @relation(fields: [bruker_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vakt_ibfk_1")
 
   @@index([bruker_id], map: "bruker_id")
+}
+
+model pinkode {
+  id         Int     @id @default(autoincrement()) @db.UnsignedInt
+  kode       String? @db.VarChar(20)
+  resep      Boolean @default(false)
+  vinkjeller Boolean @default(false)
+  beboer     beboer?
+}
+
+model rettigheter {
+  id     Int      @id @default(autoincrement()) @db.UnsignedInt
+  navn   String   @unique(map: "navn") @db.VarChar(20)
+  nivaa  Int      @db.UnsignedTinyInt
+  beboer beboer[]
 }
