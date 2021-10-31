@@ -14,6 +14,7 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -52,6 +53,7 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           kryss: {
             include: {
               drikke: true,
@@ -100,6 +102,7 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -145,6 +148,7 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           kryss: {
             include: {
               drikke: true,
@@ -195,6 +199,7 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -240,6 +245,7 @@ const beboerQuery = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -351,6 +357,7 @@ const beboerMutation = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -470,6 +477,7 @@ const beboerMutation = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -674,6 +682,7 @@ const beboerMutation = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -715,6 +724,7 @@ const beboerMutation = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,
@@ -782,6 +792,7 @@ const beboerMutation = {
           studie: true,
           skole: true,
           bruker: true,
+          pinkode: true,
           rom: {
             include: {
               romtype: true,

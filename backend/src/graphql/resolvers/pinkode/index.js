@@ -23,6 +23,7 @@ const pinkodeMutation = {
           where: {
             id: prefs[i].beboer_id,
             pinkode_id: null,
+            status: 1,
           },
           select: {
             id: true,
@@ -32,16 +33,16 @@ const pinkodeMutation = {
         if (beboer.length > 0) {
           const nyPinkode = await context.prisma.pinkode.create({
             data: {
-              kode: Number(prefs[i].pinkode),
+              kode: prefs[i].pinkode,
               vinkjeller: prefs[i].vinkjeller,
               resep: prefs[i].resepp,
             },
           });
 
           pinkode.push(nyPinkode);
-          const answer = await context.prisma.beboer.update({
+          await context.prisma.beboer.update({
             where: {
-              id: prefs[i].beboer_id,
+              id: beboer[0].id,
             },
             data: {
               pinkode_id: nyPinkode.id,
