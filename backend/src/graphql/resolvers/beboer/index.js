@@ -1,10 +1,14 @@
 const formaterBeboer = require("./formaterBeboer");
 const validerEpostAdresse = require("./validerEpostAdresse");
 const bcrypt = require("bcryptjs");
+const { SjekkTilgang } = require("../rettigheter/SjekkTilgang");
 
 const beboerQuery = {
   hentBeboer: async (parent, args, context) => {
     try {
+      const tilgang = await SjekkTilgang(context, "Beboer");
+      console.log(tilgang);
+
       const beboer = await context.prisma.beboer.findUnique({
         where: {
           id: args.id,
@@ -270,17 +274,6 @@ const beboerQuery = {
 
       return await beboere.map((beboer) => {
         return formaterBeboer(context, beboer);
-      });
-    } catch (err) {
-      throw err;
-    }
-  },
-  hentPrefs: async (parent, args, context) => {
-    try {
-      return await context.prisma.prefs.findFirst({
-        where: {
-          beboerId: args.beboerId,
-        },
       });
     } catch (err) {
       throw err;

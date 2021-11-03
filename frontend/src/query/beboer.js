@@ -192,38 +192,24 @@ export const UPDATE_BEBOER_ADMIN = gql`
   }
 `;
 
-export const GET_BEBOER_PREFS = gql`
-  query GetPrefs($beboerId: Int!) {
-    hentPrefs(beboerId: $beboerId) {
-      beboerId
-      pinboo
-      pinkode
-      resepp
+export const GET_PINKODE_BRUKER = gql`
+  query GetPinkodeBeboer {
+    hentPinkodeDenneBeboer {
+      id
+      kode
+      resep
       vinkjeller
-      vinpin
     }
   }
 `;
 
-export const UPDATE_PREFS = gql`
-  mutation OppdaterPrefs(
-    $id: Int!
-    $pinboo: Boolean!
-    $pinkode: Int
-    $resepp: Boolean!
-    $vinkjeller: Boolean!
-    $vinpin: Int
-  ) {
-    oppdaterPrefs(
-      id: $id
-      prefs: { pinboo: $pinboo, pinkode: $pinkode, resepp: $resepp, vinkjeller: $vinkjeller, vinpin: $vinpin }
-    ) {
-      beboerId
-      pinboo
-      pinkode
-      resepp
+export const UDPATE_PINKODE_BRUKER = gql`
+  mutation OppdaterPinkodeBruker($kode: String!, $resep: Boolean!, $vinkjeller: Boolean!) {
+    oppdaterPinkodeBruker(kode: $kode, resep: $resep, vinkjeller: $vinkjeller) {
+      id
+      kode
+      resep
       vinkjeller
-      vinpin
     }
   }
 `;

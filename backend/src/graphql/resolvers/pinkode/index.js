@@ -1,11 +1,59 @@
 const pinkodeQuery = {
   hentPinkode: async (parent, args, context) => {
     try {
-      return await context.prisma.pinkode.findUniqe({
+      return await context.prisma.pinkode.findUnique({
         where: {
           id: args.id,
         },
       });
+    } catch (err) {
+      throw err;
+    }
+  },
+  hentPinkodeBeboer: async (parent, args, context) => {
+    try {
+      const beboer = await context.prisma.beboer.findUnique({
+        where: {
+          id: args.id,
+        },
+        select: {
+          pinkode: true,
+        },
+      });
+
+      return beboer.pinkode;
+    } catch (err) {
+      throw err;
+    }
+  },
+  hentPinkodeDenneBeboer: async (parent, args, context) => {
+    try {
+      const beboer = await context.prisma.beboer.findUnique({
+        where: {
+          id: context.req.beboerId,
+        },
+        select: {
+          pinkode: true,
+        },
+      });
+
+      return beboer.pinkode;
+    } catch (err) {
+      throw err;
+    }
+  },
+  sjekkPinkodeDenneBeboer: async (parent, args, context) => {
+    try {
+      const beboer = await context.prisma.beboer.findUnique({
+        where: {
+          id: context.req.beboerId,
+        },
+        select: {
+          pinkode: true,
+        },
+      });
+
+      return beboer.pinkode === args.kode;
     } catch (err) {
       throw err;
     }
@@ -52,6 +100,32 @@ const pinkodeMutation = {
       }
 
       return pinkode;
+    } catch (err) {
+      throw err;
+    }
+  },
+  // Oppdaterer pinkode-informasjon til den innloggede brukeren:
+  oppdaterPinkodeBruker: async (parent, args, context) => {
+    try {
+      const PATTERN = /^(\d{4}|\d{6})$/;
+      if (!PATTERN.test(args.kode)) {
+        throw Error("Pinkoden må være 4 eller 6 tegn og kun bestå av tall!");
+      }
+
+      const beboer = await context.prisma.beboer.update({
+        where: {
+          id: context.req.beboerId,
+        },
+        data: {
+          pinkode: {
+            update: args,
+          },
+        },
+        select: {
+          pinkode: true,
+        },
+      });
+      return beboer.pinkode;
     } catch (err) {
       throw err;
     }

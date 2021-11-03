@@ -80,10 +80,6 @@ const ProfilRedigerInfo = (props) => {
     }
   }, [beboer]);
 
-  useEffect(() => {
-    console.log(fodselsdato);
-  }, [fodselsdato]);
-
   for (let i = date.getFullYear(); i >= 1950; i--) {
     aarListe.push(i);
   }
