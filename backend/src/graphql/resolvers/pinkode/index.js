@@ -42,6 +42,22 @@ const pinkodeQuery = {
       throw err;
     }
   },
+  sjekkPinkodeDenneBeboer: async (parent, args, context) => {
+    try {
+      const beboer = await context.prisma.beboer.findUnique({
+        where: {
+          id: context.req.beboerId,
+        },
+        select: {
+          pinkode: true,
+        },
+      });
+
+      return beboer.pinkode === args.kode;
+    } catch (err) {
+      throw err;
+    }
+  },
 };
 
 const pinkodeMutation = {
