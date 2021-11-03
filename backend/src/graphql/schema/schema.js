@@ -96,23 +96,6 @@ const schemaSchema = gql`
     rom_id: Int
   }
 
-  type BeboerPrefs {
-    beboerId: Int!
-    pinboo: Boolean!
-    pinkode: Int
-    resepp: Boolean!
-    vinkjeller: Boolean!
-    vinpin: Int
-  }
-
-  input BeboerPrefsInput {
-    pinboo: Boolean!
-    pinkode: Int
-    resepp: Boolean!
-    vinkjeller: Boolean!
-    vinpin: Int
-  }
-
   type Bruker {
     dato: String
     glemt_token: String!
@@ -360,7 +343,6 @@ const schemaSchema = gql`
     hentPinkode(id: Int!): Pinkode!
     hentPinkodeDenneBeboer: Pinkode!
     hentPinkodeBeboer(id: Int!): Pinkode!
-    hentPrefs(beboerId: Int!): BeboerPrefs!
     hentRegiStatus(brukerId: Int!, semester: String!, aar: Int!): RegiStatus
     hentRettigheter: [Rettigheter!]
     hentRoller: [Rolle!]
@@ -445,7 +427,6 @@ const schemaSchema = gql`
     ): Drikke!
     oppdaterEpostPrefs(id: Int!, prefs: EpostPrefsInput!): EpostPrefs!
     oppdaterPermStatus(id: Int!, perm: Int!): Beboer!
-    oppdaterPrefs(id: Int!, prefs: BeboerPrefsInput!): BeboerPrefs!
     oppdaterPinkodeBruker(
       kode: String!
       resep: Boolean!

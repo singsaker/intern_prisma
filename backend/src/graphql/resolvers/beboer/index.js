@@ -7,7 +7,6 @@ const beboerQuery = {
   hentBeboer: async (parent, args, context) => {
     try {
       const tilgang = await SjekkTilgang(context, "Beboer");
-      console.log(tilgang);
 
       const beboer = await context.prisma.beboer.findUnique({
         where: {
@@ -798,24 +797,6 @@ const beboerMutation = {
       });
 
       return formaterBeboer(context, beboer);
-    } catch (err) {
-      throw err;
-    }
-  },
-  oppdaterPrefs: async (parent, args, context) => {
-    try {
-      return await context.prisma.prefs.update({
-        where: {
-          beboerId: args.id,
-        },
-        data: {
-          pinboo: args.prefs.pinboo,
-          pinkode: args.prefs.pinkode,
-          resepp: args.prefs.resepp,
-          vinkjeller: args.prefs.vinkjeller,
-          vinpin: args.prefs.vinpin,
-        },
-      });
     } catch (err) {
       throw err;
     }
