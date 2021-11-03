@@ -47,7 +47,7 @@ const Passord = () => {
       setVellykket(true);
     },
     onError(error) {
-      setErrorBeskjed(String(error));
+      setErrorBeskjed(error.message);
       setVellykket(false);
       setError(true);
     },

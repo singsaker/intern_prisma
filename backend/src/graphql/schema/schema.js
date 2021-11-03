@@ -72,6 +72,7 @@ const schemaSchema = gql`
     studie: Studie
     telefon: String!
     verv: [Verv!]
+    pinkode: Pinkode!
   }
 
   input BeboerInfo {
@@ -178,7 +179,7 @@ const schemaSchema = gql`
 
   type Pinkode {
     id: Int!
-    kode: Int
+    kode: String
     resep: Boolean!
     vinkjeller: Boolean!
   }
@@ -357,6 +358,8 @@ const schemaSchema = gql`
     hentKunngjoringer: [Kunngjoring!]
     hentLedigeRom: [Rom!]
     hentPinkode(id: Int!): Pinkode!
+    hentPinkodeDenneBeboer: Pinkode!
+    hentPinkodeBeboer(id: Int!): Pinkode!
     hentPrefs(beboerId: Int!): BeboerPrefs!
     hentRegiStatus(brukerId: Int!, semester: String!, aar: Int!): RegiStatus
     hentRettigheter: [Rettigheter!]
@@ -442,6 +445,11 @@ const schemaSchema = gql`
     oppdaterEpostPrefs(id: Int!, prefs: EpostPrefsInput!): EpostPrefs!
     oppdaterPermStatus(id: Int!, perm: Int!): Beboer!
     oppdaterPrefs(id: Int!, prefs: BeboerPrefsInput!): BeboerPrefs!
+    oppdaterPinkodeBruker(
+      kode: String!
+      resep: Boolean!
+      vinkjeller: Boolean!
+    ): Pinkode!
     oppdaterPassord(id: Int!, nyttPassord: String!): Bruker!
     oppdaterRettigheter(id: Int!, navn: String!, nivaa: Int!): Rettigheter!
     oppdaterSkole(id: Int!, navn: String!): Skole!

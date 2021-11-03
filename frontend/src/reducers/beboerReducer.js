@@ -6,6 +6,7 @@ import {
   GET_BEBOER_TYPE,
   GET_BEBOER_PREFS_TYPE,
   GET_BEBOER_EPOST_PREFS_TYPE,
+  GET_BEBOER_PINKODE_TYPE,
   GET_NOEN_BEBOERE_TYPE,
   SLETT_BEBOER_TYPE,
   LOGG_UT_TYPE,
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
   gamleBeboere: {},
   permliste: {},
   prefs: {},
+  pinkode: {},
   epostPrefs: {},
 };
 
@@ -55,6 +57,11 @@ export default function beboer(state = INITIAL_STATE, action) {
       return {
         ...state,
         prefs: { ...state.prefs, [action.payload.beboerId]: action.payload },
+      };
+    case GET_BEBOER_PINKODE_TYPE:
+      return {
+        ...state,
+        pinkode: action.payload,
       };
     case GET_BEBOER_EPOST_PREFS_TYPE:
       return {

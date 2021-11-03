@@ -6,6 +6,7 @@ import {
   GET_GAMLE_BEBOERE_TYPE,
   GET_GAMMEL_BEBOER_TYPE,
   GET_BEBOER_PREFS_TYPE,
+  GET_BEBOER_PINKODE_TYPE,
   GET_BEBOER_EPOST_PREFS_TYPE,
   GET_NOEN_BEBOERE_TYPE,
   SLETT_BEBOER_TYPE,
@@ -18,6 +19,20 @@ export const getBeboerPrefs = (data) => {
   return {
     type: GET_BEBOER_PREFS_TYPE,
     payload: data.hentPrefs,
+  };
+};
+
+export const getPinkodeDenneBeboer = (data) => {
+  return {
+    type: GET_BEBOER_PINKODE_TYPE,
+    payload: data.hentPinkodeDenneBeboer,
+  };
+};
+
+export const oppdaterPinkodeBruker = (data) => {
+  return {
+    type: GET_BEBOER_PINKODE_TYPE,
+    payload: data.oppdaterPinkodeBruker,
   };
 };
 

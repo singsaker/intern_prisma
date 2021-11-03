@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getBeboerPrefs, oppdaterBeboerPrefs } from "../../src/actions/beboer";
-import { UPDATE_PREFS, GET_BEBOER_PREFS } from "../../src/query/beboer";
+import { oppdaterPinkodeBruker, getPinkodeDenneBeboer } from "../../src/actions/beboer";
+import { UDPATE_PINKODE_BRUKER, GET_PINKODE_BRUKER } from "../../src/query/beboer";
 
 // Components
 import Spinner from "../CustomSpinner";
 
-import { useMutation, useLazyQuery } from "@apollo/client";
-import { isNumber } from "lodash";
+import { useMutation, useQuery } from "@apollo/client";
 
 // Material-UI
 import FormGroup from "@mui/material/FormGroup";
@@ -23,91 +22,68 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import SaveIcon from "@mui/icons-material/Save";
 import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const Kryss = () => {
   const dispatch = useDispatch();
-  const beboer_id = useSelector((state) => state.auth.beboer_id);
-  const prefs = useSelector((state) => state.beboer.prefs[beboer_id]);
+  const pinkode = useSelector((state) => state.beboer.pinkode);
   const [resep, setResep] = useState(false);
   const [vinkjeller, setVinkjeller] = useState(false);
-  const [pinkode, setPinkode] = useState(false);
-  const [pinkodeResep, setPinkodeResep] = useState("");
-  const [pinkodeVinkjeller, setPinkodeVinkjeller] = useState("");
-  const [pinResep, setPinResep] = useState(null);
-  const [pinVin, setPinVin] = useState(null);
+  const [kode, setKode] = useState("");
+  const [melding, setMelding] = useState("");
   const [vellykket, setVellykket] = useState(false);
+  const [visAlert, setVisAlert] = useState(false);
 
   useEffect(() => {
-    if (prefs) {
-      setResep(prefs.resepp);
-      setVinkjeller(prefs.vinkjeller);
-      setPinkode(prefs.pinboo);
-      setPinkodeResep(prefs.pinkode === null ? "" : prefs.pinkode);
-      setPinkodeVinkjeller(prefs.vinpin === null ? "" : prefs.vinpin);
+    if (pinkode.kode) {
+      setResep(pinkode.resep);
+      setVinkjeller(pinkode.vinkjeller);
+      setKode(pinkode.kode);
     }
-  }, [prefs]);
+  }, [pinkode]);
 
-  useEffect(() => {
-    if (pinkodeResep !== "") {
-      setPinResep(Number(pinkodeResep));
-    } else {
-      setPinResep(null);
-    }
-
-    if (pinkodeVinkjeller !== "") {
-      setPinVin(Number(pinkodeResep));
-    } else {
-      setPinVin(null);
-    }
-  }, [pinkodeResep, pinkodeVinkjeller]);
-
-  // Henter krysseliste-preferansene til aktuell beboer
-  const [hentPrefs, hentPrefsState] = useLazyQuery(GET_BEBOER_PREFS, {
-    variables: {
-      beboerId: beboer_id,
-    },
+  // Henter pinkode-informasjon til aktuell beboer
+  const hentPinkodeState = useQuery(GET_PINKODE_BRUKER, {
     onCompleted(data) {
-      dispatch(getBeboerPrefs(data));
+      dispatch(getPinkodeDenneBeboer(data));
     },
     onError(error) {
-      console.log(error);
-    },
-  });
-
-  useEffect(() => {
-    if (isNumber(beboer_id) && !prefs) {
-      hentPrefs();
-    }
-  }, [beboer_id]);
-
-  // Oppdaterer krysseliste-preferansene til aktuell beboer
-  const [submitPrefs, submitPrefsState] = useMutation(UPDATE_PREFS, {
-    variables: {
-      id: beboer_id,
-      pinboo: pinkode,
-      pinkode: pinResep,
-      resepp: resep,
-      vinkjeller: vinkjeller,
-      vinpin: pinVin,
-    },
-    onCompleted(data) {
-      setVellykket(true);
-      dispatch(oppdaterBeboerPrefs(data));
-    },
-    onError(error) {
+      setMelding(error.message);
       setVellykket(false);
-      console.log(error);
+      setVisAlert(true);
     },
   });
 
-  if (submitPrefsState.loading || hentPrefsState.loading || !prefs) return <Spinner />;
+  const [oppdaterPinkode, oppdaterPinkodeState] = useMutation(UDPATE_PINKODE_BRUKER, {
+    variables: {
+      kode: kode,
+      resep: resep,
+      vinkjeller: vinkjeller,
+    },
+    onCompleted(data) {
+      dispatch(oppdaterPinkodeBruker(data));
+      setMelding("Endringer ble lagret!");
+      setVellykket(true);
+      setVisAlert(true);
+    },
+    onError(error) {
+      setMelding(error.message);
+      setVellykket(false);
+      setVisAlert(true);
+    },
+  });
+
+  if (hentPinkodeState.loading || oppdaterPinkodeState.loading) return <Spinner />;
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        submitPrefs();
+        oppdaterPinkode();
       }}
     >
       <Grid container direction="column" spacing={2}>
@@ -119,10 +95,7 @@ const Kryss = () => {
                 control={<Checkbox checked={resep} onChange={() => setResep(!resep)} name="resep" />}
                 label="Jeg ønsker å stå på krysselista i resepsjonen"
               />
-              <FormControlLabel
-                control={<Checkbox checked={pinkode} onChange={() => setPinkode(!pinkode)} name="pinkode" />}
-                label="Pinkode på krysselista"
-              />
+
               <FormControlLabel
                 control={
                   <Checkbox checked={vinkjeller} onChange={() => setVinkjeller(!vinkjeller)} name="binkjeller" />
@@ -130,31 +103,20 @@ const Kryss = () => {
                 label="Jeg ønsker å stå på krysselista i vinkjelleren"
               />
             </FormGroup>
-            <FormHelperText>Kryssing i vinkjeller krever pinkode</FormHelperText>
           </FormControl>
         </Grid>
         <Grid container item direction="row" spacing={2}>
           <Grid item>
             <TextField
-              required={pinkode}
+              required={resep || vinkjeller}
               id="outlined-required"
-              label="Pinkode resep"
-              defaultValue={pinkodeResep}
+              label="Pinkode"
+              value={kode}
               variant="outlined"
-              disabled={!pinkode}
-              onChange={(e) => setPinkodeResep(e.target.value)}
+              disabled={!resep && !vinkjeller}
+              onChange={(e) => setKode(e.target.value)}
             />
-          </Grid>
-          <Grid item>
-            <TextField
-              required={vinkjeller}
-              id="outlined-required"
-              label="Pinkode vinkjeller"
-              defaultValue={pinkodeVinkjeller}
-              variant="outlined"
-              disabled={!vinkjeller}
-              onChange={(e) => setPinkodeVinkjeller(e.target.value)}
-            />
+            <FormHelperText>Du må ha pinkode for å kunne krysse</FormHelperText>
           </Grid>
         </Grid>
         <Grid item container direction="row" justifyContent="flex-end">
@@ -163,9 +125,9 @@ const Kryss = () => {
           </Button>
         </Grid>
       </Grid>
-      <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
-        <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">
-          Endringene ble lagret!
+      <Snackbar open={visAlert} autoHideDuration={6000} onClose={() => setVisAlert(false)}>
+        <Alert onClose={() => setVisAlert(false)} severity={vellykket ? "success" : "error"}>
+          {melding}
         </Alert>
       </Snackbar>
     </form>
