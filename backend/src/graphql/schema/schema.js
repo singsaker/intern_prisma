@@ -462,7 +462,7 @@ const schemaSchema = gql`
     ): VaktAntall!
     registrerRegi(regi: RegistrerRegiInput): Arbeid!
     resettGlemtPassord(brukerId: Int!, token: String!, passord: String!): String
-    sjekkPinkodeDenneBeboer(kode: String!): Boolean!
+    sjekkPinkode(beboerId: Int!, kode: String!): Boolean!
     slettBeboer(id: Int!): Beboer!
     slettDrikke(id: Int!): Drikke!
     slettRettigheter(id: Int!): Rettigheter!
