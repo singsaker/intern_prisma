@@ -62,6 +62,7 @@ const schemaSchema = gql`
     kundenr: Int
     mellomnavn: String
     status: Int!
+    pinkode: Pinkode
     postnummer: Int
     rolle: Rolle
     rom: Rom
