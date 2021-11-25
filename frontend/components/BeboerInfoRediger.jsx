@@ -43,10 +43,10 @@ const BeboerInfoRediger = (props) => {
   const date = new Date();
   const [epost, setEpost] = useState("");
   const [tlf, setTlf] = useState("");
-  const [studie_id, setStudieId] = useState("default");
-  const [skole_id, setSkoleId] = useState("default");
+  const [studie_id, setStudieId] = useState("");
+  const [skole_id, setSkoleId] = useState("");
   const [adresse, setAdresse] = useState("");
-  const [klassetrinn, setKlassetrinn] = useState("default");
+  const [klassetrinn, setKlassetrinn] = useState("");
   const [fodselsdato, setFodselsdag] = useState(new Date());
   const [fornavn, setFornavn] = useState("");
   const [mellomnavn, setMellomnavn] = useState("");
@@ -206,7 +206,7 @@ const BeboerInfoRediger = (props) => {
             fullWidth
           />
           <div>
-            <Grid xs={12} container spacing={2}>
+            <Grid item xs={12} container spacing={2}>
               <Grid md={6} xs={12} item>
                 <TextField
                   id="adresse_input"
@@ -240,7 +240,7 @@ const BeboerInfoRediger = (props) => {
             />
           </LocalizationProvider>
 
-          <Grid container xs={12}>
+          <Grid container item xs={12}>
             <FormControl>
               <InputLabel id="skole_label">Skole</InputLabel>
               <Select

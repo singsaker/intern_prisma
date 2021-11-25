@@ -105,7 +105,6 @@ const Passord = () => {
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
           </FormControl>
         </Grid>
@@ -130,7 +129,6 @@ const Passord = () => {
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
           </FormControl>
         </Grid>

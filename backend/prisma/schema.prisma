@@ -147,17 +147,6 @@ model kunngjoring {
   @@index([beboer_id], map: "beboer_id")
 }
 
-model prefs {
-  beboer_id  Int      @unique(map: "beboerId") @db.UnsignedInt
-  resepp     Boolean? @default(true)
-  vinkjeller Boolean? @default(true)
-  pinboo     Boolean? @default(false)
-  pinkode    String?  @db.VarChar(20)
-  vinpinboo  Boolean? @default(false)
-  vinpin     String?  @db.VarChar(20)
-  id         Int      @id @default(autoincrement()) @db.UnsignedInt
-}
-
 model rolle {
   id        Int      @id @default(autoincrement()) @db.UnsignedInt
   navn      String   @db.VarChar(20)
