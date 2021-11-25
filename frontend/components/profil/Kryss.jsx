@@ -65,10 +65,11 @@ const Kryss = () => {
       vinkjeller: vinkjeller,
     },
     onCompleted(data) {
-      dispatch(oppdaterPinkodeBruker(data));
-      setMelding("Endringer ble lagret!");
-      setVellykket(true);
-      setVisAlert(true);
+      console.log(data);
+      // dispatch(oppdaterPinkodeBruker(data));
+      // setMelding("Endringer ble lagret!");
+      // setVellykket(true);
+      // setVisAlert(true);
     },
     onError(error) {
       setMelding(error.message);

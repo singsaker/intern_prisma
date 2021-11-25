@@ -11,8 +11,17 @@
 //
 //  krevdRolle er en String med rollen som kreves for å utføre funksjonen.
 //  krevdVerv brukes når krevdRolle == "Spesialist". krevdVerv må være en array med Strings - navnene på krevd verv.
+
+const dotenv = require("dotenv");
+dotenv.config();
+
 async function SjekkTilgang(context, krevdRolle, krevdVerv = null) {
   try {
+    // Under utvikling blir alle queries godtatt:
+    if (process.env.ENVIORNMENT === "dev") {
+      return true;
+    }
+
     const beboerRolle = context.req.rolle;
     const ROLLER = await context.prisma.rettigheter.findMany({
       orderBy: [

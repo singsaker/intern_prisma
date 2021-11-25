@@ -47,10 +47,14 @@ app.use((req, res, next) => {
     );
     req.brukerId = bruker_id;
     req.beboerId = beboer_id;
+  } else if (process.env.ENVIORNMENT === "dev") {
+    //  Kun for utvikling!
+    //  Setter bruker_id og beboer_id tilsvarende beboeren "Kevin Nordnes":
+    req.brukerId = 709;
+    req.beboerId = 742;
+  } else {
+    throw new AuthenticationError("Brukeren må være logget inn!");
   }
-  // else {
-  //   throw new AuthenticationError("Brukeren må være logget inn!");
-  // }
   next();
 });
 
