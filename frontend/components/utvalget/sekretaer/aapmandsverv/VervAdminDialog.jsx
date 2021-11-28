@@ -11,9 +11,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Dialog from '@mui/material/Dialog';
+import CircularProgress from '@mui/material/CircularProgress'
 import { useMutation, useQuery } from "@apollo/client";
 
-import { UPDATE_BEBOER } from "../../../../src/query/beboer";
+import { LEGG_TIL_VERV } from "../../../../src/query/verv";
 
 const VervAdminDialog = (props) => {
   const beboere = useSelector((state) => Object.values(state.beboer.beboere));
@@ -23,41 +24,27 @@ const VervAdminDialog = (props) => {
     setSelectedBeboer(event.target.value);
   };
 
-  const sendBeboerApiRequest = (event) => {
-    console.log("Adding beboer.id: ", selectedBeboer, " to verv_id: ", props.verv_id);
-    props.onClose()
-  };
-
-  // const [submitVerv, { loading }] = useMutation(UPDATE_BEBOER, {
-  //   variables: {
-  //     id: props.beboer_id,
-  //     epost,
-  //     telefon: tlf,
-  //     studie_id: Number(studie_id),
-  //     skole_id: Number(skole_id),
-  //     fodselsdato,
-  //     adresse,
-  //     postnummer: Number(postnummer),
-  //     klassetrinn: Number(klassetrinn),
-  //     fornavn,
-  //     mellomnavn,
-  //     etternavn,
-  //   },
-  //   onCompleted(data) {
-  //     props.gammelBeboer ? dispatch(oppdaterGammelBeboer(data)) : dispatch(oppdaterBeboer(data));
-  //     console.log("Endring i vervliste vellykket")
-  //   },
-  //   onError(error) {
-  //     console.error("Uhåndtert feil", error);
-  //   },
-  // });
+  const [leggTilVerv, { loading }] = useMutation(LEGG_TIL_VERV, {
+    variables: {
+      beboer_id: selectedBeboer,
+      verv_id: props.verv_id
+    },
+    onCompleted(data) {
+      console.log("Endring i vervliste vellykket")
+      props.onClose()
+    },
+    onError(error) {
+      console.error("Uhåndtert feil", error);
+    },
+  });
 
   return (
     <Dialog {...props}>
       <DialogTitle>Legg til beboer på verv</DialogTitle>
       <DialogContent dividers>
         <Box>
-          <FormControl fullWidth>
+          {loading ? <CircularProgress /> : (
+            <FormControl fullWidth>
             <InputLabel id="mui-select-beboer-verv-label">Beboer</InputLabel>
             <Select
               labelId="mui-select-beboer-verv-label"
@@ -73,10 +60,12 @@ const VervAdminDialog = (props) => {
               ))}
             </Select>
           </FormControl>
+          )}
+          
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={sendBeboerApiRequest}>Legg til</Button>
+        <Button onClick={leggTilVerv}>Legg til</Button>
       </DialogActions>
     </Dialog>
   );
