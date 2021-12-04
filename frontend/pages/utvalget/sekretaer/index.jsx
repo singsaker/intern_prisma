@@ -4,7 +4,7 @@ import Layout from "../../../components/Layout";
 import Navigasjon from "../../../components/utvalget/sekretaer/Navigasjon";
 import VervListe from "../../../components/utvalget/sekretaer/aapmandsverv/VervListe";
 import ProfilCard from "../../../components/ProfilCard";
-import VervAdmin from "../../../components/utvalget/sekretaer/aapmandsverv/VervAdmin";
+import VervAdminDialog from "../../../components/utvalget/sekretaer/aapmandsverv/VervAdminDialog";
 
 import Dialog from "@mui/material/Dialog";
 import Grid from "@mui/material/Grid";
@@ -43,9 +43,7 @@ const Sekretaer = () => {
       </Dialog>
 
       {/* Vervadminmodal */}
-      <Dialog onClose={toggleVervModal} open={vervModal}>
-        <VervAdmin verv_id={vervId} />
-      </Dialog>
+      <VervAdminDialog verv_id={vervId} onClose={toggleVervModal} open={vervModal} />
 
       <Grid container direction="column" spacing={2}>
         <Grid item>
