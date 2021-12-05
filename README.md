@@ -29,7 +29,7 @@ Install dependencies for both frontend (.intern/frontend) and backend (.intern/b
 
 Create .intern/backend/.env
 
-    APP_SECRET={Secret passphrase}
+    APP_SECRET={SECRET PASSWORD}
     DATABASE_URL="mysql://USERNAME:PASSWORD@URL:PORT/DATABASE"
     ENVIORNMENT="dev"
     DB_ENV="testing"
@@ -42,7 +42,7 @@ Introspect database
 
     npx prisma db pull
 
-Genereta prisma client
+Generate prisma client
 
     npx prisma generate
 
@@ -67,10 +67,6 @@ Test backend by opening localhost:4000 and run the following
             etternavn
         }
     }
-
-## Deployment
-
-Add additional notes to deploy this on a live system
 
 ## Built With
 
