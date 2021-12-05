@@ -1,8 +1,10 @@
 const { isString } = require("lodash");
+const { DB } = require("../../database");
 
 const drikkeQuery = {
   hentDrikke: async (parent, args, context) => {
     try {
+      return;
       return await context.prisma.drikke.findMany();
     } catch (err) {
       throw err;
