@@ -1,6 +1,8 @@
 const formaterBeboer = require("./formaterBeboer");
 const validerEpostAdresse = require("./validerEpostAdresse");
 const bcrypt = require("bcryptjs");
+const DB = require("../../database");
+const _ = require("lodash");
 const { SjekkTilgang } = require("../rettigheter/SjekkTilgang");
 
 const DEFAULT_BEBOER = {
@@ -32,18 +34,7 @@ const DEFAULT_BEBOER = {
 const beboerQuery = {
   hentBeboer: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Beboer"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboer = await context.prisma.beboer.findUnique({
-        where: {
-          id: args.id,
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboer = await DB.beboer.unik(args.id, context);
 
       return formaterBeboer(context, beboer);
     } catch (err) {
@@ -52,10 +43,6 @@ const beboerQuery = {
   },
   hentBeboerKryss: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
       const beboer = await context.prisma.beboer.findUnique({
         where: {
           id: args.id,
@@ -77,22 +64,7 @@ const beboerQuery = {
   },
   hentBeboere: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Beboer"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-      const beboere = await context.prisma.beboer.findMany({
-        where: {
-          NOT: {
-            fornavn: {
-              contains: "Utvalget",
-            },
-          },
-          status: 1,
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboere = await DB.beboer.alle(context);
 
       return await beboere.map((beboer) => {
         return formaterBeboer(context, beboer);
@@ -103,9 +75,6 @@ const beboerQuery = {
   },
   hentBeboereKryss: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
       const beboere = await context.prisma.beboer.findMany({
         where: {
           NOT: {
@@ -134,23 +103,7 @@ const beboerQuery = {
   },
   hentGamleBeboere: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Beboer"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboere = await context.prisma.beboer.findMany({
-        where: {
-          NOT: {
-            fornavn: {
-              contains: "Utvalget",
-            },
-          },
-          status: 0,
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboere = await DB.beboer.gamle(context);
 
       return await beboere.map((beboer) => {
         return formaterBeboer(context, beboer);
@@ -161,23 +114,7 @@ const beboerQuery = {
   },
   hentBeboerePerm: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Beboer"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboere = await context.prisma.beboer.findMany({
-        where: {
-          NOT: {
-            fornavn: {
-              contains: "Utvalget",
-            },
-          },
-          status: 2,
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboere = await DB.beboer.perm(context);
 
       return await beboere.map((beboer) => {
         return formaterBeboer(context, beboer);
@@ -188,10 +125,6 @@ const beboerQuery = {
   },
   hentEpostPrefs: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
       return await context.prisma.epost_pref.findFirst({
         where: { beboer_id: args.beboerId },
       });
@@ -204,68 +137,37 @@ const beboerQuery = {
 const beboerMutation = {
   flyttBeboer: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboer = await context.prisma.beboer.findUnique({
-        where: {
-          id: args.id,
-        },
-        select: {
-          romhistorikk: true,
-        },
-      });
-
-      const romhistorikk = beboer.romhistorikk;
-      let romhistorikkId = null;
+      const romhistorikk = await DB.romhistorikk.beboer(args.id, context);
+      let romhistorikk_id = null;
+      const utflytt = new Date(args.utflytt);
+      const innflytt = new Date(args.innflytt);
 
       // Finner ID til romhistorikk-objektet hvor beboeren ikke har flyttet ut av rommet (nåværende rom):
       for (let i = 0; i < romhistorikk.length; i++) {
         if (romhistorikk[i].utflyttet === null) {
-          romhistorikkId = romhistorikk[i].id;
+          romhistorikk_id = romhistorikk[i].id;
         }
       }
-
       // Oppdaterer romhistorikk-objektet slik at beboeren er flyttet ut:
-      if (romhistorikkId !== null) {
-        await context.prisma.romhistorikk.update({
-          where: {
-            id: romhistorikkId,
-          },
-          data: {
-            utflyttet: new Date(args.utflytt),
-          },
-        });
+      if (romhistorikk_id == null) {
+        return Error("Ugyldig romhistorikk! Kontakt support!");
+      } else if (_.isNaN(utflytt.getDate())) {
+        return Error("Ugyldig utflyttingsdato!");
+      } else if (_.isNaN(innflytt.getDate())) {
+        return Error("Ugyldig innflyttingsdato!");
+      } else {
+        await DB.romhistorikk.flyttUt(romhistorikk_id, utflytt, context);
       }
 
-      const nyBeboer = await context.prisma.beboer.update({
-        where: {
-          id: args.id,
-        },
-        data: {
-          rom: {
-            connect: {
-              id: args.romId,
-            },
-          },
-          romhistorikk: {
-            create: {
-              rom: {
-                connect: {
-                  id: args.romId,
-                },
-              },
-              innflyttet: new Date(args.innflytt),
-            },
-          },
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const nyRomHist = await DB.romhistorikk.lag(
+        args.id,
+        args.romId,
+        innflytt,
+        context
+      );
+      const beboer = await DB.beboer.flyttTil(args.id, args.romId, context);
 
-      return formaterBeboer(context, nyBeboer);
+      return formaterBeboer(context, beboer);
     } catch (err) {
       throw err;
     }
@@ -276,10 +178,6 @@ const beboerMutation = {
   // Den nye beboeren må ta i bruk "glemt passsord"-funksjonen for å sette nytt passord og logge inn
   lagBeboer: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
       const MAX_LENGDE = 16;
       const MIN_LENGDE = 8;
       const SALT_ROUNDS = 10;
@@ -477,24 +375,14 @@ const beboerMutation = {
 
   oppdaterAnsiennitet: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
       let beboere = [];
 
       for (let i = 0; i < args.data.length; i++) {
-        const beboer = await context.prisma.beboer.update({
-          where: {
-            id: args.data[i].beboerId,
-          },
-          data: {
-            ansiennitet: args.data[i].ansiennitet,
-          },
-          include: {
-            ...DEFAULT_BEBOER,
-          },
-        });
+        const beboer = await DB.beboer.oppdaterAnsiennitet(
+          args.data[i].beboerId,
+          args.data[i].ansiennitet,
+          context
+        );
         beboere.push(formaterBeboer(context, beboer));
       }
 
@@ -505,38 +393,7 @@ const beboerMutation = {
   },
   oppdaterBeboer: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboer = await context.prisma.beboer.update({
-        where: { id: args.id },
-        data: {
-          fornavn: args.info.fornavn,
-          mellomnavn: args.info.mellomnavn,
-          etternavn: args.info.etternavn,
-          adresse: args.info.adresse,
-          postnummer: args.info.postnummer,
-          epost: args.info.epost,
-          telefon: args.info.telefon,
-          klassetrinn: args.info.klassetrinn,
-          fodselsdato: args.info.fodselsdato,
-          kundenr: args.info.kundenr,
-          studie: {
-            connect: {
-              id: args.info.studie_id,
-            },
-          },
-          skole: {
-            connect: {
-              id: args.info.skole_id,
-            },
-          },
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboer = await DB.beboer.oppdater(args.id, args.info, context);
 
       return formaterBeboer(context, beboer);
     } catch (err) {
@@ -545,21 +402,11 @@ const beboerMutation = {
   },
   oppdaterPermStatus: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboer = await context.prisma.beboer.update({
-        where: {
-          id: args.id,
-        },
-        data: {
-          perm: args.perm,
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboer = await DB.beboer.oppdaterPermstatus(
+        args.id,
+        args.perm,
+        context
+      );
 
       return formaterBeboer(context, beboer);
     } catch (err) {
@@ -569,46 +416,14 @@ const beboerMutation = {
 
   oppdaterBeboerAdmin: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
-      const beboerRomhistorikk = await context.prisma.beboer.findUnique({
-        where: {
-          id: args.id,
-        },
-        select: {
-          romhistorikk: true,
-        },
-      });
-
-      // Romhistorikk er en string som vi gjør om til en array av objekter:
-      let beboerRom = JSON.parse(beboerRomhistorikk.romhistorikk);
-
-      // Endrer siste instans til å være det nye rommet:
-      if (beboerRom.length > 0) {
-        beboerRom[beboerRom.length - 1] = {
-          ...beboerRom[beboerRom.length - 1],
-          romId: String(args.romId),
-        };
-      } else {
-        return Error("Beboer har ingen romhistorikk");
-      }
-
-      const beboer = await context.prisma.beboer.update({
-        where: {
-          id: args.id,
-        },
-        data: {
-          alkoholdepositum: args.depositum,
-          romhistorikk: JSON.stringify(beboerRom),
-          rolle_id: args.rolleId,
-          kundenr: args.kundenr,
-        },
-        include: {
-          ...DEFAULT_BEBOER,
-        },
-      });
+      const beboer = await DB.beboer.oppdaterAdmin(
+        args.id,
+        args.depositum,
+        args.romId,
+        args.rolleId,
+        args.kondenr,
+        context
+      );
 
       return formaterBeboer(context, beboer);
     } catch (err) {
@@ -617,10 +432,6 @@ const beboerMutation = {
   },
   oppdaterEpostPrefs: async (parent, args, context) => {
     try {
-      if (!(await SjekkTilgang(context, "Utvalget"))) {
-        return Error("Du har ikke tilgang til denne ressursen!");
-      }
-
       return await context.prisma.epost_pref.update({
         where: {
           beboer_id: args.id,

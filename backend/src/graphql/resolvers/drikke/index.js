@@ -1,11 +1,9 @@
-const { isString } = require("lodash");
-const { DB } = require("../../database");
+const DB = require("../../database");
 
 const drikkeQuery = {
   hentDrikke: async (parent, args, context) => {
     try {
-      return;
-      return await context.prisma.drikke.findMany();
+      return DB.drikke.alle(context);
     } catch (err) {
       throw err;
     }
@@ -15,41 +13,23 @@ const drikkeQuery = {
 const drikkeMutation = {
   lagDrikke: async (parent, args, context) => {
     try {
-      const res = await context.prisma.drikke.create({
-        data: {
-          navn: args.navn,
-          pris: args.pris,
-          aktiv: args.aktiv,
-          farge: args.farge,
-          vin: args.vin,
-          kommentar: args.kommentar,
-          forst: args.forst,
-          produktnr: args.produktnr,
-        },
-      });
-      return res;
+      if (args.pris <= 0) {
+        return new Error("Prisen må være mer enn 0,-");
+      } else if (args.navn.length <= 256) {
+        return new Error("Lengden på navnet må være max 256 karakterer.");
+      } else {
+        return DB.drikke.lag(args, context);
+      }
     } catch (err) {
       throw err;
     }
   },
   oppdaterDrikke: async (parent, args, context) => {
     try {
-      if (args.navn.length > 0 && isString(args.navn)) {
-        return await context.prisma.drikke.update({
-          where: {
-            id: args.id,
-          },
-          data: {
-            navn: args.navn,
-            pris: args.pris,
-            aktiv: args.aktiv,
-            vin: args.vin,
-            farge: args.farge,
-            kommentar: args.kommentar,
-            forst: args.forst,
-            produktnr: args.produktnr,
-          },
-        });
+      if (args.pris <= 0) {
+        return new Error("Prisen må være mer enn 0,-");
+      } else if (args.navn.length <= 256) {
+        return new Error("Lengden på navnet må være max 256 karakterer.");
       } else {
         return Error("Ikke et gyldig navn!");
       }
@@ -59,11 +39,7 @@ const drikkeMutation = {
   },
   slettDrikke: async (parent, args, context) => {
     try {
-      return await context.prisma.drikke.delete({
-        where: {
-          id: args.id,
-        },
-      });
+      return await DB.drikke.slett(args, context);
     } catch (err) {
       throw err;
     }
