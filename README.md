@@ -54,7 +54,7 @@ For both backend and frontend
 
     npm run dev
 
-localhost:3000 is the URL for the frontpage and localhost:4000 is a URL for doing backend calls in GrapQL.
+localhost:3000 is the URL for the frontpage and localhost:4000 is a URL for doing backend calls in GraphQL.
 
 ### Sample Tests
 
