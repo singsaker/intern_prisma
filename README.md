@@ -58,15 +58,15 @@ localhost:3000 is the URL for the frontpage and localhost:4000 is a URL for doin
 
 ### Sample Tests
 
-Explain what these tests test and why
+Test backend by opening localhost:4000 and run the following
 
-    Give an example
-
-### Style test
-
-Checks if the best practices and the right coding style has been used.
-
-    Give an example
+    query {
+        hentBeboere {
+            id
+            fornavn
+            etternavn
+        }
+    }
 
 ## Deployment
 
@@ -74,16 +74,16 @@ Add additional notes to deploy this on a live system
 
 ## Built With
 
-- [Contributor Covenant](https://www.contributor-covenant.org/) - Used
-  for the Code of Conduct
-- [Creative Commons](https://creativecommons.org/) - Used to choose
-  the license
+- [Prisma](https://www.prisma.io/) - Used
+  as ORM for MySQL
+- [Apollo with GraphQL](https://www.apollographql.com/) - Used as server and query language
+- [NextJS](https://nextjs.org/) - React framework for production
+- [Material-UI](https://mui.com/) - Used as UI library
+- [React Redux](https://react-redux.js.org/) - Used as state container
 
 ## Authors
 
-- **Billie Thompson** - _Provided README Template_ -
-  [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of
-[contributors](https://github.com/PurpleBooth/a-good-readme-template/contributors)
-who participated in this project.
+- **Kevin Nordnes** - _Project leader_ - [LinkedIn](https://www.linkedin.com/in/kevin-nordnes/)
+- **Kaspar Paus Græsdal** - _Developer_
+- **Mathias Raa** - _Developer_
+- **Daniel Løvbrøtte Olsen** - _Developer_
