@@ -155,139 +155,144 @@ const ProfilAdmin = (props) => {
 
   return (
     <div>
-      <Grid container>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          oppdaterBeboerMutation();
+        }}
+      >
+        <Grid container direction="column" spacing={2}>
+          <Grid item xs={4}>
+            <FormControl>
+              <TextField
+                id="kundenr"
+                label="Kundenummer"
+                variant="outlined"
+                value={kundenr}
+                onChange={(e) => setKundenr(e.target.value)}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={4}>
+            <FormControl component="fieldset">
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={depositum} onChange={(e) => setDepositum(e.target.checked)} name="depositum" />
+                  }
+                  label="Betalt depositum"
+                />
+              </FormGroup>
+            </FormControl>
+          </Grid>
+
+          {!rollerQuery.loading && roller.length > 0 && (
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel id="rolle_label">Rolle</InputLabel>
+                <Select
+                  labelId="rolle_label"
+                  id="rolle_input"
+                  label="Rolle"
+                  value={rolle}
+                  onChange={(e) => setRolle(e.target.value)}
+                >
+                  {roller.map((rolle) => (
+                    <MenuItem key={rolle.id} value={rolle.id}>
+                      {rolle.navn}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          )}
+
+          {!romQuery.loading && alleRom.length > 0 && (
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel id="rom_label">Rom</InputLabel>
+                <Select
+                  labelId="rom_label"
+                  label="Rom"
+                  id="rom_input"
+                  value={rom}
+                  onChange={(e) => setRom(e.target.value)}
+                >
+                  {alleRom.map((rom) => (
+                    <MenuItem key={rom.id} value={rom.id}>
+                      {rom.navn}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          )}
+
+          <Grid item container justifyContent="flex-end" spacing={2}>
+            <Grid item>
+              <Button
+                variant="text"
+                size="large"
+                color="secondary"
+                onClick={() => setSlettBeboerToggle(!slettBeboerToggle)}
+                startIcon={<DeleteIcon />}
+              >
+                Slett beboer
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                size="large"
+                variant="contained"
+                color="secondary"
+                startIcon={<FlightIcon />}
+                onClick={() => oppdaterPermStatusMutation()}
+              >
+                {perm === 0 ? "Send på perm" : "Send hjem fra perm"}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
+                Lagre
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </form>
+
+      {slettBeboerToggle && (
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            oppdaterBeboerMutation();
+            handleSlettBeboer();
           }}
         >
-          <Grid container direction="column" spacing={2}>
-            <Grid item xs={6}>
-              <FormControl>
-                <TextField
-                  id="kundenr"
-                  label="Kundenummer"
-                  variant="outlined"
-                  value={kundenr}
-                  onChange={(e) => setKundenr(e.target.value)}
-                />
-              </FormControl>
-              <FormControl component="fieldset">
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={depositum} onChange={(e) => setDepositum(e.target.checked)} name="depositum" />
-                    }
-                    label="Betalt depositum"
-                  />
-                </FormGroup>
-              </FormControl>
-
-              {!rollerQuery.loading && roller.length > 0 && (
-                <FormControl>
-                  <InputLabel id="rolle_label">Rolle</InputLabel>
-                  <Select
-                    labelId="rolle_label"
-                    id="rolle_input"
-                    label="Rolle"
-                    value={rolle}
-                    onChange={(e) => setRolle(e.target.value)}
-                  >
-                    {roller.map((rolle) => (
-                      <MenuItem key={rolle.id} value={rolle.id}>
-                        {rolle.navn}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              )}
-
-              {!romQuery.loading && alleRom.length > 0 && (
-                <FormControl>
-                  <InputLabel id="rom_label">Rom</InputLabel>
-                  <Select
-                    labelId="rom_label"
-                    label="Rom"
-                    id="rom_input"
-                    value={rom}
-                    onChange={(e) => setRom(e.target.value)}
-                  >
-                    {alleRom.map((rom) => (
-                      <MenuItem key={rom.id} value={rom.id}>
-                        {rom.navn}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              )}
+          <Grid item container direction="column" spacing={2}>
+            <Grid item>
+              <Typography variant="subtitle1">Er du sikker på at du vil slette denne beboeren?</Typography>
             </Grid>
-
-            <Grid container justifyContent="flex-end" spacing={2}>
+            <Grid item container>
               <Grid item>
-                <Button
-                  variant="text"
-                  size="large"
-                  color="secondary"
-                  onClick={() => setSlettBeboerToggle(!slettBeboerToggle)}
-                  startIcon={<DeleteIcon />}
-                >
-                  Slett beboer
-                </Button>
+                <TextField
+                  variant="outlined"
+                  value={slettFornavn}
+                  label="Fornavn"
+                  onChange={(e) => setSlettFornavn(e.target.value)}
+                  helperText="Skriv inn fornavnet til beboeren (case sensitiv)"
+                />
               </Grid>
-              <Grid item>
-                <Button
-                  size="large"
-                  variant="contained"
-                  color="secondary"
-                  startIcon={<FlightIcon />}
-                  onClick={() => oppdaterPermStatusMutation()}
-                >
-                  {perm === 0 ? "Send på perm" : "Send hjem fra perm"}
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
-                  Lagre
-                </Button>
-              </Grid>
+              {slettFornavn === beboer.fornavn && (
+                <Grid item>
+                  <Button size="large" type="submit" startIcon={<DeleteIcon />}>
+                    Slett
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </form>
-
-        {slettBeboerToggle && (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSlettBeboer();
-            }}
-          >
-            <Grid item container direction="column" spacing={2}>
-              <Grid item>
-                <Typography variant="subtitle1">Er du sikker på at du vil slette denne beboeren?</Typography>
-              </Grid>
-              <Grid item container>
-                <Grid item>
-                  <TextField
-                    variant="outlined"
-                    value={slettFornavn}
-                    label="Fornavn"
-                    onChange={(e) => setSlettFornavn(e.target.value)}
-                    helperText="Skriv inn fornavnet til beboeren (case sensitiv)"
-                  />
-                </Grid>
-                {slettFornavn === beboer.fornavn && (
-                  <Grid item>
-                    <Button size="large" type="submit" startIcon={<DeleteIcon />}>
-                      Slett
-                    </Button>
-                  </Grid>
-                )}
-              </Grid>
-            </Grid>
-          </form>
-        )}
-      </Grid>
+      )}
 
       <Snackbar open={vellykket} autoHideDuration={6000} onClose={() => setVellykket(false)}>
         <Alert elevation={6} variant="filled" onClose={() => setVellykket(false)} severity="success">

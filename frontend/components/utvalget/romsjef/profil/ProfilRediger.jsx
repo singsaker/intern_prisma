@@ -61,7 +61,7 @@ const ProfilRediger = (props) => {
               <Tab label="Romhistorikk" value="romhistorikk" />
             </Tabs>
           </Paper>
-          <Grid container>
+          <Grid container style={{ overflowY: "auto", height: "400px" }}>
             <Grid item style={{ width: "100%", margin: "20px" }} hidden={tab !== "info"}>
               <Info perm={props.perm} beboer_id={props.beboer_id} />
             </Grid>

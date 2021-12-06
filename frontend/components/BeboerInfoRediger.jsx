@@ -161,86 +161,96 @@ const BeboerInfoRediger = (props) => {
           submitBeboer();
         }}
       >
-        <Stack spacing={2}>
-          <TextField
-            required
-            id="fornavn_input"
-            label="Fornavn"
-            variant="outlined"
-            value={fornavn}
-            onChange={(e) => setFornavn(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            id="mellomnavn_input"
-            label="Mellomnavn"
-            variant="outlined"
-            value={mellomnavn}
-            onChange={(e) => setMellomnavn(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            required
-            id="etternavn_input"
-            label="Etternavn"
-            variant="outlined"
-            value={etternavn}
-            onChange={(e) => setEtternavn(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            required
-            id="epost_input"
-            label="Epost"
-            variant="outlined"
-            value={epost}
-            onChange={(e) => setEpost(e.target.value)}
-            fullWidth
-          />
-          <TextField
-            id="telefon_input"
-            label="Telefon"
-            variant="outlined"
-            value={tlf}
-            onChange={(e) => setTlf(e.target.value)}
-            fullWidth
-          />
-          <div>
-            <Grid item xs={12} container spacing={2}>
-              <Grid md={6} xs={12} item>
-                <TextField
-                  id="adresse_input"
-                  label="Adresse"
-                  variant="outlined"
-                  value={adresse}
-                  onChange={(e) => setAdresse(e.target.value)}
-                  fullWidth
-                />
-              </Grid>
-              <Grid md={6} xs={12} item>
-                <TextField
-                  id="postnummer_input"
-                  label="Postnummer"
-                  variant="outlined"
-                  value={postnummer}
-                  onChange={(e) => setPostnummer(e.target.value)}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-          </div>
-
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="Fødselsdag"
-              id="fodselsdag_input"
-              value={fodselsdato}
-              onChange={handleDateChange}
-              renderInput={(params) => <TextField {...params} />}
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              required
+              id="fornavn_input"
+              label="Fornavn"
+              variant="outlined"
+              value={fornavn}
+              onChange={(e) => setFornavn(e.target.value)}
+              fullWidth
             />
-          </LocalizationProvider>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="mellomnavn_input"
+              label="Mellomnavn"
+              variant="outlined"
+              value={mellomnavn}
+              onChange={(e) => setMellomnavn(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="etternavn_input"
+              label="Etternavn"
+              variant="outlined"
+              value={etternavn}
+              onChange={(e) => setEtternavn(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={8}>
+            <TextField
+              required
+              id="epost_input"
+              label="Epost"
+              variant="outlined"
+              value={epost}
+              onChange={(e) => setEpost(e.target.value)}
+              fullWidth
+            />
+          </Grid>
 
-          <Grid container item xs={12}>
+          <Grid item xs={4}>
+            <TextField
+              id="telefon_input"
+              label="Telefon"
+              variant="outlined"
+              value={tlf}
+              onChange={(e) => setTlf(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid container item xs={12} spacing={2}>
+            <Grid md={9} xs={12} item>
+              <TextField
+                id="adresse_input"
+                label="Adresse"
+                variant="outlined"
+                value={adresse}
+                onChange={(e) => setAdresse(e.target.value)}
+                fullWidth
+              />
+            </Grid>
+            <Grid md={3} xs={12} item>
+              <TextField
+                id="postnummer_input"
+                label="Postnummer"
+                variant="outlined"
+                value={postnummer}
+                onChange={(e) => setPostnummer(e.target.value)}
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={6}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Fødselsdag"
+                id="fodselsdag_input"
+                value={fodselsdato}
+                onChange={handleDateChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+
+          <Grid item xs={2}>
             <FormControl>
               <InputLabel id="skole_label">Skole</InputLabel>
               <Select
@@ -270,6 +280,8 @@ const BeboerInfoRediger = (props) => {
                 )}
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item xs={2}>
             <FormControl>
               <InputLabel id="studie_label">Studie</InputLabel>
               <Select
@@ -299,8 +311,10 @@ const BeboerInfoRediger = (props) => {
                 )}
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item xs={2}>
             <FormControl>
-              <InputLabel id="klasse_label">Klassetrinn</InputLabel>
+              <InputLabel id="klasse_label">Trinn</InputLabel>
               <Select
                 labelId="klasse_label"
                 id="klasse_input"
@@ -316,12 +330,13 @@ const BeboerInfoRediger = (props) => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid container justifyContent="flex-end">
+
+          <Grid item container justifyContent="flex-end">
             <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
               Lagre
             </Button>
           </Grid>
-        </Stack>
+        </Grid>
       </form>
     </>
   );
