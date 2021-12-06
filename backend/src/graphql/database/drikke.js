@@ -1,7 +1,41 @@
-const drikke = {
+module.exports = {
   alle: async (context) => {
     try {
-      return await context.prisma.drikke.findMany();
+      return await context.prisma.drikke.findMany({
+        include: {
+          drikke_kategori: true,
+        },
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
+  aktive: async (context) => {
+    try {
+      const res = await context.prisma.drikke.findMany({
+        where: {
+          aktiv: true,
+        },
+        include: {
+          drikke_kategori: true,
+        },
+      });
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  },
+  unik: async (id, context) => {
+    try {
+      const res = await context.prisma.drikke.findUnique({
+        where: {
+          id: id,
+        },
+        include: {
+          drikke_kategori: true,
+        },
+      });
+      return res;
     } catch (err) {
       throw err;
     }
@@ -18,6 +52,9 @@ const drikke = {
           kommentar: args.kommentar,
           forst: args.forst,
           produktnr: args.produktnr,
+        },
+        include: {
+          drikke_kategori: true,
         },
       });
       return res;
@@ -41,6 +78,9 @@ const drikke = {
           forst: args.forst,
           produktnr: args.produktnr,
         },
+        include: {
+          drikke_kategori: true,
+        },
       });
 
       return drikke;
@@ -54,6 +94,9 @@ const drikke = {
         where: {
           id: args.id,
         },
+        include: {
+          drikke_kategori: true,
+        },
       });
       return drikke;
     } catch (err) {
@@ -61,4 +104,3 @@ const drikke = {
     }
   },
 };
-module.exports = { drikke };

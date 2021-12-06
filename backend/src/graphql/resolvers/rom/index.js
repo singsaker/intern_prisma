@@ -1,12 +1,9 @@
+const DB = require("../../database");
+
 const romQuery = {
   hentAlleRom: async (parent, args, context) => {
     try {
-      return await context.prisma.rom.findMany({
-        include: {
-          romtype: true,
-          beboer: true,
-        },
-      });
+      return DB.rom.alle(context);
     } catch (err) {
       throw err;
     }
@@ -14,14 +11,7 @@ const romQuery = {
 
   hentLedigeRom: async (parent, args, context) => {
     try {
-      return await context.prisma.rom.findMany({
-        where: {
-          beboer: null,
-        },
-        include: {
-          romtype: true,
-        },
-      });
+      return DB.rom.ledige(context);
     } catch (err) {
       throw err;
     }

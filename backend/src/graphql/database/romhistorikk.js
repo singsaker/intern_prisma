@@ -1,4 +1,4 @@
-const romhistorikk = {
+module.exports = {
   beboer: async (beboer_id, context) => {
     try {
       const res = await context.prisma.romhistorikk.findMany({
@@ -49,5 +49,3 @@ const romhistorikk = {
     }
   },
 };
-
-module.exports = { romhistorikk };

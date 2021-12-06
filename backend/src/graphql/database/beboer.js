@@ -24,7 +24,7 @@ const DEFAULT_BEBOER = {
   },
 };
 
-const beboer = {
+module.exports = {
   alle: async (context) => {
     try {
       const res = await await context.prisma.beboer.findMany({
@@ -218,6 +218,35 @@ const beboer = {
       throw err;
     }
   },
-};
+  slettSkole: async (skole_id, context) => {
+    try {
+      const res = await context.prisma.beboer.updateMany({
+        where: {
+          skole_id: skole_id,
+        },
+        data: {
+          skole_id: null,
+        },
+      });
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  },
+  slettStudie: async (studie_id, context) => {
+    try {
+      const res = await context.prisma.beboer.updateMany({
+        where: {
+          studie_id: studie_id,
+        },
+        data: {
+          studie_id: null,
+        },
+      });
 
-module.exports = { beboer };
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  },
+};

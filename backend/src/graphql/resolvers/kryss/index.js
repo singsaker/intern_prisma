@@ -1,5 +1,6 @@
 const { ApolloError } = require("apollo-server-express");
 const _ = require("lodash");
+const DB = require("../../database");
 
 const kryssQuery = {
   hentAktivVin: async (parent, args, context) => {
@@ -20,17 +21,6 @@ const kryssQuery = {
       throw err;
     }
   },
-  hentAktivDrikke: async (parent, args, context) => {
-    try {
-      return await context.prisma.drikke.findMany({
-        where: {
-          aktiv: true,
-        },
-      });
-    } catch (err) {
-      throw err;
-    }
-  },
   hentFakturert: async (parent, args, context) => {
     try {
       const filter = args.fra_dato && { dato: { gte: args.fra_dato } };
@@ -46,38 +36,11 @@ const kryssQuery = {
   },
   hentKryss: async (parent, args, context) => {
     try {
-      return await context.prisma.kryss.findMany({
-        take: -args.last,
-        include: {
-          beboer: true,
-          drikke: true,
-        },
-      });
+      return DB.kryss.siste(args.last, context);
     } catch (err) {
       throw err;
     }
   },
-  // hentKrysseliste: async (parent, args, context) => {
-  //   try {
-  //     const krysseListe = await context.prisma.krysseliste.findMany({
-  //       where: {
-  //         beboer_id: args.beboerId,
-  //       },
-  //       include: {
-  //         drikke: true,
-  //       },
-  //     });
-
-  //     return krysseListe.map((liste) => {
-  //       return {
-  //         ...liste,
-  //         krysseliste: JSON.parse(liste.krysseliste),
-  //       };
-  //     });
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // },
 };
 
 const kryssMutation = {
@@ -177,14 +140,7 @@ const kryssMutation = {
   },
   lagKryss: async (parent, args, context) => {
     try {
-      const drikke = await context.prisma.drikke.findUnique({
-        where: {
-          id: args.drikke_id,
-        },
-        select: {
-          aktiv: true,
-        },
-      });
+      const drikke = DB.drikke.unik(args.kryss_id, context);
 
       if (!drikke.aktiv) {
         return new ApolloError(
@@ -192,26 +148,12 @@ const kryssMutation = {
         );
       }
 
-      const kryss = await context.prisma.kryss.create({
-        data: {
-          beboer: {
-            connect: {
-              id: args.beboer_id,
-            },
-          },
-          drikke: {
-            connect: {
-              id: args.drikke_id,
-            },
-          },
-          antall: args.antall,
-        },
-        include: {
-          drikke: true,
-          beboer: true,
-        },
-      });
-
+      const kryss = await DB.kryss.lag(
+        args.beboer_id,
+        args.drikke_id,
+        args.antall,
+        context
+      );
       return kryss;
     } catch (err) {
       throw err;
@@ -219,16 +161,7 @@ const kryssMutation = {
   },
   fjernKryss: async (parent, args, context) => {
     try {
-      const kryss = await context.prisma.kryss.delete({
-        where: {
-          id: args.id,
-        },
-        include: {
-          drikke: true,
-          beboer: true,
-        },
-      });
-
+      const kryss = DB.kryss.slett(args.id, context);
       return kryss;
     } catch (err) {
       throw err;

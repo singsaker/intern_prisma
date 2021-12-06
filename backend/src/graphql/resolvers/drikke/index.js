@@ -8,6 +8,13 @@ const drikkeQuery = {
       throw err;
     }
   },
+  hentAktivDrikke: async (parent, args, context) => {
+    try {
+      return DB.drikke.aktive(context);
+    } catch (err) {
+      throw err;
+    }
+  },
 };
 
 const drikkeMutation = {

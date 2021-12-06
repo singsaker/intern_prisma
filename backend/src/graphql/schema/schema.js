@@ -106,6 +106,7 @@ const schemaSchema = gql`
   type Drikke {
     id: Int!
     navn: String!
+    drikke_kategori: DrikkeKategori
     pris: Float!
     vin: Boolean!
     aktiv: Boolean!
@@ -113,6 +114,12 @@ const schemaSchema = gql`
     kommentar: String
     forst: Boolean
     produktnr: Int
+  }
+
+  type DrikkeKategori {
+    id: Int!
+    navn: String!
+    farge: String!
   }
 
   type EpostPrefs {
