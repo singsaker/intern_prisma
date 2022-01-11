@@ -247,26 +247,23 @@ const schemaSchema = gql`
     beboere: [Beboer!]
   }
 
-  type Storhybel {
+  type Storhybelliste {
     id: Int!
-    semester: String!
     navn: String!
-    aktiv: Boolean!
-    velger: Int!
-    rom: [Int!]
-    rekkefolge: [StorhybelRekkefolge!]
-    valg: [StorhybelValg]
+    paamelding_start: String
+    velging_start: String
+    rom: [Rom!]
+    velger: [StorhybellisteVelger]
+    status: Int!
+    lagd: String!
   }
 
-  type StorhybelRekkefolge {
+  type StorhybellisteVelger {
+    storhybelliste: Storhybelliste!
     beboer: Beboer!
-    nummer: Int!
-  }
-
-  type StorhybelValg {
-    beboer: Beboer!
-    gammeltRom: Int
-    nyttRom: Int
+    plass: Int
+    gammelt_rom: Rom
+    nytt_rom: Rom
   }
 
   type Tilgang {
@@ -357,7 +354,7 @@ const schemaSchema = gql`
     hentSoknad(id: Int!): Soknad!
     hentSoknader: [Soknad!]
     hentSoknaderSemester(aar: Int!, semester: String!): [Soknad!]
-    hentStorhybellister: [Storhybel!]
+    hentStorhybellister: [Storhybelliste!]
     hentStudie: [Studie!]
     hentVakter(fraDato: String!, tilDato: String!, bruker_id: Int): [Vakt!]
     hentVakterBruker(bruker_id: Int!): Vakt!
@@ -403,10 +400,9 @@ const schemaSchema = gql`
     lagSkole(navn: String!): Skole
     lagStorhybelliste(
       navn: String!
-      semester: String!
-      beboere: [Int!]
-      rom: [Int!]
-    ): Storhybel!
+      paamelding_start: String!
+      velging_start: String!
+    ): Storhybelliste!
     lagStudie(navn: String!): Studie!
     lagTommeVakter(fraDato: String!, tilDato: String!, type: Int!): [Vakt!]
     login(epost: String!, passord: String!): AuthData
@@ -453,7 +449,7 @@ const schemaSchema = gql`
     slettBeboer(id: Int!): Beboer!
     slettDrikke(id: Int!): Drikke!
     slettRettigheter(id: Int!): Rettigheter!
-    slettStorhybelliste(id: Int!): Storhybel!
+    slettStorhybelliste(id: Int!): Storhybelliste!
     slettStudie(id: Int!): Studie!
     slettSkole(id: Int!): Skole!
     vaktSlipp(

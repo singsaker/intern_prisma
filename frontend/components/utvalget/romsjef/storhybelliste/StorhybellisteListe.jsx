@@ -41,8 +41,9 @@ const StorhybellisteListe = (props) => {
     },
     onError(err) {
       setMelding(err.message);
+      console.log(err.message);
       setVellykket(false);
-      setVisAlert(true);
+      //setVisAlert(true);
     },
   });
 

@@ -8,44 +8,45 @@ datasource db {
 }
 
 model beboer {
-  id               Int             @id @default(autoincrement()) @db.UnsignedInt
-  bruker_id        Int?            @unique(map: "bruker_id") @db.UnsignedInt
-  fornavn          String          @db.VarChar(20)
-  mellomnavn       String?         @db.VarChar(40)
-  etternavn        String          @db.VarChar(40)
-  fodselsdato      DateTime        @default(now()) @db.DateTime(0)
-  adresse          String?         @db.VarChar(40)
-  postnummer       Int?            @db.UnsignedSmallInt
-  telefon          String          @db.VarChar(40)
-  studie_id        Int             @db.UnsignedInt
-  skole_id         Int             @db.UnsignedInt
-  klassetrinn      Int             @default(0) @db.UnsignedInt
-  alkoholdepositum Boolean         @default(false)
-  rolle_id         Int             @db.UnsignedInt
-  epost            String?         @unique(map: "epost") @db.VarChar(40)
-  bilde            String?         @db.VarChar(256)
-  ansiennitet      Int             @default(0) @db.UnsignedSmallInt
-  kjonn            Int             @default(0) @db.UnsignedTinyInt
-  kundenr          Int?            @unique(map: "kundenr") @db.UnsignedMediumInt
-  status           Int             @db.TinyInt
-  rom_id           Int?            @db.UnsignedInt
-  prefs_id         Int?            @db.UnsignedInt
-  pinkode_id       Int?            @unique(map: "pinkode_id") @db.UnsignedInt
-  rettigheter_id   Int             @default(4) @db.UnsignedInt
-  bruker           bruker?         @relation(fields: [bruker_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_1")
-  pinkode          pinkode?        @relation(fields: [pinkode_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_9")
-  rettigheter      rettigheter     @relation(fields: [rettigheter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_8")
-  rolle            rolle           @relation(fields: [rolle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_3")
-  rom              rom?            @relation(fields: [rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_2")
-  skole            skole           @relation(fields: [skole_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_4")
-  studie           studie          @relation(fields: [studie_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_5")
-  beboer_verv      beboer_verv[]
-  drikke_pafyll    drikke_pafyll[]
-  kjop             kjop[]
-  kryss            kryss[]
-  kunngjoring      kunngjoring[]
-  romhistorikk     romhistorikk[]
-  vare_pafyll      vare_pafyll[]
+  id                    Int                     @id @default(autoincrement()) @db.UnsignedInt
+  bruker_id             Int?                    @unique(map: "bruker_id") @db.UnsignedInt
+  fornavn               String                  @db.VarChar(20)
+  mellomnavn            String?                 @db.VarChar(40)
+  etternavn             String                  @db.VarChar(40)
+  fodselsdato           DateTime                @default(now()) @db.DateTime(0)
+  adresse               String?                 @db.VarChar(40)
+  postnummer            Int?                    @db.UnsignedSmallInt
+  telefon               String                  @db.VarChar(40)
+  studie_id             Int                     @db.UnsignedInt
+  skole_id              Int                     @db.UnsignedInt
+  klassetrinn           Int                     @default(0) @db.UnsignedInt
+  alkoholdepositum      Boolean                 @default(false)
+  rolle_id              Int                     @db.UnsignedInt
+  epost                 String?                 @unique(map: "epost") @db.VarChar(40)
+  bilde                 String?                 @db.VarChar(256)
+  ansiennitet           Int                     @default(0) @db.UnsignedSmallInt
+  kjonn                 Int                     @default(0) @db.UnsignedTinyInt
+  kundenr               Int?                    @unique(map: "kundenr") @db.UnsignedMediumInt
+  status                Int                     @db.TinyInt
+  rom_id                Int?                    @db.UnsignedInt
+  prefs_id              Int?                    @db.UnsignedInt
+  pinkode_id            Int?                    @unique(map: "pinkode_id") @db.UnsignedInt
+  rettigheter_id        Int                     @default(4) @db.UnsignedInt
+  bruker                bruker?                 @relation(fields: [bruker_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_1")
+  pinkode               pinkode?                @relation(fields: [pinkode_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_9")
+  rettigheter           rettigheter             @relation(fields: [rettigheter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_8")
+  rolle                 rolle                   @relation(fields: [rolle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_3")
+  rom                   rom?                    @relation(fields: [rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_2")
+  skole                 skole                   @relation(fields: [skole_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_4")
+  studie                studie                  @relation(fields: [studie_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "beboer_ibfk_5")
+  beboer_verv           beboer_verv[]
+  drikke_pafyll         drikke_pafyll[]
+  kjop                  kjop[]
+  kryss                 kryss[]
+  kunngjoring           kunngjoring[]
+  romhistorikk          romhistorikk[]
+  storhybelliste_velger storhybelliste_velger[]
+  vare_pafyll           vare_pafyll[]
 
   @@index([rettigheter_id], map: "rettigheter_id")
   @@index([rolle_id], map: "rolle_id")
@@ -157,12 +158,15 @@ model rolle {
 }
 
 model rom {
-  id           Int            @id @default(autoincrement()) @db.UnsignedInt
-  romtype_id   Int            @db.UnsignedInt
-  navn         String         @db.VarChar(20)
-  romtype      romtype        @relation(fields: [romtype_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rom_ibfk_1")
-  beboer       beboer[]
-  romhistorikk romhistorikk[]
+  id                                                              Int                     @id @default(autoincrement()) @db.UnsignedInt
+  romtype_id                                                      Int                     @db.UnsignedInt
+  navn                                                            String                  @db.VarChar(20)
+  romtype                                                         romtype                 @relation(fields: [romtype_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rom_ibfk_1")
+  beboer                                                          beboer[]
+  romhistorikk                                                    romhistorikk[]
+  storhybelliste_rom                                              storhybelliste_rom[]
+  storhybelliste_velger_romTostorhybelliste_velger_gammelt_rom_id storhybelliste_velger[] @relation("romTostorhybelliste_velger_gammelt_rom_id")
+  storhybelliste_velger_romTostorhybelliste_velger_nytt_rom_id    storhybelliste_velger[] @relation("romTostorhybelliste_velger_nytt_rom_id")
 
   @@index([romtype_id], map: "romtype_id")
 }
@@ -272,4 +276,44 @@ model rettigheter {
   navn   String   @unique(map: "navn") @db.VarChar(20)
   nivaa  Int      @db.UnsignedTinyInt
   beboer beboer[]
+}
+
+model storhybelliste {
+  id                    Int                     @id @default(autoincrement()) @db.UnsignedInt
+  navn                  String                  @db.VarChar(128)
+  paamelding_start      DateTime?               @db.DateTime(0)
+  velging_start         DateTime?               @db.DateTime(0)
+  velger                Int?                    @db.UnsignedInt
+  status                Int                     @default(0) @db.UnsignedTinyInt
+  lagd                  DateTime                @default(now()) @db.DateTime(0)
+  storhybelliste_rom    storhybelliste_rom[]
+  storhybelliste_velger storhybelliste_velger[]
+}
+
+model storhybelliste_rom {
+  storhybelliste_id Int            @db.UnsignedInt
+  rom_id            Int            @db.UnsignedInt
+  tatt              Boolean        @default(false)
+  rom               rom            @relation(fields: [rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "storhybelliste_rom_ibfk_2")
+  storhybelliste    storhybelliste @relation(fields: [storhybelliste_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "storhybelliste_rom_ibfk_1")
+
+  @@id([storhybelliste_id, rom_id])
+  @@index([rom_id], map: "rom_id")
+}
+
+model storhybelliste_velger {
+  storhybelliste_id                             Int            @db.UnsignedInt
+  beboer_id                                     Int            @db.UnsignedInt
+  plass                                         Int?           @db.UnsignedInt
+  gammelt_rom_id                                Int?           @db.UnsignedInt
+  nytt_rom_id                                   Int?           @db.UnsignedInt
+  beboer                                        beboer         @relation(fields: [beboer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "storhybelliste_velger_ibfk_2")
+  rom_romTostorhybelliste_velger_gammelt_rom_id rom?           @relation("romTostorhybelliste_velger_gammelt_rom_id", fields: [gammelt_rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "storhybelliste_velger_ibfk_3")
+  rom_romTostorhybelliste_velger_nytt_rom_id    rom?           @relation("romTostorhybelliste_velger_nytt_rom_id", fields: [nytt_rom_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "storhybelliste_velger_ibfk_4")
+  storhybelliste                                storhybelliste @relation(fields: [storhybelliste_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "storhybelliste_velger_ibfk_1")
+
+  @@id([storhybelliste_id, beboer_id])
+  @@index([beboer_id], map: "beboer_id")
+  @@index([gammelt_rom_id], map: "gammelt_rom_id")
+  @@index([nytt_rom_id], map: "nytt_rom_id")
 }

@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const helmet = require("helmet");
+const cron = require("./cron");
+
 require("dotenv").config();
 
 async function startApolloServer() {
@@ -65,6 +67,8 @@ async function startApolloServer() {
   });
 
   await server.start();
+
+  cron();
 
   server.applyMiddleware({
     app,

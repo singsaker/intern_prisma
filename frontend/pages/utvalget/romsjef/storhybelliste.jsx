@@ -150,7 +150,7 @@ const Storhybelliste = () => {
       </Dialog>
 
       {/* Ny liste-modal */}
-      <Dialog maxWidth="md" fullWidth open={nyListeModal} onClose={toggleNyListe}>
+      <Dialog maxWidth="sm" fullWidth open={nyListeModal} onClose={toggleNyListe}>
         <NyListeModal handleLagStorhybelliste={handleLagStorhybelliste} toggleNyListe={toggleNyListe} />
       </Dialog>
 
