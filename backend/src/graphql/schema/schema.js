@@ -400,8 +400,8 @@ const schemaSchema = gql`
     lagSkole(navn: String!): Skole
     lagStorhybelliste(
       navn: String!
-      paamelding_start: String!
-      velging_start: String!
+      paamelding_start: String
+      velging_start: String
     ): Storhybelliste!
     lagStudie(navn: String!): Studie!
     lagTommeVakter(fraDato: String!, tilDato: String!, type: Int!): [Vakt!]

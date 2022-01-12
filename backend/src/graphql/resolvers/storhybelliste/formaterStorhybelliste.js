@@ -1,18 +1,14 @@
-module.exports = async (storhybel) => {
+module.exports = async (liste) => {
   try {
     return {
-      ...storhybel,
-      rom: storhybel.storhybel_rom.map((r) => r.rom_id),
-      rekkefolge: storhybel.storhybel_rekkefolge.map((obj) => {
-        return { beboer: obj.storhybel_velger.beboer, nummer: obj.nummer };
-      }),
-      valg: storhybel.storhybel_fordeling.map((ford) => {
-        return {
-          beboer: ford.storhybel_velger.beboer,
-          gammeltRom: ford.gammel_rom_id,
-          nyttRom: ford.ny_rom_id,
-        };
-      }),
+      ...liste,
+      paamelding_start:
+        liste.paamelding_start &&
+        liste.paamelding_start.toISOString().replace(/"/g, ""),
+      velging_start:
+        liste.velging_start &&
+        liste.velging_start.toISOString().replace(/"/g, ""),
+      lagd: liste.lagd && liste.lagd.toISOString().replace(/"/g, ""),
     };
   } catch (err) {
     throw err;

@@ -1,5 +1,3 @@
-const { argsToArgsConfig } = require("graphql/type/definition");
-
 module.exports = {
   alle: async (context) => {
     try {

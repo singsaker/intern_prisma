@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { GET_ALLE_STORHYBELLISTER } from "../../../../src/query/rom";
-import { getAlleStorhybellister } from "../../../../src/actions/rom";
+import { GET_ALLE_STORHYBELLISTER } from "../../../../src/query/storhybelliste";
+import { getAlleStorhybellister } from "../../../../src/actions/storhybelliste";
 
 // Misc
 import { useLazyQuery } from "@apollo/client";
@@ -23,6 +23,12 @@ import MuiAlert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 
+import NotStartedIcon from "@mui/icons-material/NotStarted";
+import PauseIcon from "@mui/icons-material/Pause";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
@@ -40,8 +46,8 @@ const StorhybellisteListe = (props) => {
       dispatch(getAlleStorhybellister(data));
     },
     onError(err) {
-      setMelding(err.message);
       console.log(err.message);
+      setMelding(err.message);
       setVellykket(false);
       //setVisAlert(true);
     },
@@ -71,26 +77,42 @@ const StorhybellisteListe = (props) => {
           <TableHead>
             <TableRow>
               <TableCell>Navn</TableCell>
-              <TableCell>Semester</TableCell>
               <TableCell>Status</TableCell>
-              <TableCell>Nåverende velger</TableCell>
-              <TableCell>Neste</TableCell>
+              <TableCell>Påmelding begynner</TableCell>
+              <TableCell>Velging begynner</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {storhybellister.map((liste) => {
+              let statusIkon = <NotStartedIcon />;
+              let paamelding = "Ikke satt";
+              let velging = "Ikke satt";
+
+              if (liste.paamelding_start) {
+                paamelding = new Date(liste.paamelding_start).toLocaleString();
+              }
+
+              if (liste.velging_start) {
+                velging = new Date(liste.velging_start).toLocaleString();
+              }
+
+              if (liste.status == 1) {
+                statusIkon = <PersonAddIcon />;
+              } else if (liste.status == 2) {
+                statusIkon = <PlayArrowIcon />;
+              }
+
               return (
                 <TableRow
-                  onClick={() => props.toggleListeModal(liste.id)}
+                  //onClick={() => props.toggleListeModal(liste.id)}
                   key={liste.id}
                   hover
                   style={{ cursor: "pointer" }}
                 >
                   <TableCell>{liste.navn}</TableCell>
-                  <TableCell>{liste.semester}</TableCell>
-                  <TableCell>{liste.aktiv ? <AccessTimeIcon /> : <DoneIcon />}</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
+                  <TableCell>{statusIkon}</TableCell>
+                  <TableCell>{paamelding}</TableCell>
+                  <TableCell>{velging}</TableCell>
                 </TableRow>
               );
             })}

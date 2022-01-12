@@ -23,6 +23,7 @@ export default function rom(state = INITIAL_STATE, action) {
         rom: _.mapKeys(action.payload, (r) => r.id),
       };
     case GET_ALLE_STORHYBELLISTER_TYPE:
+      console.log(action.payload);
       return {
         ...state,
         storhybellister: _.mapKeys(action.payload, (l) => l.id),

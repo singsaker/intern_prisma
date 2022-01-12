@@ -1,38 +1,13 @@
 const _ = require("lodash");
 const formaterStorhybelliste = require("./formaterStorhybelliste");
+const DB = require("../../database");
 
 const storhybellisteQuery = {
   hentStorhybellister: async (parent, args, context) => {
     try {
-      const storhybellister = await context.prisma.storhybel.findMany({
-        include: {
-          storhybel_fordeling: {
-            select: {
-              gammel_rom_id: true,
-              ny_rom_id: true,
-              storhybel_velger: {
-                select: {
-                  beboer: true,
-                },
-              },
-            },
-          },
-          storhybel_rekkefolge: {
-            include: {
-              storhybel_velger: {
-                select: {
-                  beboer: true,
-                },
-              },
-            },
-          },
-          storhybel_rom: true,
-        },
-      });
+      const storhybellister = await DB.storhybelliste.alle(context);
 
-      return storhybellister.map((liste) => {
-        return formaterStorhybelliste(liste);
-      });
+      return storhybellister.map((liste) => formaterStorhybelliste(liste));
     } catch (err) {
       throw err;
     }
@@ -210,16 +185,9 @@ const storhybellisteMutation = {
   // },
   lagStorhybelliste: async (parent, args, context) => {
     try {
-      const storhybelliste = await context.prisma.storhybelliste.create({
-        data: {
-          navn: args.navn,
-          paamelding_start: args.paamelding_start,
-          velging_start: args.velging_start,
-        },
-      });
-      console.log(storhybelliste);
+      const storhybelliste = await DB.storhybelliste.lag(args, context);
 
-      return storhybelliste;
+      return formaterStorhybelliste(storhybelliste);
     } catch (err) {
       throw err;
     }

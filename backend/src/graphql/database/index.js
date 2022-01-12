@@ -5,6 +5,7 @@ const romhistorikk = require("./romhistorikk");
 const kryss = require("./kryss");
 const skole = require("./skole");
 const studie = require("./studie");
+const storhybelliste = require("./storhybelliste");
 
 const types = {
   beboer,
@@ -14,6 +15,7 @@ const types = {
   romhistorikk,
   skole,
   studie,
+  storhybelliste,
 };
 
 module.exports = types;
